@@ -1,4 +1,4 @@
-﻿﻿// ----------------------------------------------------------------------------------
+﻿// ----------------------------------------------------------------------------------
 //
 // Copyright Microsoft Corporation
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,18 +12,17 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-namespace Microsoft.WindowsAzure.Commands.Storage.Model.Contract
+namespace Microsoft.WindowsAzure.Commands.Common.Storage
 {
-    using Microsoft.WindowsAzure.Commands.Common.Storage;
+    using System;
 
-    /// <summary>
-    /// Storage management interface
-    /// </summary>
-    public interface IStorageManagement
+    public interface IStorageClientWrapper
     {
-        /// <summary>
-        /// The azure storage context assoicated with this IStorageBlobManagement
-        /// </summary>
-        AzureStorageContext StorageContext { get; }
+        void DeletePackageFromBlob(
+            string storageName,
+            Uri packageUri);
+
+        Uri UploadFileToBlob(
+            BlobUploadParameters parameters);
     }
 }

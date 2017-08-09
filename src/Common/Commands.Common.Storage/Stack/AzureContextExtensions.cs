@@ -12,15 +12,19 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.Commands.Common.Authentication.Abstractions;
 using System;
+using Microsoft.Azure.Commands.Common.Authentication.Abstractions;
+using Microsoft.Azure.Commands.Common.Authentication.Models;
+using ArmStorage = Microsoft.Azure.Management.Storage;
+using SmStorage = Microsoft.WindowsAzure.Management.Storage;
+using Microsoft.WindowsAzure.Storage;
+using IStorageContextProvider = Microsoft.WindowsAzure.Commands.Common.Storage.IStorageContextProvider;
 
-namespace Microsoft.WindowsAzure.Commands.Storage.Common
+namespace Microsoft.WindowsAzure.Commands.Utilities.Common
 {
     public static class AzureContextExtensions
     {
         const string storageFormatTemplate = "{{0}}://{{1}}.{0}.{1}/";
-        const string StorageContextConnectionString = "StorageContextConnectionString";
 
         /// <summary>
         /// Set the current storage account using the given connection string
@@ -31,20 +35,7 @@ namespace Microsoft.WindowsAzure.Commands.Storage.Common
         {
             if (context.Subscription != null)
             {
-                context.Subscription.SetStorageAccount(connectionString);
-            }
-        }
-
-        /// <summary>
-        /// Set the current storageaccount using the given storage context
-        /// </summary>
-        /// <param name="context">The Azure context to set the current storage account in</param>
-        /// <param name="storageContext">The context to set as the current storage context</param>
-        public static void SetCurrentStorageAccount(this IAzureContext context, IStorageContext storageContext)
-        {
-            if (storageContext != null && storageContext.ConnectionString != null)
-            {
-                context.SetCurrentStorageAccount(storageContext.ConnectionString);
+                context.Subscription.SetProperty(AzureSubscription.Property.StorageAccount, connectionString);
             }
         }
 
@@ -55,26 +46,36 @@ namespace Microsoft.WindowsAzure.Commands.Storage.Common
         /// <param name="account">A storage account.</param>
         public static void SetCurrentStorageAccount(this IAzureContext context, IStorageContextProvider account)
         {
-            context.SetCurrentStorageAccount(account.Context);
+            if (context.Subscription != null && account != null && account.Context != null 
+                && account.Context.StorageAccount != null)
+            {
+                context.SetCurrentStorageAccount(account.Context.StorageAccount.ToString(true));
+            }
         }
 
         /// <summary>
-        /// Return the connection string for the current storage account from the given context
+        /// Get the current storage account.
         /// </summary>
-        /// <param name="context">The context to retrieve storage account information from.</param>
-        /// <returns>A connection string for the current storage account, or null if no current 
-        /// storage account is selected.</returns>
-        public static string GetCurrentStorageAccountConnectionString(this IAzureContext context)
+        /// <param name="context">The current context.</param>
+        /// <returns>The current storage account, or null, if no current storage account is set.</returns>
+        public static CloudStorageAccount GetCurrentStorageAccount(this IAzureContext context)
         {
-            string result = null; 
-            if (context.Subscription != null)
+            if (context != null && context.Subscription != null)
             {
-                result = context.Subscription.GetStorageAccount();
+                try
+                {
+                    return
+                        CloudStorageAccount.Parse(
+                            context.Subscription.GetProperty(AzureSubscription.Property.StorageAccount));
+                }
+                catch
+                {
+                    // return null if we could not parse the connection string
+                }
             }
 
-            return result;
+            return null;
         }
-
 
         /// <summary>
         /// Get the endpoint for the blob service for the given storage account in this environment
@@ -167,5 +168,6 @@ namespace Microsoft.WindowsAzure.Commands.Storage.Common
         {
             return environment.EndpointFormatFor("file");
         }
+
     }
 }

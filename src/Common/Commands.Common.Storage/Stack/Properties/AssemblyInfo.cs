@@ -12,25 +12,17 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-namespace Microsoft.WindowsAzure.Commands.Storage.Common
-{
-    using Azure.Commands.Common.Authentication.Abstractions;
-    using Microsoft.WindowsAzure.Commands.Common.Storage;
-    using System;
+using System;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
-    /// <summary>
-    /// Base class for all azure storage object
-    /// </summary>
-    public class AzureStorageBase
-    {
-        /// <summary>
-        /// Storage context
-        /// </summary>
-        public AzureStorageContext Context { get; set; }
+[assembly: AssemblyTitle("Microsoft Azure Powershell - Common Storage Library")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("Microsoft Azure Powershell")]
+[assembly: AssemblyCopyright("Copyright © Microsoft")]
 
-        /// <summary>
-        /// Azure storage object name
-        /// </summary>
-        public String Name { get; set; }
-    }
-}
+[assembly: ComVisible(false)]
+[assembly: CLSCompliant(false)]
+[assembly: Guid("c565107e-98a9-4703-85cd-a7efc3d8da7b")]
+[assembly: AssemblyVersion("1.0.0")]
+[assembly: AssemblyFileVersion("1.0.0")]

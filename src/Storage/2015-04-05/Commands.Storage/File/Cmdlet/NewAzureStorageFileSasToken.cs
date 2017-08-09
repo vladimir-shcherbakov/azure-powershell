@@ -20,7 +20,7 @@ using System.Management.Automation;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
-
+using Microsoft.WindowsAzure.Commands.Common.Storage;
 using Microsoft.WindowsAzure.Commands.Storage.Common;
 using Microsoft.WindowsAzure.Commands.Storage.Model.Contract;
 using Microsoft.WindowsAzure.Storage.File;

@@ -1,4 +1,4 @@
-﻿﻿// ----------------------------------------------------------------------------------
+﻿// ----------------------------------------------------------------------------------
 //
 // Copyright Microsoft Corporation
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,18 +12,19 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-namespace Microsoft.WindowsAzure.Commands.Storage.Model.Contract
-{
-    using Microsoft.WindowsAzure.Commands.Common.Storage;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-    /// <summary>
-    /// Storage management interface
-    /// </summary>
-    public interface IStorageManagement
+namespace Microsoft.WindowsAzure.Commands.Common.Storage
+{
+    public interface IStorageContextProvider
     {
-        /// <summary>
-        /// The azure storage context assoicated with this IStorageBlobManagement
-        /// </summary>
-        AzureStorageContext StorageContext { get; }
+        AzureStorageContext Context
+        {
+            get;
+        }
     }
 }

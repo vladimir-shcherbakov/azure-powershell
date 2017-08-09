@@ -12,14 +12,12 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.WindowsAzure.Commands.Storage.Common;
-
 namespace Microsoft.WindowsAzure.Commands.Storage.Model.Contract
 {
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    
+    using Microsoft.WindowsAzure.Commands.Common.Storage;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.File;
 
