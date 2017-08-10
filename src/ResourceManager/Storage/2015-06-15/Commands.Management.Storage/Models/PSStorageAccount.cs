@@ -20,6 +20,7 @@ using Microsoft.Azure.Management.Storage.Models;
 using Microsoft.WindowsAzure.Commands.Common.Storage;
 //using Microsoft.WindowsAzure.Commands.Storage.Adapters;
 using Microsoft.WindowsAzure.Storage;
+using IStorageContextProvider = Microsoft.WindowsAzure.Commands.Common.Storage.IStorageContextProvider;
 using StorageModels = Microsoft.Azure.Management.Storage.Models;
 
 namespace Microsoft.Azure.Commands.Management.Storage.Models
@@ -104,9 +105,7 @@ namespace Microsoft.Azure.Commands.Management.Storage.Models
             return null;
         }
 
-        public IStorageContext Context { get; private set; }
-
-        public IDictionary<string, string> ExtendedProperties { get; } = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        public AzureStorageContext Context { get; private set; }
 
         /// <summary>
         /// Return a string representation of this storage account

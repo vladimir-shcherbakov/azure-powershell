@@ -82,12 +82,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\Common\Commands.Common.Storage\Adapters\WindowsAzure.Storage.6\AzureStorageContext.cs">
-      <Link>Common\AzureStorageContext.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Common\Commands.Common.Storage\Adapters\WindowsAzure.Storage.6\LazyAzureStorageContext.cs">
-      <Link>Common\LazyAzureStorageContext.cs</Link>
-    </Compile>
     <Compile Include="Generated\IStorageAccountOperations.cs" />
     <Compile Include="Generated\IStorageManagementClient.cs" />
     <Compile Include="Generated\IUsageOperations.cs" />
@@ -154,6 +148,10 @@
     <ProjectReference Include="..\..\..\..\Common\Commands.Common.Authentication.Abstractions\Commands.Common.Authentication.Abstractions.csproj">
       <Project>{70527617-7598-4aef-b5bd-db9186b8184b}</Project>
       <Name>Commands.Common.Authentication.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Common\Commands.Common.Storage\Stack\Commands.Common.Storage.csproj">
+      <Project>{65c3a86a-716d-4e7d-ab67-1db00b3bf72d}</Project>
+      <Name>Commands.Common.Storage</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\Common\Commands.Common\Commands.Common.csproj">
       <Project>{5ee72c53-1720-4309-b54b-5fb79703195f}</Project>
