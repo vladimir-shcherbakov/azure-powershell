@@ -15,8 +15,8 @@
 using System;
 using Microsoft.Azure.Commands.Common.Authentication.Abstractions;
 using Microsoft.Azure.Commands.Common.Authentication.Models;
-using ArmStorage = Microsoft.Azure.Management.Storage;
-using SmStorage = Microsoft.WindowsAzure.Management.Storage;
+//using ArmStorage = Microsoft.Azure.Management.Storage;
+//using SmStorage = Microsoft.WindowsAzure.Management.Storage;
 using Microsoft.WindowsAzure.Storage;
 using IStorageContextProvider = Microsoft.WindowsAzure.Commands.Common.Storage.IStorageContextProvider;
 
