@@ -19,15 +19,18 @@ Tests getting metrics values for a particular resource.
 function Test-GetMetrics
 {
     # Setup
-	$rscname = 'subscriptions/a93fb07c-6c93-40be-bf3b-4f0deba10f4b/resourceGroups/Default-Web-EastUS/providers/microsoft.web/sites/myWeb1'
+    # private const string ResourceGroupName = "Rac46PostSwapRG";
+    # private const string ResourceUri = "/subscriptions/{0}/resourceGroups/" + ResourceGroupName + "/providers/Microsoft.Web/sites/alertruleTest";
+	$resourceUri = '/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest'
 
     try 
     {
         # Test
-        $actual = Get-AzureRmMetric -ResourceId $rscname -timeGrain 00:01:00 -starttime 2015-03-23T22:00:00Z -endtime 2015-03-23T22:30:00Z -Aggrega Count -MetricNames CPU, Requests
+        $actual = Get-AzureRmMetric -timeGrain 00:01:00 -ResourceId $resourceUri -StartTime 2017-08-18T21:51:07.7385445Z -EndTime 2017-08-18T22:51:07.7385445Z -Aggrega Total -MetricNames CpuTime, Requests
  
-        # Assert TODO add more asserts
-		Assert-AreEqual 1 $actual.Count
+        # Assert TODO add more asserts, do not assume that the output is known
+		Assert-NotNull $actual
+		Assert-True { $actual.Count -gt 0 }
     }
     finally
     {
@@ -43,14 +46,15 @@ Tests getting metrics definitions.
 function Test-GetMetricDefinitions
 {
     # Setup
-    $rscname = 'subscriptions/a93fb07c-6c93-40be-bf3b-4f0deba10f4b/resourceGroups/Default-Web-EastUS/providers/microsoft.web/sites/myWeb1'
+    $resourceUri = '/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest'
 
     try 
     {
-	    $actual = Get-AzureRmMetricDefinition -ResourceId $rscname 
+	    $actual = Get-AzureRmMetricDefinition -ResourceId $resourceUri 
 
         # Assert TODO add more asserts
-		Assert-AreEqual 15 $actual.Count
+		Assert-NotNull $actual
+		Assert-True { $actual.Count -gt 0 }
     }
     finally
     {

@@ -43,7 +43,7 @@ namespace Microsoft.Azure.Commands.Insights.OutputClasses
             StringBuilder output = new StringBuilder();
             output.AppendLine();
             output.AppendLine("Enabled         : " + Enabled);
-            output.AppendLine("TimeGrain       : " + XmlConvert.ToString(TimeGrain));
+            output.AppendLine("TimeGrain       : " + XmlConvert.ToString(TimeGrain.HasValue));
             output.Append("RetentionPolicy : " + RetentionPolicy.ToString(1));
             return output.ToString();
         }

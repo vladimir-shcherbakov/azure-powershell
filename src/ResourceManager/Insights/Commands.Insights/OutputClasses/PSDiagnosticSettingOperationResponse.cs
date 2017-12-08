@@ -24,6 +24,6 @@ namespace Microsoft.Azure.Commands.Insights.OutputClasses
         /// <summary>
         /// Gets or sets the DiagnosticSettingsResource
         /// </summary>
-        public ServiceDiagnosticSettingsResource DiagnosticSettingsResource { get; set; }
+        public DiagnosticSettingsResource DiagnosticSettingsResource { get; set; }
     }
 }

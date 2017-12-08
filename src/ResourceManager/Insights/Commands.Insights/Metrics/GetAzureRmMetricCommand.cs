@@ -15,13 +15,9 @@
 using System;
 using System.Linq;
 using System.Management.Automation;
-using System.Text;
-using System.Threading;
-using System.Xml;
 using Microsoft.Azure.Commands.Insights.OutputClasses;
 using Microsoft.Azure.Management.Monitor;
 using Microsoft.Azure.Management.Monitor.Models;
-using Microsoft.Rest.Azure.OData;
 
 namespace Microsoft.Azure.Commands.Insights.Metrics
 {
@@ -89,62 +85,6 @@ namespace Microsoft.Azure.Commands.Insights.Metrics
         public SwitchParameter DetailedOutput { get; set; }
 
         /// <summary>
-        /// Process the general parameters (i.e. defined in this class). The particular parameters are a responsibility of the descendants after adding a method to process more parameters.
-        /// </summary>
-        /// <returns>The query filter to be used by the cmdlet</returns>
-        protected string ProcessParameters()
-        {
-            var buffer = new StringBuilder();
-            if (this.MetricName != null)
-            {
-                var metrics = this.MetricName.Select(n => string.Concat("name.value eq '", n, "'")).Aggregate((a, b) => string.Concat(a, " or ", b));
-
-                buffer.Append("(");
-                buffer.Append(metrics);
-                buffer.Append(")");
-
-                if (this.TimeGrain != default(TimeSpan))
-                {
-                    buffer.Append(" and timeGrain eq duration'");
-                    buffer.Append(XmlConvert.ToString(this.TimeGrain));
-                    buffer.Append("'");
-                }
-
-                // EndTime defaults to Now
-                if (this.EndTime == default(DateTime))
-                {
-                    this.EndTime = DateTime.UtcNow;
-                }
-
-                // StartTime defaults to EndTime - DefaultTimeRange  (NOTE: EndTime defaults to Now)
-                if (this.StartTime == default(DateTime))
-                {
-                    this.StartTime = this.EndTime.Subtract(DefaultTimeRange);
-                }
-
-                buffer.Append(" and startTime eq ");
-                buffer.Append(this.StartTime.ToUniversalTime().ToString("O"));
-                buffer.Append(" and endTime eq ");
-                buffer.Append(this.EndTime.ToUniversalTime().ToString("O"));
-
-                if (this.AggregationType != null)
-                {
-                    buffer.Append(" and aggregationType eq '");
-                    buffer.Append(this.AggregationType);
-                    buffer.Append("'");
-                }
-            }
-
-            string queryFilter = buffer.ToString();
-            if (queryFilter.StartsWith(" and "))
-            {
-                queryFilter = queryFilter.Substring(4);
-            }
-
-            return queryFilter.Trim();
-        }
-
-        /// <summary>
         /// Execute the cmdlet
         /// </summary>
         protected override void ProcessRecordInternal()
@@ -153,12 +93,34 @@ namespace Microsoft.Azure.Commands.Insights.Metrics
                 cmdletName: "Get-AzureRmMetric",
                 topic: "Parameter deprecation", 
                 message: "The DetailedOutput parameter will be deprecated in a future breaking change release.");
-            string queryFilter = this.ProcessParameters();
+
+            // All the changes in this are intended to maintain this cmdlet behaving like in the previous version
             bool fullDetails = this.DetailedOutput.IsPresent;
+            TimeSpan? interval = this.TimeGrain == default(TimeSpan) ? (TimeSpan?)null : this.TimeGrain;
+
+            if (this.EndTime == default(DateTime))
+            {
+                this.EndTime = DateTime.UtcNow;
+            }
+
+            // StartTime defaults to EndTime - DefaultTimeRange  (NOTE: EndTime defaults to Now)
+            if (this.StartTime == default(DateTime))
+            {
+                this.StartTime = this.EndTime.Subtract(DefaultTimeRange);
+            }
+
+            string timespan = string.Concat(this.StartTime.ToUniversalTime().ToString("O"), "/", this.EndTime.ToUniversalTime().ToString("O"));
 
             // If fullDetails is present full details of the records are displayed, otherwise only a summary of the records is displayed
-            var records = this.MonitorClient.Metrics.List(resourceUri: this.ResourceId, odataQuery: new ODataQuery<Metric>(queryFilter))
-                .Select(e => fullDetails ? new PSMetric(e) : new PSMetricNoDetails(e)).ToArray();
+            var response = this.MonitorClient.Metrics.List(
+                resourceUri: this.ResourceId,
+                timespan: timespan,
+                interval: interval,
+                metric: this.MetricName == null ? null : string.Join(",", this.MetricName),
+                aggregation: this.AggregationType.HasValue ? this.AggregationType.Value.ToString() : null,
+                resultType: ResultType.Data);
+
+            var records = response.Value.Select(e => fullDetails ? new PSMetric(e) : new PSMetricNoDetails(e)).ToArray();
             WriteObject(sendToPipeline: records, enumerateCollection: true);
         }
     }

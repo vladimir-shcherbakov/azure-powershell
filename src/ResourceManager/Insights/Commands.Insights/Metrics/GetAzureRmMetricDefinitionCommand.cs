@@ -15,7 +15,6 @@
 using System.Linq;
 using System.Management.Automation;
 using System.Text;
-using System.Threading;
 using Microsoft.Azure.Commands.Insights.OutputClasses;
 using Microsoft.Azure.Management.Monitor;
 using Microsoft.Azure.Management.Monitor.Models;
@@ -51,24 +50,6 @@ namespace Microsoft.Azure.Commands.Insights.Metrics
         public SwitchParameter DetailedOutput { get; set; }
 
         /// <summary>
-        /// Process the general parameters (i.e. defined in this class) and the particular parameters (i.e. the parameters added by the descendants of this class).
-        /// </summary>
-        /// <returns>The final query filter to be used by the cmdlet</returns>
-        protected string ProcessParameters()
-        {
-            var buffer = new StringBuilder();
-            if (this.MetricName != null)
-            {
-                var metrics = this.MetricName
-                    .Select(n => string.Concat("name.value eq '", n, "'"))
-                    .Aggregate((a, b) => string.Concat(a, " or ", b));
-                buffer.Append(metrics);
-            }
-
-            return buffer.ToString().Trim();
-        }
-
-        /// <summary>
         /// Execute the cmdlet
         /// </summary>
         protected override void ProcessRecordInternal()
@@ -82,11 +63,12 @@ namespace Microsoft.Azure.Commands.Insights.Metrics
                 cmdletName: cmdletName,
                 topic: "Parameter name change", 
                 message: "The parameter plural names for the parameters will be deprecated in a future breaking change release in favor of the singular versions of the same names.");
-            string queryFilter = this.ProcessParameters();
+
             bool fullDetails = this.DetailedOutput.IsPresent;
 
             // If fullDetails is present full details of the records are displayed, otherwise only a summary of the records is displayed
-            var records = this.MonitorClient.MetricDefinitions.List(resourceUri: this.ResourceId, odataQuery: new ODataQuery<MetricDefinition>(queryFilter))
+            var records = this.MonitorClient.MetricDefinitions.List(resourceUri: this.ResourceId)
+                .Where(e => this.MetricName == null || this.MetricName.Length == 0 || this.MetricName.Any(n => string.Equals(n, e.Name.Value, System.StringComparison.InvariantCultureIgnoreCase)))
                 .Select(e => fullDetails ? new PSMetricDefinition(e) : new PSMetricDefinitionNoDetails(e)).ToArray();
 
             WriteObject(sendToPipeline: records, enumerateCollection: true);

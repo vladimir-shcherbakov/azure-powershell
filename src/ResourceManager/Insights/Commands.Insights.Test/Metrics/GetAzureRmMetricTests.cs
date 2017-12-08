@@ -30,13 +30,20 @@ namespace Microsoft.Azure.Commands.Insights.Test.Metrics
 {
     public class GetAzureRmMetricTests
     {
+        private const string ResourceUri = "/subscriptions/4d7e91d4-e930-4bb5-a93d-163aa358e0dc/resourceGroups/Default-Web-westus/providers/microsoft.web/serverFarms/DefaultServerFarm";
+
         private readonly GetAzureRmMetricCommand cmdlet;
         private readonly Mock<MonitorClient> MonitorClientMock;
         private readonly Mock<IMetricsOperations> insightsMetricOperationsMock;
         private Mock<ICommandRuntime> commandRuntimeMock;
-        private Microsoft.Rest.Azure.AzureOperationResponse<IEnumerable<Metric>> response;
+        private Microsoft.Rest.Azure.AzureOperationResponse<Response> response;
         private string resourceId;
-        private ODataQuery<Metric> filter;
+        private ODataQuery<MetadataValue> filter;
+        private string timespan;
+        private TimeSpan? interval;
+        private string metric;
+        private string aggregation;
+        private ResultType resultType;
 
         public GetAzureRmMetricTests(Xunit.Abstractions.ITestOutputHelper output)
         {
@@ -50,81 +57,120 @@ namespace Microsoft.Azure.Commands.Insights.Test.Metrics
                 MonitorClient = MonitorClientMock.Object
             };
 
-            response = new Microsoft.Rest.Azure.AzureOperationResponse<IEnumerable<Metric>>()
+            response = new Microsoft.Rest.Azure.AzureOperationResponse<Response>()
             {
-                Body = new List<Metric>()
+                Body = this.GetMetricCollection(ResourceUri)
             };
 
-            insightsMetricOperationsMock.Setup(f => f.ListWithHttpMessagesAsync(It.IsAny<string>(), It.IsAny<ODataQuery<Metric>>(), It.IsAny<Dictionary<string, List<string>>>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult<Microsoft.Rest.Azure.AzureOperationResponse<IEnumerable<Metric>>>(response))
-                .Callback((string r, ODataQuery<Metric> s, Dictionary<string, List<string>> headers, CancellationToken t) =>
-                 {
+            insightsMetricOperationsMock.Setup(f => f.ListWithHttpMessagesAsync(It.IsAny<string>(), It.IsAny<ODataQuery<MetadataValue>>(), It.IsAny<string>(), It.IsAny<TimeSpan?>(), It.IsAny<string>(), It.IsAny<string>(), It.Is<ResultType>(v => v == ResultType.Data), It.IsAny<Dictionary<string, List<string>>>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(response))
+                .Callback((string r, ODataQuery<MetadataValue> s, string ts, TimeSpan? i, string m, string a, ResultType rt, Dictionary<string, List<string>> headers, CancellationToken t) =>
+                {
                     resourceId = r;
                     filter = s;
+                    timespan = ts;
+                    interval = i;
+                    metric = m;
+                    aggregation = a;
+                    resultType = rt;
                 });
 
             MonitorClientMock.SetupGet(f => f.Metrics).Returns(this.insightsMetricOperationsMock.Object);
- }
+        }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void GetMetricsCommandParametersProcessing()
         {
             // Testting defaults and required parameters
-            cmdlet.ResourceId = Utilities.ResourceUri;
+            cmdlet.ResourceId = ResourceUri;
 
             cmdlet.ExecuteCmdlet();
-            Assert.True(filter != null && filter.Filter == null);
-            Assert.Equal(Utilities.ResourceUri, resourceId);
+            Assert.Null(filter);
+            Assert.Null(metric);
+            Assert.Null(aggregation);
+            Assert.Null(interval);
+            Assert.NotNull(timespan);
+            Assert.Equal(ResourceUri, resourceId);
+            Assert.Equal(ResultType.Data, resultType);
 
-            cmdlet.MetricName = new[] { "n1", "n2" };
+            cmdlet.MetricName = new[] { "CpuTime" };
             cmdlet.ExecuteCmdlet();
-            Assert.True(filter != null);
-            Assert.True(filter.Filter.Contains("(name.value eq 'n1' or name.value eq 'n2')"));
-            Assert.Equal(Utilities.ResourceUri, resourceId);
+            Assert.Null(filter);
+            Assert.Equal("CpuTime", metric);
+            Assert.Null(aggregation);
+            Assert.Null(interval);
+            Assert.NotNull(timespan);
+            Assert.Equal(ResourceUri, resourceId);
+            Assert.Equal(ResultType.Data, resultType);
 
             cmdlet.AggregationType = AggregationType.Total;
             cmdlet.ExecuteCmdlet();
-            Assert.True(filter != null);
-            Assert.True(filter.Filter.Contains("aggregationType eq 'Total'"));
-            Assert.True(filter.Filter.Contains("(name.value eq 'n1' or name.value eq 'n2')"));
-            Assert.Equal(Utilities.ResourceUri, resourceId);
+            Assert.Null(filter);
+            Assert.Equal("CpuTime", metric);
+            Assert.Equal(AggregationType.Total.ToString(), aggregation);
+            Assert.Null(interval);
+            Assert.NotNull(timespan);
+            Assert.Equal(ResourceUri, resourceId);
+            Assert.Equal(ResultType.Data, resultType);
 
             var endDate = DateTime.UtcNow.AddMinutes(-1);
-            cmdlet.AggregationType = AggregationType.Average;
             cmdlet.EndTime = endDate;
 
-            // Remove the value assigned in the last execution
-            cmdlet.StartTime = default(DateTime);
-
             cmdlet.ExecuteCmdlet();
-            Assert.True(filter != null);
-            Assert.True(filter.Filter.Contains("aggregationType eq 'Average'"));
-            Assert.True(filter.Filter.Contains("(name.value eq 'n1' or name.value eq 'n2')"));
-            Assert.True(filter.Filter.Contains("startTime eq " + endDate.Subtract(GetAzureRmMetricCommand.DefaultTimeRange).ToString("O")));
-            Assert.True(filter.Filter.Contains("endTime eq " + endDate.ToString("O")));
-            Assert.Equal(Utilities.ResourceUri, resourceId);
+            Assert.Null(filter);
+            Assert.Equal("CpuTime", metric);
+            Assert.Equal(AggregationType.Total.ToString(), aggregation);
+            Assert.Null(interval);
+            Assert.NotNull(timespan);
+            Assert.True(timespan.Contains("/" + endDate.ToUniversalTime().ToString("O")));
+            Assert.Equal(ResourceUri, resourceId);
+            Assert.Equal(ResultType.Data, resultType);
+        }
 
-            cmdlet.StartTime = endDate.Subtract(GetAzureRmMetricCommand.DefaultTimeRange).Subtract(GetAzureRmMetricCommand.DefaultTimeRange);
-
-            cmdlet.ExecuteCmdlet();
-            Assert.True(filter != null);
-            Assert.True(filter.Filter.Contains("aggregationType eq 'Average'"));
-            Assert.True(filter.Filter.Contains("(name.value eq 'n1' or name.value eq 'n2')"));
-            Assert.True(filter.Filter.Contains("startTime eq " + endDate.Subtract(GetAzureRmMetricCommand.DefaultTimeRange).Subtract(GetAzureRmMetricCommand.DefaultTimeRange).ToString("O")));
-            Assert.True(filter.Filter.Contains("endTime eq " + endDate.ToString("O")));
-            Assert.Equal(Utilities.ResourceUri, resourceId);
-
-            cmdlet.AggregationType = AggregationType.Maximum;
-            cmdlet.TimeGrain = TimeSpan.FromMinutes(5);
-            cmdlet.ExecuteCmdlet();
-            Assert.True(filter != null);
-            Assert.True(filter.Filter.Contains("aggregationType eq 'Maximum'"));
-            Assert.True(filter.Filter.Contains("(name.value eq 'n1' or name.value eq 'n2')"));
-            Assert.True(filter.Filter.Contains("startTime eq " + endDate.Subtract(GetAzureRmMetricCommand.DefaultTimeRange).Subtract(GetAzureRmMetricCommand.DefaultTimeRange).ToString("O")));
-            Assert.True(filter.Filter.Contains("endTime eq " + endDate.ToString("O")));
-            Assert.True(filter.Filter.Contains("timeGrain eq duration'" + XmlConvert.ToString(cmdlet.TimeGrain) + "'"));
-            Assert.Equal(Utilities.ResourceUri, resourceId);
+        private Response GetMetricCollection(string resourceId)
+        {
+            return new Response
+            {
+                Timespan = "2017-08-10T22:19:35Z/2017-08-10T23:19:35Z",
+                Cost = 0,
+                Interval = TimeSpan.FromMinutes(1),
+                Value = new List<Metric>
+                {
+                    new Metric
+                    {
+                        Id = "/subscriptions/07c0b09d-9f69-4e6e-8d05-f59f67299cb2/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/alertruleTest/providers/Microsoft.Insights/metrics/CpuTime",
+                        Type = "Microsoft.Insights/metrics",
+                        Name = new LocalizableString {LocalizedValue = "CPU Time", Value = "CpuTime"},
+                        Unit = Unit.Seconds,
+                        Timeseries = new List<TimeSeriesElement>
+                        {
+                            new TimeSeriesElement
+                            {
+                                Data = new List<MetricValue>
+                                {
+                                    new MetricValue
+                                    {
+                                        TimeStamp = DateTime.Parse("2017-08-10T22:19:00Z"),
+                                        Total = 0.0
+                                    },
+                                    new MetricValue
+                                    {
+                                        TimeStamp = DateTime.Parse("2017-08-10T22:20:00Z"),
+                                        Total = 0.0
+                                    },
+                                    new MetricValue
+                                    {
+                                        TimeStamp = DateTime.Parse("2017-08-10T22:21:00Z"),
+                                        Total = 0.0
+                                    }
+                                },
+                                Metadatavalues = new List<MetadataValue>()
+                            }
+                        }
+                    }
+                }
+            };
         }
     }
 }

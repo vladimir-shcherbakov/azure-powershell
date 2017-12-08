@@ -34,7 +34,6 @@ namespace Microsoft.Azure.Commands.Insights.Test.Metrics
         private Mock<ICommandRuntime> commandRuntimeMock;
         private Microsoft.Rest.Azure.AzureOperationResponse<IEnumerable<MetricDefinition>> response;
         private string resourceId;
-        private ODataQuery<MetricDefinition> filter;
 
         public GetAzureRmMetricDefinitionTests(Xunit.Abstractions.ITestOutputHelper output)
         {
@@ -53,12 +52,11 @@ namespace Microsoft.Azure.Commands.Insights.Test.Metrics
                 Body = Utilities.InitializeMetricDefinitionResponse()
             };
 
-            insightsMetricDefinitionOperationsMock.Setup(f => f.ListWithHttpMessagesAsync(It.IsAny<string>(), It.IsAny<ODataQuery<MetricDefinition>>(), It.IsAny<Dictionary<string, List<string>>>(), It.IsAny<CancellationToken>()))
+            insightsMetricDefinitionOperationsMock.Setup(f => f.ListWithHttpMessagesAsync(It.IsAny<string>(), It.IsAny<Dictionary<string, List<string>>>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult<Microsoft.Rest.Azure.AzureOperationResponse<IEnumerable<MetricDefinition>>>(response))
-                .Callback((string resource, ODataQuery<MetricDefinition> query, Dictionary<string, List<string>> header, CancellationToken t) =>
+                .Callback((string resource, Dictionary<string, List<string>> header, CancellationToken t) =>
                 {
                     resourceId = resource;
-                    filter = query;
                 });
 
             MonitorClientMock.SetupGet(f => f.MetricDefinitions).Returns(this.insightsMetricDefinitionOperationsMock.Object);
@@ -72,15 +70,12 @@ namespace Microsoft.Azure.Commands.Insights.Test.Metrics
             cmdlet.ResourceId = Utilities.ResourceUri;
 
             cmdlet.ExecuteCmdlet();
-            Assert.True(string.IsNullOrWhiteSpace(filter.Filter));
             Assert.Equal(Utilities.ResourceUri, resourceId);
 
             // Testing with optional parameters
             cmdlet.MetricName = new[] { "n1", "n2" };
-            const string expected = "name.value eq 'n1' or name.value eq 'n2'";
 
             cmdlet.ExecuteCmdlet();
-            Assert.Equal(expected, filter.Filter);
             Assert.Equal(Utilities.ResourceUri, resourceId);
         }
     }

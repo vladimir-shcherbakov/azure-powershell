@@ -31,6 +31,7 @@ namespace Microsoft.Azure.Commands.Insights.Diagnostics
     [Cmdlet(VerbsCommon.Set, "AzureRmDiagnosticSetting", SupportsShouldProcess = true), OutputType(typeof(PSServiceDiagnosticSettings))]
     public class SetAzureRmDiagnosticSettingCommand : ManagementCmdletBase
     {
+
         public const string StorageAccountIdParamName = "StorageAccountId";
         public const string ServiceBusRuleIdParamName = "ServiceBusRuleId";
         public const string EventHubRuleIdParamName = "EventHubAuthorizationRuleId";
@@ -135,9 +136,9 @@ namespace Microsoft.Azure.Commands.Insights.Diagnostics
                 throw new ArgumentException("No operation is specified");
             }
 
-            ServiceDiagnosticSettingsResource getResponse = this.MonitorManagementClient.ServiceDiagnosticSettings.GetAsync(resourceUri: this.ResourceId, cancellationToken: CancellationToken.None).Result;
+            DiagnosticSettingsResource getResponse = this.MonitorManagementClient.DiagnosticSettings.GetAsync(resourceUri: this.ResourceId, name: null, cancellationToken: CancellationToken.None).Result;
 
-            ServiceDiagnosticSettingsResource properties = getResponse;
+            DiagnosticSettingsResource properties = getResponse;
 
             SetStorage(properties);
 
@@ -175,28 +176,28 @@ namespace Microsoft.Azure.Commands.Insights.Diagnostics
                 target: string.Format("Create/update a diagnostic setting for resource Id: {0}", this.ResourceId),
                 action: "Create/update a diagnostic setting"))
             {
-                ServiceDiagnosticSettingsResource result = this.MonitorManagementClient.ServiceDiagnosticSettings.CreateOrUpdateAsync(resourceUri: this.ResourceId, parameters: putParameters, cancellationToken: CancellationToken.None).Result;
+                DiagnosticSettingsResource result = this.MonitorManagementClient.DiagnosticSettings.CreateOrUpdateAsync(resourceUri: this.ResourceId, parameters: putParameters, name: null, cancellationToken: CancellationToken.None).Result;
                 WriteObject(new PSServiceDiagnosticSettings(result));
             }
         }
 
-        private static ServiceDiagnosticSettingsResource CopySettings(ServiceDiagnosticSettingsResource properties)
+        private static DiagnosticSettingsResource CopySettings(DiagnosticSettingsResource properties)
         {
             // Location is marked as required, but the get operation returns Location as null. So use an empty string instead of null to avoid validation errors
-            var putParameters = new ServiceDiagnosticSettingsResource(location: properties.Location ?? string.Empty, name: properties.Name, id: properties.Id, type: properties.Type)
+            var putParameters = new DiagnosticSettingsResource(name: properties.Name, id: properties.Id, type: properties.Type)
             {
                 Logs = properties.Logs,
                 Metrics = properties.Metrics,
-                ServiceBusRuleId = properties.ServiceBusRuleId,
+                // ServiceBusRuleId = properties.ServiceBusRuleId,
                 StorageAccountId = properties.StorageAccountId,
                 WorkspaceId = properties.WorkspaceId,
-                Tags = properties.Tags,
+                // Tags = properties.Tags,
                 EventHubAuthorizationRuleId = properties.EventHubAuthorizationRuleId
             };
             return putParameters;
         }
 
-        private void SetRetention(ServiceDiagnosticSettingsResource properties)
+        private void SetRetention(DiagnosticSettingsResource properties)
         {
             var retentionPolicy = new RetentionPolicy
             {
@@ -221,7 +222,7 @@ namespace Microsoft.Azure.Commands.Insights.Diagnostics
             }
         }
 
-        private void SetSelectedTimegrains(ServiceDiagnosticSettingsResource properties)
+        private void SetSelectedTimegrains(DiagnosticSettingsResource properties)
         {
             if (!this.isEnbledParameterPresent)
             {
@@ -241,7 +242,7 @@ namespace Microsoft.Azure.Commands.Insights.Diagnostics
             }
         }
 
-        private void SetSelectedCategories(ServiceDiagnosticSettingsResource properties)
+        private void SetSelectedCategories(DiagnosticSettingsResource properties)
         {
             if (!this.isEnbledParameterPresent)
             {
@@ -261,7 +262,7 @@ namespace Microsoft.Azure.Commands.Insights.Diagnostics
             }
         }
 
-        private void SetAllCategoriesAndTimegrains(ServiceDiagnosticSettingsResource properties)
+        private void SetAllCategoriesAndTimegrains(DiagnosticSettingsResource properties)
         {
             if (!this.isEnbledParameterPresent)
             {
@@ -279,7 +280,7 @@ namespace Microsoft.Azure.Commands.Insights.Diagnostics
             }
         }
 
-        private void SetWorkspace(ServiceDiagnosticSettingsResource properties)
+        private void SetWorkspace(DiagnosticSettingsResource properties)
         {
             if (this.isWorkspaceParamPresent)
             {
@@ -287,15 +288,15 @@ namespace Microsoft.Azure.Commands.Insights.Diagnostics
             }
         }
 
-        private void SetServiceBus(ServiceDiagnosticSettingsResource properties)
+        private void SetServiceBus(DiagnosticSettingsResource properties)
         {
             if (this.isServiceBusParamPresent)
             {
-                properties.ServiceBusRuleId = this.ServiceBusRuleId;
+                // properties.ServiceBusRuleId = this.ServiceBusRuleId;
             }
         }
 
-        private void SetEventHubRule(ServiceDiagnosticSettingsResource properties)
+        private void SetEventHubRule(DiagnosticSettingsResource properties)
         {
             if (this.isEventHubRuleParamPresent)
             {
@@ -304,12 +305,12 @@ namespace Microsoft.Azure.Commands.Insights.Diagnostics
         }
 
 
-        private void SetStorage(ServiceDiagnosticSettingsResource properties)
+        private void SetStorage(DiagnosticSettingsResource properties)
         {
             if (this.isStorageParamPresent)
             {
                 properties.StorageAccountId = this.StorageAccountId;
             }
-        }
+        } 
     }
 }

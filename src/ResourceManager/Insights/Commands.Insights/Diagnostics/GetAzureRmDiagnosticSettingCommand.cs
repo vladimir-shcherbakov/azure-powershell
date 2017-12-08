@@ -40,7 +40,7 @@ namespace Microsoft.Azure.Commands.Insights.Diagnostics
 
         protected override void ProcessRecordInternal()
         {
-            ServiceDiagnosticSettingsResource result = this.MonitorManagementClient.ServiceDiagnosticSettings.GetAsync(resourceUri: this.ResourceId, cancellationToken: CancellationToken.None).Result;
+            DiagnosticSettingsResource result = this.MonitorManagementClient.DiagnosticSettings.GetAsync(resourceUri: this.ResourceId, name: null, cancellationToken: CancellationToken.None).Result;
 
             var psResult = new PSServiceDiagnosticSettings(result);
             WriteObject(psResult);
