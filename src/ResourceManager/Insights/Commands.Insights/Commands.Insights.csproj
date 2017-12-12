@@ -50,6 +50,9 @@
       <HintPath>..\..\..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Rest.ClientRuntime.Azure, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System.Collections" />
     <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
@@ -83,6 +86,12 @@
     <Compile Include="Autoscale\GetAzureRmAutoscaleSettingCommand.cs" />
     <Compile Include="Autoscale\NewAzureRmAutoscaleWebhookCommand.cs" />
     <Compile Include="Autoscale\RemoveAzureRmAutoscaleSettingCommand.cs" />
+    <Compile Include="Diagnostics\AddAzureRmDiagnosticSettingCommand.cs" />
+    <Compile Include="Diagnostics\DiagnosticSettingsCommon.cs" />
+    <Compile Include="Diagnostics\DisableAzureRmDiagnosticSettingCommand.cs" />
+    <Compile Include="Diagnostics\EnableDisableDiagnosticSettingsBase.cs" />
+    <Compile Include="Diagnostics\EnableAzureRmDiagnosticSettingCommand.cs" />
+    <Compile Include="Diagnostics\RemoveAzureRmDiagnosticSettingCommand.cs" />
     <Compile Include="Diagnostics\SetAzureRmDiagnosticSettingCommand.cs" />
     <Compile Include="Diagnostics\GetAzureRmDiagnosticSettingCommand.cs" />
     <Compile Include="LogsCmdletBase.cs" />
@@ -107,6 +116,8 @@
     <Compile Include="OutputClasses\PSAlertRuleResource.cs" />
     <Compile Include="OutputClasses\PSAutoscaleSettingNoDetails.cs" />
     <Compile Include="OutputClasses\PSDiagnosticSettingOperationResponse.cs" />
+    <Compile Include="OutputClasses\PSDiagnosticSettings.cs" />
+    <Compile Include="OutputClasses\PSDiagnosticSettingsCollection.cs" />
     <Compile Include="OutputClasses\PSEmailReceiver.cs" />
     <Compile Include="OutputClasses\PSLocalizableString.cs" />
     <Compile Include="OutputClasses\PSLocalizableStringNoDetails.cs" />
@@ -118,7 +129,6 @@
     <Compile Include="OutputClasses\PSLogProfile.cs" />
     <Compile Include="OutputClasses\PSAutoscaleProfilesList.cs" />
     <Compile Include="OutputClasses\PSRetentionPolicy.cs" />
-    <Compile Include="OutputClasses\PSServiceDiagnosticSettings.cs" />
     <Compile Include="OutputClasses\PSAlertRule.cs" />
     <Compile Include="OutputClasses\PSAlertRuleNoDetails.cs" />
     <Compile Include="OutputClasses\PSAutoscaleSetting.cs" />

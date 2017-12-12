@@ -1,73 +1,13 @@
 {
   "Entries": [
     {
-      "RequestUri": "/%2Fsubscriptions%2F1a66ce04-b633-4a0b-b2bc-a912ec8986a6%2Fresourcegroups%2Finsights-integration%2Fproviders%2Ftest.shoebox%2Ftestresources2%2Fpstest0000eastusR2/providers/microsoft.insights/diagnosticSettings/service?api-version=2017-05-01-preview",
-      "EncodedRequestUri": "LyUyRnN1YnNjcmlwdGlvbnMlMkYxYTY2Y2UwNC1iNjMzLTRhMGItYjJiYy1hOTEyZWM4OTg2YTYlMkZyZXNvdXJjZWdyb3VwcyUyRmluc2lnaHRzLWludGVncmF0aW9uJTJGcHJvdmlkZXJzJTJGdGVzdC5zaG9lYm94JTJGdGVzdHJlc291cmNlczIlMkZwc3Rlc3QwMDAwZWFzdHVzUjIvcHJvdmlkZXJzL21pY3Jvc29mdC5pbnNpZ2h0cy9kaWFnbm9zdGljU2V0dGluZ3Mvc2VydmljZT9hcGktdmVyc2lvbj0yMDE3LTA1LTAxLXByZXZpZXc=",
-      "RequestMethod": "GET",
-      "RequestBody": "",
-      "RequestHeaders": {
-        "x-ms-client-request-id": [
-          "7a401a97-ec21-4d0c-b4f4-a5d25ecb6558"
-        ],
-        "accept-language": [
-          "en-US"
-        ],
-        "User-Agent": [
-          "FxVersion/4.7.2053.0",
-          "OSName/WindowsServer2012R2Datacenter",
-          "OSVersion/6.3.9600",
-          "Microsoft.Azure.Management.Monitor.Management.MonitorManagementClient/0.17.0.0"
-        ]
-      },
-      "ResponseBody": "{\r\n  \"code\": \"ResourceNotFound\",\r\n  \"message\": \"The diagnostic setting 'service' doesn't exist.\"\r\n}",
-      "ResponseHeaders": {
-        "Content-Length": [
-          "87"
-        ],
-        "Content-Type": [
-          "application/json; charset=utf-8"
-        ],
-        "Expires": [
-          "-1"
-        ],
-        "Pragma": [
-          "no-cache"
-        ],
-        "Strict-Transport-Security": [
-          "max-age=31536000; includeSubDomains"
-        ],
-        "x-ms-request-id": [
-          "00000000-0000-0000-0000-000000000000"
-        ],
-        "x-ms-ratelimit-remaining-subscription-reads": [
-          "14972"
-        ],
-        "x-ms-correlation-request-id": [
-          "f092809b-f1b5-4691-91cc-e741156a50dc"
-        ],
-        "x-ms-routing-request-id": [
-          "WESTUS2:20170912T235341Z:f092809b-f1b5-4691-91cc-e741156a50dc"
-        ],
-        "Cache-Control": [
-          "no-cache"
-        ],
-        "Date": [
-          "Tue, 12 Sep 2017 23:53:41 GMT"
-        ],
-        "Server": [
-          "Microsoft-IIS/8.5"
-        ]
-      },
-      "StatusCode": 404
-    },
-    {
       "RequestUri": "/%2Fsubscriptions%2F1a66ce04-b633-4a0b-b2bc-a912ec8986a6%2Fresourcegroups%2Finsights-integration%2Fproviders%2Ftest.shoebox%2Ftestresources2%2Fpstest0000eastusR2/providers/microsoft.insights/diagnosticSettingsCategories?api-version=2017-05-01-preview",
       "EncodedRequestUri": "LyUyRnN1YnNjcmlwdGlvbnMlMkYxYTY2Y2UwNC1iNjMzLTRhMGItYjJiYy1hOTEyZWM4OTg2YTYlMkZyZXNvdXJjZWdyb3VwcyUyRmluc2lnaHRzLWludGVncmF0aW9uJTJGcHJvdmlkZXJzJTJGdGVzdC5zaG9lYm94JTJGdGVzdHJlc291cmNlczIlMkZwc3Rlc3QwMDAwZWFzdHVzUjIvcHJvdmlkZXJzL21pY3Jvc29mdC5pbnNpZ2h0cy9kaWFnbm9zdGljU2V0dGluZ3NDYXRlZ29yaWVzP2FwaS12ZXJzaW9uPTIwMTctMDUtMDEtcHJldmlldw==",
       "RequestMethod": "GET",
       "RequestBody": "",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "6173d8d6-4c4a-423e-a00f-40d81408950f"
+          "87ac4d1d-d313-4a78-a07c-c49db10da7c3"
         ],
         "accept-language": [
           "en-US"
@@ -97,22 +37,22 @@
           "max-age=31536000; includeSubDomains"
         ],
         "x-ms-request-id": [
-          "e69deb15-db3a-4390-ad0c-d49de4e894f5"
+          "5f53ba81-53a5-4041-b635-d595cc304bf4"
         ],
         "x-ms-ratelimit-remaining-subscription-reads": [
-          "14971"
+          "14957"
         ],
         "x-ms-correlation-request-id": [
-          "9c5ad96d-2c15-4d64-aa23-4ccdf94c50a4"
+          "44fe4820-2b8b-4a27-adb5-6aaeb5c6a55b"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS2:20170912T235341Z:9c5ad96d-2c15-4d64-aa23-4ccdf94c50a4"
+          "WESTUS:20170912T224806Z:44fe4820-2b8b-4a27-adb5-6aaeb5c6a55b"
         ],
         "Cache-Control": [
           "no-cache"
         ],
         "Date": [
-          "Tue, 12 Sep 2017 23:53:41 GMT"
+          "Tue, 12 Sep 2017 22:48:05 GMT"
         ],
         "Server": [
           "Microsoft-IIS/8.5"
@@ -127,7 +67,7 @@
       "RequestBody": "",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "e96c5fba-47dc-4b66-b6b3-511754850743"
+          "d5046df3-2789-4e8a-a470-5b5002446a3e"
         ],
         "accept-language": [
           "en-US"
@@ -157,22 +97,22 @@
           "max-age=31536000; includeSubDomains"
         ],
         "x-ms-request-id": [
-          "436eca8a-4917-435d-b19f-8f68a7811d4c"
+          "69c93b64-4c2a-46d2-a8f0-e8f8889d9d93"
         ],
         "x-ms-ratelimit-remaining-subscription-reads": [
-          "14969"
+          "14956"
         ],
         "x-ms-correlation-request-id": [
-          "a745b835-3053-4daf-8dbd-af8cfa382c23"
+          "a6815103-00d0-48f4-bda5-bf74c1296f89"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS2:20170912T235345Z:a745b835-3053-4daf-8dbd-af8cfa382c23"
+          "WESTUS:20170912T224808Z:a6815103-00d0-48f4-bda5-bf74c1296f89"
         ],
         "Cache-Control": [
           "no-cache"
         ],
         "Date": [
-          "Tue, 12 Sep 2017 23:53:45 GMT"
+          "Tue, 12 Sep 2017 22:48:08 GMT"
         ],
         "Server": [
           "Microsoft-IIS/8.5"
@@ -193,7 +133,7 @@
           "497"
         ],
         "x-ms-client-request-id": [
-          "ef92ddb6-738c-4ae6-9be4-0a8363de77ac"
+          "f2ae4314-d69c-46c2-aeba-6d773fcffc5d"
         ],
         "accept-language": [
           "en-US"
@@ -223,88 +163,28 @@
           "max-age=31536000; includeSubDomains"
         ],
         "x-ms-request-id": [
-          "db311645-7ef0-439c-ab22-2c96941e5bc2"
+          "39881318-4317-4e77-b86c-d4deb89a3ad3"
         ],
         "x-ms-ratelimit-remaining-subscription-writes": [
-          "1194"
+          "1191"
         ],
         "x-ms-correlation-request-id": [
-          "c72cefc7-2b1d-4efc-bb0d-a9e1a9b0bf10"
+          "d2adeb0e-47ed-4363-9739-02361f022e61"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS2:20170912T235344Z:c72cefc7-2b1d-4efc-bb0d-a9e1a9b0bf10"
+          "WESTUS:20170912T224808Z:d2adeb0e-47ed-4363-9739-02361f022e61"
         ],
         "Cache-Control": [
           "no-cache"
         ],
         "Date": [
-          "Tue, 12 Sep 2017 23:53:44 GMT"
+          "Tue, 12 Sep 2017 22:48:08 GMT"
         ],
         "Server": [
           "Microsoft-IIS/8.5"
         ]
       },
       "StatusCode": 200
-    },
-    {
-      "RequestUri": "/%2Fsubscriptions%2F1a66ce04-b633-4a0b-b2bc-a912ec8986a6%2Fresourcegroups%2Finsights-integration%2Fproviders%2Ftest.shoebox%2Ftestresources2%2Fpstest0000eastusR2/providers/microsoft.insights/diagnosticSettings/mysetting?api-version=2017-05-01-preview",
-      "EncodedRequestUri": "LyUyRnN1YnNjcmlwdGlvbnMlMkYxYTY2Y2UwNC1iNjMzLTRhMGItYjJiYy1hOTEyZWM4OTg2YTYlMkZyZXNvdXJjZWdyb3VwcyUyRmluc2lnaHRzLWludGVncmF0aW9uJTJGcHJvdmlkZXJzJTJGdGVzdC5zaG9lYm94JTJGdGVzdHJlc291cmNlczIlMkZwc3Rlc3QwMDAwZWFzdHVzUjIvcHJvdmlkZXJzL21pY3Jvc29mdC5pbnNpZ2h0cy9kaWFnbm9zdGljU2V0dGluZ3MvbXlzZXR0aW5nP2FwaS12ZXJzaW9uPTIwMTctMDUtMDEtcHJldmlldw==",
-      "RequestMethod": "GET",
-      "RequestBody": "",
-      "RequestHeaders": {
-        "x-ms-client-request-id": [
-          "8b127e19-263a-4450-a29d-0b61c748689d"
-        ],
-        "accept-language": [
-          "en-US"
-        ],
-        "User-Agent": [
-          "FxVersion/4.7.2053.0",
-          "OSName/WindowsServer2012R2Datacenter",
-          "OSVersion/6.3.9600",
-          "Microsoft.Azure.Management.Monitor.Management.MonitorManagementClient/0.17.0.0"
-        ]
-      },
-      "ResponseBody": "{\r\n  \"code\": \"ResourceNotFound\",\r\n  \"message\": \"The diagnostic setting 'mysetting' doesn't exist.\"\r\n}",
-      "ResponseHeaders": {
-        "Content-Length": [
-          "89"
-        ],
-        "Content-Type": [
-          "application/json; charset=utf-8"
-        ],
-        "Expires": [
-          "-1"
-        ],
-        "Pragma": [
-          "no-cache"
-        ],
-        "Strict-Transport-Security": [
-          "max-age=31536000; includeSubDomains"
-        ],
-        "x-ms-request-id": [
-          "00000000-0000-0000-0000-000000000000"
-        ],
-        "x-ms-ratelimit-remaining-subscription-reads": [
-          "14970"
-        ],
-        "x-ms-correlation-request-id": [
-          "cbfa5907-1ed1-4ae8-8127-f2f8c30a74e0"
-        ],
-        "x-ms-routing-request-id": [
-          "WESTUS2:20170912T235345Z:cbfa5907-1ed1-4ae8-8127-f2f8c30a74e0"
-        ],
-        "Cache-Control": [
-          "no-cache"
-        ],
-        "Date": [
-          "Tue, 12 Sep 2017 23:53:45 GMT"
-        ],
-        "Server": [
-          "Microsoft-IIS/8.5"
-        ]
-      },
-      "StatusCode": 404
     },
     {
       "RequestUri": "/%2Fsubscriptions%2F1a66ce04-b633-4a0b-b2bc-a912ec8986a6%2Fresourcegroups%2Finsights-integration%2Fproviders%2Ftest.shoebox%2Ftestresources2%2Fpstest0000eastusR2/providers/microsoft.insights/diagnosticSettings/mysetting?api-version=2017-05-01-preview",
@@ -319,7 +199,7 @@
           "593"
         ],
         "x-ms-client-request-id": [
-          "a2a3de4f-6941-4ffd-8518-e7dec1369920"
+          "5200e9fb-c641-4e90-a323-06baf95a7518"
         ],
         "accept-language": [
           "en-US"
@@ -331,7 +211,7 @@
           "Microsoft.Azure.Management.Monitor.Management.MonitorManagementClient/0.17.0.0"
         ]
       },
-      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/insights-integration/providers/test.shoebox/testresources2/pstest0000eastusr2/providers/microsoft.insights/diagnosticSettings/mysetting\",\r\n  \"type\": null,\r\n  \"name\": \"mysetting\",\r\n  \"location\": null,\r\n  \"kind\": null,\r\n  \"tags\": null,\r\n  \"properties\": {\r\n    \"storageAccountId\": null,\r\n    \"serviceBusRuleId\": null,\r\n    \"workspaceId\": null,\r\n    \"eventHubAuthorizationRuleId\": \"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/Default-ServiceBus-EastUS/providers/Microsoft.ServiceBus/namespaces/mdmtesting/authorizationRules/RootManageSharedAccessKey\",\r\n    \"eventHubName\": \"eventHubName\",\r\n    \"metrics\": [\r\n      {\r\n        \"timeGrain\": \"PT1M\",\r\n        \"category\": \"AllMetrics\",\r\n        \"enabled\": true,\r\n        \"retentionPolicy\": {\r\n          \"enabled\": false,\r\n          \"days\": 0\r\n        }\r\n      }\r\n    ],\r\n    \"logs\": [\r\n      {\r\n        \"category\": \"TestLog1\",\r\n        \"enabled\": true,\r\n        \"retentionPolicy\": {\r\n          \"enabled\": false,\r\n          \"days\": 0\r\n        }\r\n      },\r\n      {\r\n        \"category\": \"TestLog2\",\r\n        \"enabled\": true,\r\n        \"retentionPolicy\": {\r\n          \"enabled\": false,\r\n          \"days\": 0\r\n        }\r\n      }\r\n    ]\r\n  },\r\n  \"identity\": null\r\n}",
+      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/insights-integration/providers/test.shoebox/testresources2/pstest0000eastusr2/providers/microsoft.insights/diagnosticSettings/service\",\r\n  \"type\": null,\r\n  \"name\": \"service\",\r\n  \"location\": null,\r\n  \"kind\": null,\r\n  \"tags\": null,\r\n  \"properties\": {\r\n    \"storageAccountId\": null,\r\n    \"serviceBusRuleId\": null,\r\n    \"workspaceId\": null,\r\n    \"eventHubAuthorizationRuleId\": \"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/Default-ServiceBus-EastUS/providers/Microsoft.ServiceBus/namespaces/mdmtesting/authorizationRules/RootManageSharedAccessKey\",\r\n    \"eventHubName\": null,\r\n    \"metrics\": [\r\n      {\r\n        \"timeGrain\": \"PT1M\",\r\n        \"category\": \"AllMetrics\",\r\n        \"enabled\": true,\r\n        \"retentionPolicy\": {\r\n          \"enabled\": false,\r\n          \"days\": 0\r\n        }\r\n      }\r\n    ],\r\n    \"logs\": [\r\n      {\r\n        \"category\": \"TestLog1\",\r\n        \"enabled\": true,\r\n        \"retentionPolicy\": {\r\n          \"enabled\": false,\r\n          \"days\": 0\r\n        }\r\n      },\r\n      {\r\n        \"category\": \"TestLog2\",\r\n        \"enabled\": true,\r\n        \"retentionPolicy\": {\r\n          \"enabled\": false,\r\n          \"days\": 0\r\n        }\r\n      }\r\n    ]\r\n  },\r\n  \"identity\": null\r\n}",
       "ResponseHeaders": {
         "Content-Length": [
           "913"
@@ -349,22 +229,82 @@
           "max-age=31536000; includeSubDomains"
         ],
         "x-ms-request-id": [
-          "4eadea53-480e-4c7e-bb69-cf082d921527"
+          "978ca54e-de19-4f24-8f20-0b86343b83a0"
         ],
         "x-ms-ratelimit-remaining-subscription-writes": [
-          "1193"
+          "1190"
         ],
         "x-ms-correlation-request-id": [
-          "47c5ee1e-9e9c-493a-9c84-aafcafc4d334"
+          "b164d260-6a12-44e2-8f2f-4db7ad8aadd4"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS2:20170912T235348Z:47c5ee1e-9e9c-493a-9c84-aafcafc4d334"
+          "WESTUS:20170912T224811Z:b164d260-6a12-44e2-8f2f-4db7ad8aadd4"
         ],
         "Cache-Control": [
           "no-cache"
         ],
         "Date": [
-          "Tue, 12 Sep 2017 23:53:48 GMT"
+          "Tue, 12 Sep 2017 22:48:11 GMT"
+        ],
+        "Server": [
+          "Microsoft-IIS/8.5"
+        ]
+      },
+      "StatusCode": 200
+    },
+    {
+      "RequestUri": "/%2Fsubscriptions%2F1a66ce04-b633-4a0b-b2bc-a912ec8986a6%2Fresourcegroups%2Finsights-integration%2Fproviders%2Ftest.shoebox%2Ftestresources2%2Fpstest0000eastusR2/providers/microsoft.insights/diagnosticSettings?api-version=2017-05-01-preview",
+      "EncodedRequestUri": "LyUyRnN1YnNjcmlwdGlvbnMlMkYxYTY2Y2UwNC1iNjMzLTRhMGItYjJiYy1hOTEyZWM4OTg2YTYlMkZyZXNvdXJjZWdyb3VwcyUyRmluc2lnaHRzLWludGVncmF0aW9uJTJGcHJvdmlkZXJzJTJGdGVzdC5zaG9lYm94JTJGdGVzdHJlc291cmNlczIlMkZwc3Rlc3QwMDAwZWFzdHVzUjIvcHJvdmlkZXJzL21pY3Jvc29mdC5pbnNpZ2h0cy9kaWFnbm9zdGljU2V0dGluZ3M/YXBpLXZlcnNpb249MjAxNy0wNS0wMS1wcmV2aWV3",
+      "RequestMethod": "GET",
+      "RequestBody": "",
+      "RequestHeaders": {
+        "x-ms-client-request-id": [
+          "e5668f81-0da7-46d1-ba5f-88ce5ed48f6a"
+        ],
+        "accept-language": [
+          "en-US"
+        ],
+        "User-Agent": [
+          "FxVersion/4.7.2053.0",
+          "OSName/WindowsServer2012R2Datacenter",
+          "OSVersion/6.3.9600",
+          "Microsoft.Azure.Management.Monitor.Management.MonitorManagementClient/0.17.0.0"
+        ]
+      },
+      "ResponseBody": "{\r\n  \"value\": [\r\n    {\r\n      \"id\": \"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/insights-integration/providers/test.shoebox/testresources2/pstest0000eastusr2/providers/microsoft.insights/diagnosticSettings/service\",\r\n      \"type\": null,\r\n      \"name\": \"service\",\r\n      \"location\": null,\r\n      \"kind\": null,\r\n      \"tags\": null,\r\n      \"properties\": {\r\n        \"storageAccountId\": \"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/vmss123/providers/Microsoft.Storage/storageAccounts/qj7vz3po4dtccvmssash1sa\",\r\n        \"serviceBusRuleId\": null,\r\n        \"workspaceId\": null,\r\n        \"eventHubAuthorizationRuleId\": null,\r\n        \"eventHubName\": null,\r\n        \"metrics\": [\r\n          {\r\n            \"category\": \"AllMetrics\",\r\n            \"enabled\": true,\r\n            \"retentionPolicy\": {\r\n              \"enabled\": false,\r\n              \"days\": 0\r\n            }\r\n          }\r\n        ],\r\n        \"logs\": [\r\n          {\r\n            \"category\": \"TestLog1\",\r\n            \"enabled\": true,\r\n            \"retentionPolicy\": {\r\n              \"enabled\": false,\r\n              \"days\": 0\r\n            }\r\n          },\r\n          {\r\n            \"category\": \"TestLog2\",\r\n            \"enabled\": true,\r\n            \"retentionPolicy\": {\r\n              \"enabled\": false,\r\n              \"days\": 0\r\n            }\r\n          }\r\n        ]\r\n      },\r\n      \"identity\": null\r\n    },\r\n    {\r\n      \"id\": \"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/insights-integration/providers/test.shoebox/testresources2/pstest0000eastusr2/providers/microsoft.insights/diagnosticSettings/mysetting\",\r\n      \"type\": null,\r\n      \"name\": \"mysetting\",\r\n      \"location\": null,\r\n      \"kind\": null,\r\n      \"tags\": null,\r\n      \"properties\": {\r\n        \"storageAccountId\": null,\r\n        \"serviceBusRuleId\": null,\r\n        \"workspaceId\": null,\r\n        \"eventHubAuthorizationRuleId\": \"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/Default-ServiceBus-EastUS/providers/Microsoft.ServiceBus/namespaces/mdmtesting/authorizationRules/RootManageSharedAccessKey\",\r\n        \"eventHubName\": \"eventHubName\",\r\n        \"metrics\": [\r\n          {\r\n            \"category\": \"AllMetrics\",\r\n            \"enabled\": true,\r\n            \"retentionPolicy\": {\r\n              \"enabled\": false,\r\n              \"days\": 0\r\n            }\r\n          }\r\n        ],\r\n        \"logs\": [\r\n          {\r\n            \"category\": \"TestLog1\",\r\n            \"enabled\": true,\r\n            \"retentionPolicy\": {\r\n              \"enabled\": false,\r\n              \"days\": 0\r\n            }\r\n          },\r\n          {\r\n            \"category\": \"TestLog2\",\r\n            \"enabled\": true,\r\n            \"retentionPolicy\": {\r\n              \"enabled\": false,\r\n              \"days\": 0\r\n            }\r\n          }\r\n        ]\r\n      },\r\n      \"identity\": null\r\n    }\r\n  ]\r\n}",
+      "ResponseHeaders": {
+        "Content-Length": [
+          "1767"
+        ],
+        "Content-Type": [
+          "application/json; charset=utf-8"
+        ],
+        "Expires": [
+          "-1"
+        ],
+        "Pragma": [
+          "no-cache"
+        ],
+        "Strict-Transport-Security": [
+          "max-age=31536000; includeSubDomains"
+        ],
+        "x-ms-request-id": [
+          "92b87e96-3b7f-4003-9a7d-9b37f1e22ea1"
+        ],
+        "x-ms-ratelimit-remaining-subscription-reads": [
+          "14955"
+        ],
+        "x-ms-correlation-request-id": [
+          "7f11b87d-d6ee-49c6-9f96-b6b4b16d4641"
+        ],
+        "x-ms-routing-request-id": [
+          "WESTUS:20170912T224813Z:7f11b87d-d6ee-49c6-9f96-b6b4b16d4641"
+        ],
+        "Cache-Control": [
+          "no-cache"
+        ],
+        "Date": [
+          "Tue, 12 Sep 2017 22:48:12 GMT"
         ],
         "Server": [
           "Microsoft-IIS/8.5"
@@ -379,7 +319,7 @@
       "RequestBody": "",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "025ce272-bb5b-4aa5-817c-72a0c6886524"
+          "7c000e2b-51fa-43af-8d80-756b43adda64"
         ],
         "accept-language": [
           "en-US"
@@ -406,22 +346,22 @@
           "max-age=31536000; includeSubDomains"
         ],
         "x-ms-request-id": [
-          "e723c0a7-de26-45d0-90d0-ba0979d25ef4"
+          "f6eaac56-98ce-421d-9032-3df83e3b83d9"
         ],
         "x-ms-ratelimit-remaining-subscription-writes": [
-          "1192"
+          "1189"
         ],
         "x-ms-correlation-request-id": [
-          "1b759a75-64b1-49ad-a432-97aed0149303"
+          "38034777-2a5f-4c16-9f54-175b853ce786"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS2:20170912T235349Z:1b759a75-64b1-49ad-a432-97aed0149303"
+          "WESTUS:20170912T224814Z:38034777-2a5f-4c16-9f54-175b853ce786"
         ],
         "Cache-Control": [
           "no-cache"
         ],
         "Date": [
-          "Tue, 12 Sep 2017 23:53:49 GMT"
+          "Tue, 12 Sep 2017 22:48:13 GMT"
         ],
         "Server": [
           "Microsoft-IIS/8.5"
@@ -436,7 +376,7 @@
       "RequestBody": "",
       "RequestHeaders": {
         "x-ms-client-request-id": [
-          "6c809bf7-78f6-4af3-a501-479a57c55cab"
+          "e8944173-7c3c-4ebf-995b-1d30e2978d11"
         ],
         "accept-language": [
           "en-US"
@@ -463,22 +403,22 @@
           "max-age=31536000; includeSubDomains"
         ],
         "x-ms-request-id": [
-          "3d5554b6-561c-4aca-a7f1-97a75bed543b"
+          "387b1bff-9815-4877-a0be-273e8f67c941"
         ],
         "x-ms-ratelimit-remaining-subscription-writes": [
-          "1191"
+          "1188"
         ],
         "x-ms-correlation-request-id": [
-          "889e1a1c-1425-4ffb-acf4-be9e07c9c50d"
+          "1384df89-4b43-484f-b541-c5c7bb395bab"
         ],
         "x-ms-routing-request-id": [
-          "WESTUS2:20170912T235351Z:889e1a1c-1425-4ffb-acf4-be9e07c9c50d"
+          "WESTUS:20170912T224815Z:1384df89-4b43-484f-b541-c5c7bb395bab"
         ],
         "Cache-Control": [
           "no-cache"
         ],
         "Date": [
-          "Tue, 12 Sep 2017 23:53:51 GMT"
+          "Tue, 12 Sep 2017 22:48:14 GMT"
         ],
         "Server": [
           "Microsoft-IIS/8.5"

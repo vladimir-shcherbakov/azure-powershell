@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Test;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Microsoft.WindowsAzure.Commands.Test.Utilities.Common;
 using Xunit;
@@ -30,6 +31,13 @@ namespace Microsoft.Azure.Commands.Insights.Test.ScenarioTests
         public void TestGetAzureRmDiagnosticSetting()
         {
             TestsController.NewInstance.RunPsTest("Test-GetAzureRmDiagnosticSetting");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        public void TestGetAzureRmDiagnosticSettingList()
+        {
+            TestsController.NewInstance.RunPsTest("Test-GetAzureRmDiagnosticSetting-List");
         }
 
         [Fact]
@@ -53,11 +61,88 @@ namespace Microsoft.Azure.Commands.Insights.Test.ScenarioTests
             TestsController.NewInstance.RunPsTest("Test-SetAzureRmDiagnosticSetting-CategoriesOnly");
         }
 
-        [Fact] //(Skip = "TODO: fixing this test after introducing Swagger specs")]
+        [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSetAzureRmDiagnosticSettingTimeGrainsOnly()
         {
             TestsController.NewInstance.RunPsTest("Test-SetAzureRmDiagnosticSetting-TimegrainsOnly");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        public void TestSetAzureRmDiagnosticSettingLogCategory()
+        {
+            TestsController.NewInstance.RunPsTest("Test-SetAzureRmDiagnosticSetting-LogCategory");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        public void TestSetAzureRmDiagnosticSettingMetricCategory()
+        {
+            TestsController.NewInstance.RunPsTest("Test-SetAzureRmDiagnosticSetting-MetricCategory");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        public void TestSetAzureRmDiagnosticSettingEnableDisableDestinations()
+        {
+            TestsController.NewInstance.RunPsTest("Test-SetAzureRmDiagnosticSetting-EnableDisableDestinations");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        public void TestAddAzureRmDiagnosticSetting()
+        {
+            TestsController.NewInstance.RunPsTest("Test-AddAzureRmDiagnosticSetting");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        public void TestAddAzureRmDiagnosticSettingLogCategory()
+        {
+            TestsController.NewInstance.RunPsTest("Test-AddAzureRmDiagnosticSetting-LogCategory");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        public void TestAddAzureRmDiagnosticSettingMetricCategory()
+        {
+            TestsController.NewInstance.RunPsTest("Test-AddAzureRmDiagnosticSetting-MetricCategory");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        public void TestAddAzureRmDiagnosticSettingLogCategoryAndMetricCategory()
+        {
+            TestsController.NewInstance.RunPsTest("Test-AddAzureRmDiagnosticSetting-LogCategoryAndMetricCategory");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        public void TestAddAzureRmDiagnosticSettingStorageOnly()
+        {
+            TestsController.NewInstance.RunPsTest("Test-AddAzureRmDiagnosticSetting-StorageOnly");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        public void TestAddAzureRmDiagnosticSettingEventHubOnly()
+        {
+            TestsController.NewInstance.RunPsTest("Test-AddAzureRmDiagnosticSetting-EventHubOnly");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        public void TestRemoveAzureRmDiagnosticSetting()
+        {
+            TestsController.NewInstance.RunPsTest("Test-RemoveAzureRmDiagnosticSetting");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        public void TestEnableDisableAzureRmDiagnosticSetting()
+        {
+            TestsController.NewInstance.RunPsTest("Test-EnableDisableAzureRmDiagnosticSetting");
         }
     }
 }

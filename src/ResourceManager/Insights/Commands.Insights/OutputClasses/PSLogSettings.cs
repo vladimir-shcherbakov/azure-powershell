@@ -13,7 +13,7 @@
 // ----------------------------------------------------------------------------------
 
 using System.Text;
-using Microsoft.Azure.Management.Monitor.Models;
+using Microsoft.Azure.Commands.Insights.Diagnostics;
 using Microsoft.Azure.Management.Monitor.Management.Models;
 
 namespace Microsoft.Azure.Commands.Insights.OutputClasses
@@ -43,7 +43,7 @@ namespace Microsoft.Azure.Commands.Insights.OutputClasses
             output.AppendLine();
             output.AppendLine("Enabled         : " + Enabled);
             output.AppendLine("Category        : " + Category);
-            output.Append("RetentionPolicy : " + RetentionPolicy.ToString(1));
+            output.Append("RetentionPolicy : " + RetentionPolicy.ToString());
             return output.ToString();
         }
     }

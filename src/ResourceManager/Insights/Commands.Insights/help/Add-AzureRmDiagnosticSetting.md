@@ -5,32 +5,27 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-AzureRmDiagnosticSetting
+# Add-AzureRmDiagnosticSetting
 
 ## SYNOPSIS
-Sets the diagnostic settings that specify how monitoring data about azure resources is routed to data destinations. 
+Adds diagnostic settings that specify how monitoring data about azure resources is routed to data destinations. 
 
 ## SYNTAX
 
 ```
-Set-AzureRmDiagnosticSetting -ResourceId <String> -Name <String> 
+Add-AzureRmDiagnosticSetting -ResourceId <String> -Name <String> 
  [-StorageAccountId <String>] 
- [-ServiceBusRuleId <String>]
  [-EventHubAuthorizationRuleId <String>]
  [-EventHubName <String>]
- [-WorkspaceId <String>] 
- [-Enabled <Boolean>] 
+ [-WorkspaceId <String>]
  [-LogCategory <System.Collections.Generic.List`1[System.String]>]
  [-MetricCategory <System.Collections.Generic.List`1[System.String]>]
- [-RetentionEnabled <Boolean>]
- [-RetentionInDays <Int32>] 
- [-Categories <System.Collections.Generic.List`1[System.String]>]
- [-Timegrains <System.Collections.Generic.List`1[System.String]>] 
+ [-RetentionInDays <Int32>]  
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The **Set-AzureRmDiagnosticSetting** cmdlet allows routing logs and metrics from azure resources to supported data destinations.
+The **Add-AzureRmDiagnosticSetting** cmdlet allows routing logs and metrics from azure resources to supported data destinations.
 
 The list of supported data destinations is:
 
@@ -40,29 +35,22 @@ The list of supported data destinations is:
 
 ## EXAMPLES
 
-### Example 1: Route all metrics and logs from a resource to the specified storage account 'myaccount'
+### Example 1: Route all metrics and logs for a resource to the specified storage account
 ```
-PS C:\>Set-AzureRmDiagnosticSetting -ResourceId /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/ResourceGroups/ContosoRG/providers/microsoft.logic/workspaces/mylogicapp -Name mysetting -Enabled $True -StorageAccountId /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/ResourceGroups/ContosoRG/providers/microsoft.storage/storageaccounts/myaccount
-```
-
-This command routes all metrics and logs from logic app 'mylogicapp' to be routed to storage account 'myaccount'
-
-### Example 2: Stop routing logs and metrics to data destinations
-```
-PS C:\>Set-AzureRmDiagnosticSetting -ResourceId /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/ResourceGroups/ContosoRG/providers/microsoft.logic/workspaces/mylogicapp -Enabled $False
+PS C:\>Add-AzureRmDiagnosticSetting -ResourceId /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/ResourceGroups/ContosoRG/providers/microsoft.logic/workspaces/mylogicapp -Name mysetting -StorageAccountId /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/ResourceGroups/ContosoRG/providers/microsoft.storage/storageaccounts/myaccount
 ```
 
-This stops routing any data from a logic app 'mylogicapp' to any data destination.
+This command routes all metrics and logs from logic app 'mylogicapp' to storage account 'myaccount'
 
-### Example 3: Selecting the log categories
+### Example 2: Selecting the metric and log categories
 ```
-PS C:\>Set-AzureRmDiagnosticSetting -ResourceId <resourceId> -Enabled $True -LogCategory LogCategory1,LogCategory2
+PS C:\>Add-AzureRmDiagnosticSetting -ResourceId <resourceId> -Name mysetting -LogCategory LogCategory1,LogCategory2 -MetricCategory MetricCategory1
 StorageAccountId   : <storageAccountId>
 EventHubAuthorizationRuleId : 
 EventHubName: 
 WorkspaceId : 
 Metrics
-Enabled   : False
+Enabled   : True
 Timegrain : PT1M
 Category  : MetricCategory1
 Enabled   : False
@@ -79,16 +67,24 @@ Enabled  : False
 Category : LogCategory4
 ```
 
-This command enables LogCategory1 and LogCategory2 only.
-All other log and metric categories remain the same.
+This command enables LogCategory1, LogCategory2 and MetricCategory1 only.
 
-### Example 4: Selecting a time grain and multiple categories
+### Example 3: Selecting a particular eventhub
 ```
-PS C:\>Set-AzureRmDiagnosticSetting -ResourceId <resourceId> -Enabled $True -Categories Category1,Category2 -Timegrains PT1M
+PS C:\>Add-AzureRmDiagnosticSetting -ResourceId <resourceId> -Name mysetting -EventHubAuthorizationRuleId /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/ResourceGroups/ContosoRG/providers/microsoft.eventhub/namespaces/mynamespace -EventHubName myeventhub
+EventHubAuthorizationRuleId : /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/ResourceGroups/ContosoRG/providers/microsoft.eventhub/namespaces/mynamespace
+EventHubName: myeventhub
+WorkspaceId : 
+Metrics
+Enabled   : True
+Timegrain : PT1M
+Category  : MetricCategory1
+Logs
+Enabled  : True
+Category : LogCategory1
 ```
 
-This command enables only Category1, Category2, and time grain PT1M.
-All other time grains and categories are unchanged.
+This command specifies a particular event hub to be used. If event hub name is not included, an event hub will be created for each category of metric and log data.
 
 ## PARAMETERS
 
@@ -110,8 +106,8 @@ Accept wildcard characters: False
 ```
 
 ### -LogCategory
-Specifies the list of log categories to enable or disable, according to the value of *Enabled*.
-If no LogCategories is specified, Categories is used instead. If neither Categories or LogCategories
+Specifies the list of log categories to be routed.
+If no LogCategories are specified, Categories is used instead. If neither Categories or LogCategories
 are specified, the command assumes all categories.
 
 ```yaml
@@ -126,12 +122,12 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Enabled
-Indicates whether the specified categories should be enabled or disabled.
-Specify $True to enable diagnostics, or $False to disable diagnostics.
+### -MetricCategory
+Specifies the list of metric categories to be routed.
+If no MetricCategories are specified, the command assumes all categories.
 
 ```yaml
-Type: Boolean
+Type: System.Collections.Generic.List`1[System.String]
 Parameter Sets: (All)
 Aliases: 
 
@@ -143,7 +139,7 @@ Accept wildcard characters: False
 ```
 
 ### -ResourceId
-Specifies the ID of the resource.
+Specifies the ID of the resource from which data will be routed.
 
 ```yaml
 Type: String
@@ -158,22 +154,22 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-Specifies the name of the setting. If no name is specified, the default name 'service' is used.
+Specifies the unique name of the setting.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases: 
 
-Required: False
+Required: True
 Position: Named
-Default value: service
+Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
 ### -RetentionEnabled
-Indicates whether retention of diagnostic information is enabled for the specified categories.
+Indicates whether a retention policy is applied to the data stored in a storage account for the specified categories.
 
 ```yaml
 Type: Boolean
@@ -202,23 +198,8 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ServiceBusRuleId
-Deprecated. Use EventHubAuthorizationRuleId.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
 ### -EventHubAuthorizationRuleId
-Specifies the eventhub rule id. Service bus rule ids are also supported.
+Resource ID of the event hub namespace authorization rule from the event hub namespace that will be used as the data destination.
 
 ```yaml
 Type: String
@@ -233,6 +214,8 @@ Accept wildcard characters: False
 ```
 
 ### -EventHubName
+Name of the event hub to which data will be sent within the event hub namespace. If none is specified, an event hub is created for each category of log and metric data.
+
 ```yaml
 Type: String
 Parameter Sets: (All)
@@ -246,7 +229,7 @@ Accept wildcard characters: False
 ```
 
 ### -StorageAccountId
-Specifies the ID of the Storage account in which to save the data.
+Specifies the resource ID of the storage account in which the data is saved.
 
 ```yaml
 Type: String
@@ -279,7 +262,7 @@ Accept wildcard characters: False
 ```
 
 ### -WorkspaceId
-The Id of the workspace
+The Azure resource ID of the Log Analytics workspace to which data should be sent.
 
 ```yaml
 Type: String
@@ -299,8 +282,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ## OUTPUTS
-
-### Microsoft.Azure.Commands.Insights.OutputClasses.PSServiceDiagnosticSettings
 
 ## NOTES
 

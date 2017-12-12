@@ -12,45 +12,50 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.Management.Monitor.Management.Models;
 using System.Collections.Generic;
+using Microsoft.Azure.Commands.Insights.Diagnostics;
+using Microsoft.Azure.Management.Monitor.Management.Models;
 
 namespace Microsoft.Azure.Commands.Insights.OutputClasses
 {
     /// <summary>
     /// Wrapps around the ServiceDiagnosticSettings
     /// </summary>
-    public class PSServiceDiagnosticSettings : DiagnosticSettingsResource
+    public class PSDiagnosticSettings : DiagnosticSettingsResource
     {
+        /// <summary>
+        /// Deprecated. Use EventHubAuthorizationRuleId instead.
+        /// </summary>
+        public string ServiceBusRuleId;
+
         /// <summary>
         /// Initializes a new instance of the PSServiceDiagnosticSettings class.
         /// </summary>
-        public PSServiceDiagnosticSettings(DiagnosticSettingsResource serviceDiagnosticSettings)
+        public PSDiagnosticSettings(DiagnosticSettingsResource diagnosticSettings)
             : base(
-                name: serviceDiagnosticSettings.Name,
-                id: serviceDiagnosticSettings.Id, 
-                // location: serviceDiagnosticSettings.Location, 
-                type: serviceDiagnosticSettings.Type,
-                metrics: serviceDiagnosticSettings.Metrics, 
-                logs: serviceDiagnosticSettings.Logs)
+                name: diagnosticSettings.Name,
+                id: diagnosticSettings.Id, 
+                type: diagnosticSettings.Type,
+                metrics: null, 
+                logs: null)
         {
-            this.StorageAccountId = serviceDiagnosticSettings.StorageAccountId;
-            // this.ServiceBusRuleId = serviceDiagnosticSettings.ServiceBusRuleId;
-            this.EventHubAuthorizationRuleId = serviceDiagnosticSettings.EventHubAuthorizationRuleId;
+            this.StorageAccountId = diagnosticSettings.StorageAccountId;
+            this.EventHubAuthorizationRuleId = diagnosticSettings.EventHubAuthorizationRuleId;
+            this.ServiceBusRuleId = diagnosticSettings.EventHubAuthorizationRuleId;
+            this.EventHubName = diagnosticSettings.EventHubName;
             this.Metrics = new List<MetricSettings>();
-            foreach (MetricSettings metricSettings in serviceDiagnosticSettings.Metrics)
+            foreach (MetricSettings metricSettings in diagnosticSettings.Metrics)
             {
                 this.Metrics.Add(new PSMetricSettings(metricSettings));
             }
 
             this.Logs = new List<LogSettings>();
-            foreach (LogSettings logSettings in serviceDiagnosticSettings.Logs)
+            foreach (LogSettings logSettings in diagnosticSettings.Logs)
             {
                 this.Logs.Add(new PSLogSettings(logSettings));
             }
 
-            this.WorkspaceId = serviceDiagnosticSettings.WorkspaceId;
-            // this.Tags = serviceDiagnosticSettings.Tags;
+            this.WorkspaceId = diagnosticSettings.WorkspaceId;
         }
     }
 }

@@ -12,46 +12,58 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.Commands.Insights.Diagnostics;
-using Microsoft.WindowsAzure.Commands.ScenarioTest;
-using Moq;
 using System;
 using System.Collections.Generic;
 using System.Management.Automation;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Xunit;
+using Microsoft.Azure.Commands.Insights.Diagnostics;
 using Microsoft.Azure.Management.Monitor.Management;
 using Microsoft.Azure.Management.Monitor.Management.Models;
+using Microsoft.WindowsAzure.Commands.ScenarioTest;
+using Moq;
+using Xunit;
 
 namespace Microsoft.Azure.Commands.Insights.Test.Diagnostics
 {
-    public class GetDiagnosticSettingCommandTests
+    public class DisableDiagnosticSettingCommandTests
     {
-        private readonly GetAzureRmDiagnosticSettingCommand cmdlet;
+        private readonly DisableAzureRmDiagnosticSettingCommand cmdlet;
         private readonly Mock<MonitorManagementClient> insightsManagementClientMock;
         private readonly Mock<IDiagnosticSettingsOperations> insightsDiagnosticsOperationsMock;
         private Mock<ICommandRuntime> commandRuntimeMock;
-        private Microsoft.Rest.Azure.AzureOperationResponse<DiagnosticSettingsResource> response;
-        private const string resourceId = "/subscriptions/123/resourcegroups/rg/providers/rp/resource/myresource";
-        private const string name = "service";
-        private string calledResourceId;
-        private string calledName;
+        private const string ResourceId = "/subscriptions/123/resourcegroups/rg/providers/rp/resource/myresource";
 
-        public GetDiagnosticSettingCommandTests(Xunit.Abstractions.ITestOutputHelper output)
+        private string resourceIdIn;
+        private string settingName;
+
+        public DisableDiagnosticSettingCommandTests(Xunit.Abstractions.ITestOutputHelper output)
         {
-            ServiceManagemenet.Common.Models.XunitTracingInterceptor.AddToContext(new ServiceManagemenet.Common.Models.XunitTracingInterceptor(output));
-            insightsDiagnosticsOperationsMock = new Mock<IDiagnosticSettingsOperations>();
-            insightsManagementClientMock = new Mock<MonitorManagementClient>();
-            commandRuntimeMock = new Mock<ICommandRuntime>();
-            cmdlet = new GetAzureRmDiagnosticSettingCommand()
+            this.insightsDiagnosticsOperationsMock = new Mock<IDiagnosticSettingsOperations>();
+            this.insightsManagementClientMock = new Mock<MonitorManagementClient>();
+            this.commandRuntimeMock = new Mock<ICommandRuntime>();
+            this.cmdlet = new DisableAzureRmDiagnosticSettingCommand()
             {
                 CommandRuntime = commandRuntimeMock.Object,
                 MonitorManagementClient = insightsManagementClientMock.Object
             };
 
-            response = new Microsoft.Rest.Azure.AzureOperationResponse<DiagnosticSettingsResource>()
+            insightsDiagnosticsOperationsMock.Setup(f => f.DeleteWithHttpMessagesAsync(
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<Dictionary<string, List<string>>>(),
+                It.IsAny<CancellationToken>()))
+                   .Returns(Task.FromResult(new Rest.Azure.AzureOperationResponse
+                   {
+                       RequestId = "111-222"
+                   }))
+                   .Callback((string resourceId, string settingName, Dictionary<string, List<string>> headers, CancellationToken t) =>
+                   {
+                       this.resourceIdIn = resourceId;
+                       this.settingName = settingName;
+                   });
+
+            var response = new Microsoft.Rest.Azure.AzureOperationResponse<DiagnosticSettingsResource>()
             {
                 Body = new DiagnosticSettingsResource
                 {
@@ -115,23 +127,24 @@ namespace Microsoft.Azure.Commands.Insights.Test.Diagnostics
                     .Returns(Task.FromResult(response))
                     .Callback((string resourceId, string name, Dictionary<string, List<string>> headers, CancellationToken cancellationToken) =>
                     {
-                        this.calledResourceId = resourceId;
-                        this.calledName = name;
+                        this.resourceIdIn = resourceId;
+                        this.settingName = name;
                     });
 
             insightsManagementClientMock.SetupGet(f => f.DiagnosticSettings).Returns(this.insightsDiagnosticsOperationsMock.Object);
+
+            cmdlet.ResourceId = ResourceId;
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void GetDiagnosticSettingCommandParametersProcessing()
+        public void DisableSettingTest()
         {
-            cmdlet.ResourceId = resourceId;
-            cmdlet.Name = name;
+            cmdlet.Name = "MySetting";
             cmdlet.ExecuteCmdlet();
 
-            Assert.Equal(resourceId, calledResourceId);
-            Assert.Equal(name, calledName);
+            Assert.Equal(ResourceId, resourceIdIn);
+            Assert.Equal("MySetting", settingName);
         }
     }
 }

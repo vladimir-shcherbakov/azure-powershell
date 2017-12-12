@@ -68,9 +68,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Microsoft.Azure.Test.Framework.1.0.6179.26854-prerelease\lib\net45\Microsoft.Azure.Test.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Azure.Test.HttpRecorder">
-      <HintPath>..\..\..\packages\Microsoft.Azure.Test.HttpRecorder.1.7.0\lib\net45\Microsoft.Azure.Test.HttpRecorder.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Azure.Test.HttpRecorder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Azure.Test.HttpRecorder.1.8.1\lib\net452\Microsoft.Azure.Test.HttpRecorder.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.Build">
       <SpecificVersion>False</SpecificVersion>
@@ -85,11 +84,10 @@
       <HintPath>..\..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.28.3\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Rest.ClientRuntime.2.3.8\lib\net452\Microsoft.Rest.ClientRuntime.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\..\packages\Microsoft.Rest.ClientRuntime.2.3.10\lib\net452\Microsoft.Rest.ClientRuntime.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Rest.ClientRuntime.Azure">
-      <HintPath>..\..\..\packages\Microsoft.Rest.ClientRuntime.Azure.3.3.8\lib\net452\Microsoft.Rest.ClientRuntime.Azure.dll</HintPath>
+    <Reference Include="Microsoft.Rest.ClientRuntime.Azure, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Rest.ClientRuntime.Azure.3.3.10\lib\net452\Microsoft.Rest.ClientRuntime.Azure.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Rest.ClientRuntime.Azure.Authentication">
       <HintPath>..\..\..\packages\Microsoft.Rest.ClientRuntime.Azure.Authentication.2.3.1\lib\net452\Microsoft.Rest.ClientRuntime.Azure.Authentication.dll</HintPath>
@@ -162,8 +160,11 @@
     <Compile Include="ActivityLogAlerts\NewAzureRmActionGroupTests.cs" />
     <Compile Include="ActivityLogAlerts\NewAzureRmActivityLogAlertConditionTests.cs" />
     <Compile Include="ActivityLogAlerts\RemoveAzureRmActivityLogAlertTests.cs" />
+    <None Include="app.config" />
     <None Include="Diagnostics\RemoveDiagnosticSettingCommandTests.cs" />
     <Compile Include="CustomPrinterTests.cs" />
+    <Compile Include="Diagnostics\DisableDiagnosticSettingCommandTests.cs" />
+    <Compile Include="Diagnostics\EnableDiagnosticSettingCommandTests.cs" />
     <Compile Include="Diagnostics\SetDiagnosticSettingCommandTests.cs" />
     <Compile Include="Diagnostics\GetDiagnosticSettingCommandTests.cs" />
     <Compile Include="ActivityLogs\GetAzureRmLogTests.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="ScenarioTests\ActivityLogsTests.cs" />
     <Compile Include="ScenarioTests\MetricsTests.cs" />
     <Compile Include="ScenarioTests\TestsController.cs" />
+    <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AzureRmDiagnosticSettingTests\TestGetAzureRmDiagnosticSettingList.json" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +257,17 @@
     <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AutoscaleTests\TestGetAzureRmAutoscaleSettingByName.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AzureRmDiagnosticSettingTests\TestAddAzureRmDiagnosticSetting.json" />
+    <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AzureRmDiagnosticSettingTests\TestAddAzureRmDiagnosticSettingEventHubOnly.json" />
+    <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AzureRmDiagnosticSettingTests\TestAddAzureRmDiagnosticSettingLogCategory.json" />
+    <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AzureRmDiagnosticSettingTests\TestAddAzureRmDiagnosticSettingLogCategoryAndMetricCategory.json" />
+    <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AzureRmDiagnosticSettingTests\TestAddAzureRmDiagnosticSettingMetricCategory.json" />
+    <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AzureRmDiagnosticSettingTests\TestAddAzureRmDiagnosticSettingStorageOnly.json" />
+    <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AzureRmDiagnosticSettingTests\TestEnableDisableAzureRmDiagnosticSetting.json" />
+    <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AzureRmDiagnosticSettingTests\TestRemoveAzureRmDiagnosticSetting.json" />
+    <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AzureRmDiagnosticSettingTests\TestSetAzureRmDiagnosticSettingEnableDisableDestinations.json" />
+    <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AzureRmDiagnosticSettingTests\TestSetAzureRmDiagnosticSettingLogCategory.json" />
+    <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AzureRmDiagnosticSettingTests\TestSetAzureRmDiagnosticSettingMetricCategory.json" />
     <None Include="SessionRecords\Microsoft.Azure.Commands.Insights.Test.ScenarioTests.AzureRmDiagnosticSettingTests\TestSetAzureRmDiagnosticSettingWithRetention.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -12,20 +12,21 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using System.Management.Automation;
+using System.Threading;
 using Microsoft.Azure.Commands.Insights.OutputClasses;
 using Microsoft.Azure.Management.Monitor.Management;
 using Microsoft.Azure.Management.Monitor.Management.Models;
-using System.Management.Automation;
-using System.Threading;
 
 namespace Microsoft.Azure.Commands.Insights.Diagnostics
 {
     /// <summary>
     /// Gets the logs and metrics for the resource.
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, "AzureRmDiagnosticSetting"), OutputType(typeof(PSServiceDiagnosticSettings))]
+    [Cmdlet(VerbsCommon.Get, "AzureRmDiagnosticSetting"), OutputType(typeof(PSDiagnosticSettings))]
     public class GetAzureRmDiagnosticSettingCommand : ManagementCmdletBase
     {
+        private const string DefaultSettingName = "service";
 
         #region Parameters declarations
 
@@ -36,13 +37,43 @@ namespace Microsoft.Azure.Commands.Insights.Diagnostics
         [ValidateNotNullOrEmpty]
         public string ResourceId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the name parameter of the cmdlet
+        /// </summary>
+        [Parameter(Position = 1, Mandatory = false, ValueFromPipelineByPropertyName = true, HelpMessage = "The Name")]
+        public string Name { get; set; }
+
         #endregion
 
         protected override void ProcessRecordInternal()
         {
-            DiagnosticSettingsResource result = this.MonitorManagementClient.DiagnosticSettings.GetAsync(resourceUri: this.ResourceId, name: null, cancellationToken: CancellationToken.None).Result;
+            if (string.IsNullOrWhiteSpace(this.Name))
+            {
+                ListDiagnosticSettings();
+            } else
+            {
+                GetDiagnosticSettings();
+            }
+        }
 
-            var psResult = new PSServiceDiagnosticSettings(result);
+        private void ListDiagnosticSettings()
+        {
+            DiagnosticSettingsResourceCollection result = this.MonitorManagementClient.DiagnosticSettings.ListAsync(
+                resourceUri: this.ResourceId,
+                cancellationToken: CancellationToken.None).Result;
+
+            var psResult = new PSDiagnosticSettingsCollection(result);
+            WriteObject(psResult);
+        }
+
+        private void GetDiagnosticSettings()
+        {
+            DiagnosticSettingsResource result = this.MonitorManagementClient.DiagnosticSettings.GetAsync(
+            resourceUri: this.ResourceId,
+            name: this.Name,
+            cancellationToken: CancellationToken.None).Result;
+
+            var psResult = new PSDiagnosticSettings(result);
             WriteObject(psResult);
         }
     }
