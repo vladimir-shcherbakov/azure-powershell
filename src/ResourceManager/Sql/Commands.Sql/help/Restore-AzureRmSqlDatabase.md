@@ -82,6 +82,15 @@ PS C:\> Restore-AzureRmSqlDatabase -FromDeletedDatabaseBackup -DeletionDate $Del
 The first command gets the deleted database backup that you want to restore by using [Get-AzureRmSqlDeletedDatabaseBackup](./Get-AzureRMSqlDeletedDatabaseBackup.md).
 The second command starts the restore from the deleted database backup by using the [Restore-AzureRmSqlDatabase](./Restore-AzureRmSqlDatabase.md) cmdlet. If the -PointInTime parameter is not specified, the database will be restored to the deletion time.
 
+If the database was deleted and re-created with same name multiple times, you will get multiple deleted databases with different deletion time by using [Get-AzureRmSqlDeletedDatabaseBackup](./Get-AzureRMSqlDeletedDatabaseBackup.md). You can filter the list of deleted databases by deletion time. For example, to restore Database01 which is deleted at 1/2/2018, you can use the following script:
+```
+PS C:\>$DeletedDatabases = Get-AzureRmSqlDeletedDatabaseBackup -ResourceGroupName "ResourceGroup01" -ServerName "Server01" -DatabaseName "Database01"
+PS C:\>$starDate = get-date 1/2/2018
+PS C:\>$endDate = get-date 1/3/2018
+PS C:\>$DeletedDatabase = $DeletedDatabases | where {$_.DeletionDate -ge $starDate -and $_.DeletionDate -le $endDate}
+PS C:\>Restore-AzureRmSqlDatabase -FromDeletedDatabaseBackup -DeletionDate $DeletedDatabase.DeletionDate -ResourceGroupName $DeletedDatabase.ResourceGroupName -ServerName $DeletedDatabase.ServerName -TargetDatabaseName "RestoredDatabase" -ResourceId $DeletedDatabase.ResourceID -Edition "Standard" -ServiceObjectiveName "S2" -PointInTime "1/1/2018 11:00:00"
+```
+
 ### Example 4: Restore a deleted database into an elastic pool
 ```
 PS C:\>$DeletedDatabase = Get-AzureRmSqlDeletedDatabaseBackup -ResourceGroupName $resourceGroupName -ServerName $sqlServerName -DatabaseName 'DatabaseToRestore'
