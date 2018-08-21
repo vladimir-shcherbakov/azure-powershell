@@ -64,6 +64,10 @@
       <HintPath>$(LibraryNugetPackageFolder)\Microsoft.Rest.ClientRuntime.Azure.TestFramework.1.7.2\lib\net452\Microsoft.Rest.ClientRuntime.Azure.TestFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Azure.PowerShell.TestFx, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>$(LibraryNugetPackageFolder)\Microsoft.Azure.Powershell.TestFx.1.0.0-preview\lib\net452\Microsoft.Azure.Powershell.TestFx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <PropertyGroup>
     <ScenarioTestToolsPath>$(LibraryNugetPackageFolder)\Microsoft.Azure.PowerShell.ScenarioTest.ResourceManager.1.0.0-preview\tools\</ScenarioTestToolsPath>
