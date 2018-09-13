@@ -24,10 +24,7 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
 {
-    [Cmdlet(
-        VerbsLifecycle.Disable,
-        ProfileNouns.AzureVmssDiskEncryption,
-        SupportsShouldProcess = true)]
+    [Cmdlet("Disable", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "VmssDiskEncryption",SupportsShouldProcess = true)]
     [OutputType(typeof(PSVirtualMachineScaleSet))]
     public class RemoveAzureVmssDiskEncryptionCommand : VirtualMachineScaleSetExtensionBaseCmdlet
     {
@@ -87,9 +84,6 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
 
             ExecuteClientAction(() =>
             {
-                WriteWarning("Disable-AzureRmVmssDiskEncryption: A property of the output of this cmdlet will change in an upcoming breaking change release. " +
-                             "The StorageAccountType property for a DataDisk will return Standard_LRS and Premium_LRS");
-
                 if (this.ShouldProcess(VMScaleSetName, Properties.Resources.RemoveDiskEncryptionAction)
                     && (this.Force.IsPresent
                     || this.ShouldContinue(Properties.Resources.VirtualMachineExtensionRemovalConfirmation, Properties.Resources.VirtualMachineExtensionRemovalCaption)))

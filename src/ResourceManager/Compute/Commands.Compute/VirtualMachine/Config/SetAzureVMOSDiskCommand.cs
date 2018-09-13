@@ -21,13 +21,8 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute
 {
-    [Cmdlet(
-        VerbsCommon.Set,
-        ProfileNouns.OSDisk,
-        DefaultParameterSetName = DefaultParamSet),
-    OutputType(
-        typeof(PSVirtualMachine))]
-    public class SetAzureVMOSDiskCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
+    [Cmdlet("Set", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "VMOSDisk",DefaultParameterSetName = DefaultParamSet),OutputType(typeof(PSVirtualMachine))]
+    public class SetAzureVMOSDiskCommand : ComputeClientBaseCmdlet
     {
         protected const string DefaultParamSet = "DefaultParamSet";
         protected const string WindowsParamSet = "WindowsParamSet";
@@ -172,9 +167,6 @@ namespace Microsoft.Azure.Commands.Compute
 
         public override void ExecuteCmdlet()
         {
-            WriteWarning("Set-AzureRmVMOSDisk: A property of the output of this cmdlet will change in an upcoming breaking change release. " +
-                         "The StorageAccountType property for a DataDisk will return Standard_LRS and Premium_LRS");
-
             if (this.VM.StorageProfile == null)
             {
                 this.VM.StorageProfile = new StorageProfile();
@@ -252,22 +244,7 @@ namespace Microsoft.Azure.Commands.Compute
                 };
             }
 
-            if (MyInvocation.BoundParameters.ContainsKey("StorageAccountType"))
-            {
-                WriteWarning("Set-AzureRmVMOSDisk: The accepted values for parameter StorageAccountType will change in an upcoming breaking change release " +
-                             "from StandardLRS and PremiumLRS to Standard_LRS and Premium_LRS, respectively.");
-            }
-
-            if (!string.IsNullOrEmpty(this.ManagedDiskId) || this.StorageAccountType != null)
-            {
-                if (this.VM.StorageProfile.OsDisk.ManagedDisk == null)
-                {
-                    this.VM.StorageProfile.OsDisk.ManagedDisk = new ManagedDiskParameters();
-                }
-
-                this.VM.StorageProfile.OsDisk.ManagedDisk.Id = this.ManagedDiskId ?? this.VM.StorageProfile.OsDisk.ManagedDisk.Id;
-                this.VM.StorageProfile.OsDisk.ManagedDisk.StorageAccountType = this.StorageAccountType ?? this.VM.StorageProfile.OsDisk.ManagedDisk.StorageAccountType;
-            }
+            this.VM.StorageProfile.OsDisk.ManagedDisk = SetManagedDisk(this.ManagedDiskId, this.StorageAccountType, this.VM.StorageProfile.OsDisk.ManagedDisk);
 
             this.VM.StorageProfile.OsDisk.WriteAcceleratorEnabled = this.WriteAccelerator.IsPresent;
 

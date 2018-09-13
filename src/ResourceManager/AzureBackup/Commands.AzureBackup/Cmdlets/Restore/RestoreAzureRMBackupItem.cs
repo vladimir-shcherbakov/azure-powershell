@@ -25,7 +25,7 @@ namespace Microsoft.Azure.Commands.AzureBackup.Cmdlets
     /// <summary>
     /// Restore Azure Backup Item
     /// </summary>
-    [Cmdlet(VerbsData.Restore, "AzureRmBackupItem"), OutputType(typeof(AzureRMBackupJob))]
+    [Cmdlet("Restore", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "BackupItem"), OutputType(typeof(AzureRMBackupJob))]
     public class RestoreAzureRMBackupItem : AzureBackupRestoreBase
     {
         [Parameter(Position = 1, Mandatory = true, HelpMessage = AzureBackupCmdletHelpMessage.StorageAccountName)]
@@ -50,7 +50,9 @@ namespace Microsoft.Azure.Commands.AzureBackup.Cmdlets
                     Region = RecoveryPoint.Location,
                 };
 
-                string azureIaaSVMRecoveryInputsCSMObjectString = JsonConvert.SerializeObject(azureIaaSVMRecoveryInputsCSMObject);
+                string azureIaaSVMRecoveryInputsCSMObjectString = JsonConvert.SerializeObject(
+                    azureIaaSVMRecoveryInputsCSMObject, 
+                    new JsonSerializerSettings { DateFormatHandling = DateFormatHandling.MicrosoftDateFormat });
 
                 CSMRestoreRequest csmRestoreRequest = new CSMRestoreRequest()
                 {

@@ -44,6 +44,7 @@ namespace StaticAnalysis.DependencyAnalyzer
             "Microsoft.Management.Infrastructure",
             "Microsoft.Build",
             "Microsoft.Build.Framework",
+            "Microsoft.Win32.Primitives",
             "WindowsBase"
         };
 
@@ -62,6 +63,8 @@ namespace StaticAnalysis.DependencyAnalyzer
         private ReportLogger<ExtraAssembly> _extraAssemblyLogger;
         private ReportLogger<DependencyMap> _dependencyMapLogger;
 
+        private bool _isNetcore;
+
         public DependencyAnalyzer()
         {
             Name = "Dependency Analyzer";
@@ -70,7 +73,12 @@ namespace StaticAnalysis.DependencyAnalyzer
         public AnalysisLogger Logger { get; set; }
         public string Name { get; private set; }
 
-        public void Analyze(IEnumerable<string> directories)
+        public void Analyze(IEnumerable<string> scopes)
+        {
+            Analyze(scopes, null);
+        }
+
+        public void Analyze(IEnumerable<string> directories, IEnumerable<String> modulesToAnalyze)
         {
             if (directories == null)
             {
@@ -86,6 +94,13 @@ namespace StaticAnalysis.DependencyAnalyzer
             {
                 foreach (var directoryPath in Directory.EnumerateDirectories(baseDirectory))
                 {
+                    if (modulesToAnalyze != null &&
+                        modulesToAnalyze.Any() &&
+                        !modulesToAnalyze.Where(m => directoryPath.EndsWith(m)).Any())
+                    {
+                        continue;
+                    }
+
                     if (!Directory.Exists(directoryPath))
                     {
                         throw new InvalidOperationException("Please pass a valid directory name as the first parameter");
@@ -97,6 +112,7 @@ namespace StaticAnalysis.DependencyAnalyzer
                     _missingAssemblyLogger.Decorator.AddDecorator(r => { r.Directory = directoryPath; }, "Directory");
                     _extraAssemblyLogger.Decorator.AddDecorator(r => { r.Directory = directoryPath; }, "Directory");
                     _dependencyMapLogger.Decorator.AddDecorator(r => { r.Directory = directoryPath; }, "Directory");
+                    _isNetcore = directoryPath.Contains("Az.");
                     ProcessDirectory(directoryPath);
                     _versionConflictLogger.Decorator.Remove("Directory");
                     _missingAssemblyLogger.Decorator.Remove("Directory");
@@ -229,7 +245,7 @@ namespace StaticAnalysis.DependencyAnalyzer
 
         private static bool IsFrameworkAssembly(AssemblyName name)
         {
-            return name.Name.StartsWith("System") || name.Name.Equals("mscorlib")
+            return name.Name.StartsWith("System") || name.Name.Equals("mscorlib") || name.Name.Equals("netstandard")
                 || FrameworkAssemblies.Contains(name.Name);
         }
 
@@ -237,7 +253,12 @@ namespace StaticAnalysis.DependencyAnalyzer
         {
             var savedDirectory = Directory.GetCurrentDirectory();
             Directory.SetCurrentDirectory(directoryPath);
-            _loader = EnvironmentHelpers.CreateProxy<AssemblyLoader>(directoryPath, out _testDomain);
+            _loader =
+#if !NETSTANDARD
+                EnvironmentHelpers.CreateProxy<AssemblyLoader>(directoryPath, out _testDomain);
+#else
+                new AssemblyLoader();
+#endif
             foreach (var file in Directory.GetFiles(directoryPath).Where(file => file.EndsWith(".dll")))
             {
                 AssemblyRecord assembly = CreateAssemblyRecord(file);
@@ -282,7 +303,9 @@ namespace StaticAnalysis.DependencyAnalyzer
 
             FindExtraAssemblies();
 
+#if !NETSTANDARD
             AppDomain.Unload(_testDomain);
+#endif
             Directory.SetCurrentDirectory(savedDirectory);
         }
 
@@ -344,7 +367,7 @@ namespace StaticAnalysis.DependencyAnalyzer
                                                    parent.Name)
                     });
                 }
-                else
+                else if (_isNetcore && stored.Version < reference.Version)
                 {
                     var minVersion = (stored.Version < reference.Version) ? stored.Version : reference.Version;
                     _versionConflictLogger.LogRecord(new AssemblyVersionConflict()
@@ -395,6 +418,11 @@ namespace StaticAnalysis.DependencyAnalyzer
         /// </summary>
         /// <returns></returns>
         public AnalysisReport GetAnalysisReport()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Analyze(IEnumerable<string> cmdletProbingDirs, Func<IEnumerable<string>, IEnumerable<string>> directoryFilter, Func<string, bool> cmdletFilter, IEnumerable<string> modulesToAnalyze)
         {
             throw new NotImplementedException();
         }

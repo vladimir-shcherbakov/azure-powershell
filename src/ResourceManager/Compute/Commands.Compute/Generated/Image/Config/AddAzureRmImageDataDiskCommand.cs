@@ -20,8 +20,6 @@
 // code is regenerated.
 
 using Microsoft.Azure.Commands.Compute.Automation.Models;
-using Microsoft.Azure.Commands.Compute.Common;
-using Microsoft.Azure.Commands.Compute.Models;
 using Microsoft.Azure.Commands.ResourceManager.Common.ArgumentCompleters;
 using Microsoft.Azure.Management.Compute.Models;
 using System;
@@ -32,7 +30,7 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute.Automation
 {
-    [Cmdlet("Add", "AzureRmImageDataDisk", SupportsShouldProcess = true)]
+    [Cmdlet(VerbsCommon.Add, ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "ImageDataDisk", SupportsShouldProcess = true)]
     [OutputType(typeof(PSImage))]
     public partial class AddAzureRmImageDataDiskCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
     {
@@ -92,9 +90,6 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
         private void Run()
         {
-            WriteWarning("Add-AzureRmImageDataDisk: A property of the output of this cmdlet will change in an upcoming breaking change release. " +
-                         "The StorageAccountType property for a DataDisk will return Standard_LRS and Premium_LRS");
-
             // StorageProfile
             if (this.Image.StorageProfile == null)
             {
@@ -115,11 +110,9 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             vDataDisks.DiskSizeGB = this.MyInvocation.BoundParameters.ContainsKey("DiskSizeGB") ? this.DiskSizeGB : (int?) null;
             if (this.MyInvocation.BoundParameters.ContainsKey("StorageAccountType"))
             {
-                WriteWarning("Add-AzureRmImageDataDisk: The accepted values for parameter StorageAccountType will change in an upcoming breaking change release " +
-                             "from StandardLRS and PremiumLRS to Standard_LRS and Premium_LRS, respectively.");
+                vDataDisks.StorageAccountType = (StorageAccountTypes?)this.StorageAccountType;
             }
 
-            vDataDisks.StorageAccountType = this.MyInvocation.BoundParameters.ContainsKey("StorageAccountType") ? this.StorageAccountType : null;
             if (this.MyInvocation.BoundParameters.ContainsKey("SnapshotId"))
             {
                 // Snapshot
@@ -137,4 +130,3 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         }
     }
 }
-

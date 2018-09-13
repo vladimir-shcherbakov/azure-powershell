@@ -27,7 +27,7 @@ namespace Microsoft.Azure.Commands.WebApps.Cmdlets.WebApps
     /// <summary>
     /// this commandlet will let you create a new Azure Web app using ARM APIs
     /// </summary>
-    [Cmdlet(VerbsCommon.Set, "AzureRmWebApp")]
+    [Cmdlet("Set", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "WebApp"), OutputType(typeof(Site))]
     public class SetAzureWebAppCmdlet : WebAppBaseCmdlet
     {
         [Parameter(ParameterSetName = ParameterSet1Name, Position = 2, Mandatory = false, HelpMessage = "The name of the app service plan eg: Default1.")]
@@ -98,10 +98,10 @@ namespace Microsoft.Azure.Commands.WebApps.Cmdlets.WebApps
         public SwitchParameter AsJob { get; set; }
         
         [Parameter(ParameterSetName = ParameterSet1Name, Mandatory = false, HelpMessage = "Enable MSI on an existing azure webapp")]
-        public SwitchParameter AssignIdentity { get; set; }
+        public bool AssignIdentity { get; set; }
 
         [Parameter(ParameterSetName = ParameterSet1Name, Mandatory = false, HelpMessage = "Enable/disable redirecting all traffic to HTTPS on an existing azure webapp")]
-        public SwitchParameter HttpsOnly { get; set; }
+        public bool HttpsOnly { get; set; }
 
         public override void ExecuteCmdlet()
         {
@@ -121,7 +121,7 @@ namespace Microsoft.Azure.Commands.WebApps.Cmdlets.WebApps
                         {
                             DefaultDocuments = parameters.Contains("DefaultDocuments") ? DefaultDocuments : null,
                             NetFrameworkVersion = parameters.Contains("NetFrameworkVersion") ? NetFrameworkVersion : null,
-                            PhpVersion = parameters.Contains("PhpVersion") ? PhpVersion : null,
+                            PhpVersion = parameters.Contains("PhpVersion") ? PhpVersion.ToLower() == "off" ? "" : PhpVersion : null,
                             RequestTracingEnabled =
                                 parameters.Contains("RequestTracingEnabled") ? (bool?)RequestTracingEnabled : null,
                             HttpLoggingEnabled = parameters.Contains("HttpLoggingEnabled") ? (bool?)HttpLoggingEnabled : null,
@@ -138,43 +138,25 @@ namespace Microsoft.Azure.Commands.WebApps.Cmdlets.WebApps
                             AutoSwapSlotName = parameters.Contains("AutoSwapSlotName") ? AutoSwapSlotName : null,
                             NumberOfWorkers = parameters.Contains("NumberOfWorkers") ? NumberOfWorkers : WebApp.SiteConfig.NumberOfWorkers
                         };
-
-                        // Update web app configuration
-                        WebsitesClient.UpdateWebAppConfiguration(ResourceGroupName, location, Name, null, siteConfig, AppSettings.ConvertToStringDictionary(), ConnectionStrings.ConvertToConnectionStringDictionary());
                     }
+
+                    // Update web app configuration
+                    WebsitesClient.UpdateWebAppConfiguration(ResourceGroupName, location, Name, null, siteConfig, AppSettings.ConvertToStringDictionary(), ConnectionStrings.ConvertToConnectionStringDictionary());
+
+                    //Update WebApp object after configuration update
+                    WebApp = WebsitesClient.GetWebApp(ResourceGroupName, Name, null);
 
                     if (parameters.Any(p => CmdletHelpers.SiteParameters.Contains(p)))
                     {
+
                         site = new Site
                         {
                             Location = location,
                             ServerFarmId = WebApp.ServerFarmId,
-                            Identity = AssignIdentity.IsPresent ? new ManagedServiceIdentity("SystemAssigned", null, null) : WebApp.Identity,
-                            HttpsOnly = HttpsOnly.IsPresent
+                            Identity = parameters.Contains("AssignIdentity") ? AssignIdentity ? new ManagedServiceIdentity("SystemAssigned", null, null) : new ManagedServiceIdentity("None", null, null) : WebApp.Identity,
+                            HttpsOnly = parameters.Contains("HttpsOnly") ? HttpsOnly : WebApp.HttpsOnly
                         };
 
-                        Dictionary<string, string> appSettings = WebApp.SiteConfig?.AppSettings?.ToDictionary(x => x.Name, x => x.Value);
-                        if (AssignIdentity.IsPresent)
-                        {
-
-                            // Add or update the appsettings property
-                            appSettings["WEBSITE_DISABLE_MSI"] = (!AssignIdentity).ToString();
-                            WebsitesClient.UpdateWebAppConfiguration(ResourceGroupName, location, Name, null, WebApp.SiteConfig, appSettings, 
-                                                                     WebApp.SiteConfig.ConnectionStrings.
-                                                                        ToDictionary(nvp => nvp.Name,
-                                                                        nvp => new ConnStringValueTypePair
-                                                                        {
-                                                                            Type = nvp.Type.Value,
-                                                                            Value = nvp.ConnectionString
-                                                                        },
-                                                                        StringComparer.OrdinalIgnoreCase));
-                        }
-                        else
-                        {
-                            // disabling the identity property updates the siteconfig only
-                            appSettings["WEBSITE_DISABLE_MSI"] = (!AssignIdentity.IsPresent).ToString();
-                        }
-                        
                         WebsitesClient.UpdateWebApp(ResourceGroupName, location, Name, null, WebApp.ServerFarmId, site);
                     }
 

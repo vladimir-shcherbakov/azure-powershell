@@ -20,8 +20,6 @@
 // code is regenerated.
 
 using Microsoft.Azure.Commands.Compute.Automation.Models;
-using Microsoft.Azure.Commands.Compute.Common;
-using Microsoft.Azure.Commands.Compute.Models;
 using Microsoft.Azure.Commands.ResourceManager.Common.ArgumentCompleters;
 using Microsoft.Azure.Management.Compute.Models;
 using System;
@@ -32,7 +30,7 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute.Automation
 {
-    [Cmdlet("New", "AzureRmDiskUpdateConfig", SupportsShouldProcess = true)]
+    [Cmdlet(VerbsCommon.New, ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "DiskUpdateConfig", SupportsShouldProcess = true)]
     [OutputType(typeof(PSDiskUpdate))]
     public partial class NewAzureRmDiskUpdateConfigCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
     {
@@ -122,8 +120,6 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
             if (this.MyInvocation.BoundParameters.ContainsKey("SkuName"))
             {
-                WriteWarning("New-AzureRmDiskUpdateConfig: The accepted values for parameter SkuName will change in an upcoming breaking change release " +
-                             "from StandardLRS and PremiumLRS to Standard_LRS and Premium_LRS, respectively.");
                 if (vSku == null)
                 {
                     vSku = new Microsoft.Azure.Management.Compute.Models.DiskSku();
@@ -144,4 +140,3 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         }
     }
 }
-

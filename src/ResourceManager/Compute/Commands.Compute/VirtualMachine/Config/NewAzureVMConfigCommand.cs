@@ -21,12 +21,7 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute
 {
-    [Cmdlet(
-        VerbsCommon.New,
-        ProfileNouns.VirtualMachineConfig,
-        DefaultParameterSetName = "DefaultParameterSet"),
-    OutputType(
-        typeof(PSVirtualMachine))]
+    [Cmdlet("New", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "VMConfig",DefaultParameterSetName = "DefaultParameterSet"),OutputType(typeof(PSVirtualMachine))]
     public class NewAzureVMConfigCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
     {
         [Alias("ResourceName", "Name")]
@@ -98,9 +93,6 @@ namespace Microsoft.Azure.Commands.Compute
 
         public override void ExecuteCmdlet()
         {
-            WriteWarning("New-AzureRmVMConfig: A property of the output of this cmdlet will change in an upcoming breaking change release. " +
-                         "The StorageAccountType property for a DataDisk will return Standard_LRS and Premium_LRS");
-
             var vm = new PSVirtualMachine
             {
                 Name = this.VMName,

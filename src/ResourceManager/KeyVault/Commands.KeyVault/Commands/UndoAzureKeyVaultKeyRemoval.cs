@@ -17,10 +17,7 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.KeyVault
 {
-    [Cmdlet(VerbsCommon.Undo, "AzureKeyVaultKeyRemoval",
-        SupportsShouldProcess = true,
-        DefaultParameterSetName = DefaultParameterSet,
-        HelpUri = Constants.KeyVaultHelpUri)]
+    [Cmdlet("Undo", ResourceManager.Common.AzureRMConstants.AzurePrefix + "KeyVaultKeyRemoval",SupportsShouldProcess = true,DefaultParameterSetName = DefaultParameterSet)]
     [OutputType(typeof(PSKeyVaultKey))]
     public class UndoAzureKeyVaultKeyRemoval : KeyVaultCmdletBase
     {
@@ -39,7 +36,6 @@ namespace Microsoft.Azure.Commands.KeyVault
         [Parameter(Mandatory = true,
             Position = 0,
             ParameterSetName = DefaultParameterSet,
-            ValueFromPipelineByPropertyName = true,
             HelpMessage = "Vault name. Cmdlet constructs the FQDN of a vault based on the name and currently selected environment.")]
         [ValidateNotNullOrEmpty]
         public string VaultName { get; set; }
@@ -50,7 +46,6 @@ namespace Microsoft.Azure.Commands.KeyVault
         [Parameter(Mandatory = true,
             Position = 1,
             ParameterSetName = DefaultParameterSet,
-            ValueFromPipelineByPropertyName = true,
             HelpMessage = "Key name. Cmdlet constructs the FQDN of a key from vault name, currently selected environment and key name.")]
         [ValidateNotNullOrEmpty]
         [Alias(Constants.KeyName)]

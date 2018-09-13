@@ -38,7 +38,7 @@ To install the module containing the legacy RDFE cmdlets, run the following comm
 Install-Module -Name Azure
 ```
 
-If you have an earlier version of the Azure PowerShell modules installed from the PowerShell Gallery and would like to update to the latest version, run the following commands in an elevated PowerShell session:
+If you have an earlier version of the Azure PowerShell modules installed from the PowerShell Gallery and would like to update to the latest version, run the following commands in an elevated PowerShell session. Update-Module installs the new version side-by-side with the old version. It does not remove the old version.
 
 ```powershell
 # Update to the latest version of AzureRM
@@ -156,7 +156,7 @@ If there is a feature you would like to see in Azure PowerShell, please use the 
 
 If you would like to become an active contributor to this project please follow the instructions provided in [Microsoft Azure Projects Contribution Guidelines](https://azure.github.io/guidelines/).
 
-More information about contributing to this repo can be found in [CONTRIBUTING md](https://github.com/Azure/azure-powershell/blob/preview/CONTRIBUTING.md) and the [Azure PowerShell Developer Guide](https://github.com/Azure/azure-powershell/wiki/Azure-Powershell-Developer-Guide) folder.
+More information about contributing to this repo can be found in [CONTRIBUTING md](https://github.com/Azure/azure-powershell/blob/preview/CONTRIBUTING.md) and the [Azure PowerShell Developer Guide](https://github.com/Azure/azure-powershell/blob/preview/documentation/development-docs/azure-powershell-developer-guide.md) folder.
 
 ## Learn More
 

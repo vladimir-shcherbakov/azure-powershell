@@ -1,8 +1,8 @@
 ---
 Module Name: AzureRM.Websites
 Module Guid: cc69c625-e961-43f4-8b50-0061eba6e4b6
-Download Help Link: 
-Help Version: 1.0
+Download Help Link: https://docs.microsoft.com/en-us/powershell/module/azurerm.websites
+Help Version: 1.0.0.0
 Locale: en-US
 ---
 
@@ -52,6 +52,9 @@ Gets metrics for an Azure Web App slot.
 
 ### [Get-AzureRmWebAppSlotPublishingProfile](Get-AzureRmWebAppSlotPublishingProfile.md)
 Gets an Azure Web App slot publishing profile.
+
+### [Get-AzureRmWebAppSnapshot](Get-AzureRmWebAppSnapshot.md)
+Gets the snapshots available for a web app.
 
 ### [Get-AzureRmWebAppSSLBinding](Get-AzureRmWebAppSSLBinding.md)
 Gets an Azure Web App certificate SSL binding.
@@ -103,6 +106,10 @@ Restarts an Azure Web App slot.
 
 ### [Restore-AzureRmWebAppBackup](Restore-AzureRmWebAppBackup.md)
 Restores an Azure Web App from a backup.
+
+
+### [Restore-AzureRmWebAppSnapshot](Restore-AzureRmWebAppSnapshot.md)
+Restores a web app snapshot.
 
 ### [Set-AzureRmAppServicePlan](Set-AzureRmAppServicePlan.md)
 Sets an Azure App Service plan.

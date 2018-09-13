@@ -23,11 +23,7 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute
 {
-    [Cmdlet(
-        VerbsCommon.Set,
-        ProfileNouns.DataDisk),
-    OutputType(
-        typeof(PSVirtualMachine))]
+    [Cmdlet("Set", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "VMDataDisk"),OutputType(typeof(PSVirtualMachine))]
     public class SetAzureVMDataDiskCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
     {
         private const string NameParameterSet = "ChangeWithName";
@@ -91,9 +87,6 @@ namespace Microsoft.Azure.Commands.Compute
 
         public override void ExecuteCmdlet()
         {
-            WriteWarning("Set-AzureRmVMDataDisk: A property of the output of this cmdlet will change in an upcoming breaking change release. " +
-                         "The StorageAccountType property for a DataDisk will return Standard_LRS and Premium_LRS");
-
             var storageProfile = this.VM.StorageProfile;
 
             if (storageProfile == null || storageProfile.DataDisks == null)
@@ -121,8 +114,6 @@ namespace Microsoft.Azure.Commands.Compute
                 }
                 if (this.StorageAccountType != null)
                 {
-                    WriteWarning("Set-AzureRmVMDataDisk: The accepted values for parameter StorageAccountType will change in an upcoming breaking change release " +
-                                 "from StandardLRS and PremiumLRS to Standard_LRS and Premium_LRS, respectively.");
                     if (dataDisk.ManagedDisk == null)
                     {
                         ThrowTerminatingError

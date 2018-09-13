@@ -1,4 +1,4 @@
-﻿---
+---
 external help file: Microsoft.Azure.Commands.Network.dll-Help.xml
 Module Name: AzureRM.Network
 ms.assetid: 76DB6AF5-BF6F-436C-8500-626468F84466
@@ -42,7 +42,7 @@ The last command then creates a WAF configuration with firewall rules disabled a
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: IAzureContextContainer
+Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -59,7 +59,7 @@ The disabled rule groups.
 ```yaml
 Type: System.Collections.Generic.List`1[Microsoft.Azure.Commands.Network.Models.PSApplicationGatewayFirewallDisabledRuleGroup]
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -72,9 +72,9 @@ Accept wildcard characters: False
 Indicates whether the WAF is enabled.
 
 ```yaml
-Type: Boolean
+Type: System.Boolean
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -86,14 +86,13 @@ Accept wildcard characters: False
 ### -FirewallMode
 Specifies the web application firewall mode.
 The acceptable values for this parameter are:
-
 - Detection
 - Prevention
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 Accepted values: Detection, Prevention
 
 Required: True
@@ -106,13 +105,12 @@ Accept wildcard characters: False
 ### -RuleSetType
 The type of the web application firewall rule set. 
 The acceptable values for this parameter are: 
-
 - OWASP
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 Accepted values: OWASP
 
 Required: False
@@ -125,14 +123,13 @@ Accept wildcard characters: False
 ### -RuleSetVersion
 The version of the rule set type.
 The acceptable values for this parameter are: 
-
 - 3.0
 - 2.2.9
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 Accepted values: 3.0, 2.2.9
 
 Required: False
@@ -146,7 +143,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -161,7 +158,7 @@ Accept wildcard characters: False
 Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -178,7 +175,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-This cmdlet does not accept any input.
 
 ## OUTPUTS
 

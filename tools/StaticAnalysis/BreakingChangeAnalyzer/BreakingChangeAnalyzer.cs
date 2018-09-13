@@ -55,6 +55,19 @@ namespace StaticAnalysis.BreakingChangeAnalyzer
             Analyze(cmdletProbingDirs, null, null);
         }
 
+        public void Analyze(IEnumerable<string> cmdletProbingDirs, IEnumerable<string> modulesToAnalyze)
+        {
+            Analyze(cmdletProbingDirs, null, null, modulesToAnalyze);
+        }
+
+        public void Analyze(
+            IEnumerable<string> cmdletProbingDirs,
+            Func<IEnumerable<string>, IEnumerable<string>> directoryFilter,
+            Func<string, bool> cmdletFilter)
+        {
+            Analyze(cmdletProbingDirs, directoryFilter, cmdletFilter, null);
+        }
+
         /// <summary>
         /// Given a set of directory paths containing PowerShell module folders,
         /// analyze the breaking changes in the modules and report any issues
@@ -67,7 +80,8 @@ namespace StaticAnalysis.BreakingChangeAnalyzer
         public void Analyze(
             IEnumerable<string> cmdletProbingDirs,
             Func<IEnumerable<string>, IEnumerable<string>> directoryFilter,
-            Func<string, bool> cmdletFilter)
+            Func<string, bool> cmdletFilter,
+            IEnumerable<string> modulesToAnalyze)
         {
             var savedDirectory = Directory.GetCurrentDirectory();
             var processedHelpFiles = new List<string>();
@@ -89,6 +103,13 @@ namespace StaticAnalysis.BreakingChangeAnalyzer
 
                 foreach (var directory in probingDirectories)
                 {
+                    if (modulesToAnalyze != null &&
+                        modulesToAnalyze.Any() &&
+                        !modulesToAnalyze.Where(m => directory.EndsWith(m)).Any())
+                    {
+                        continue;
+                    }
+
                     var service = Path.GetFileName(directory);
 
                     var manifestFiles = Directory.EnumerateFiles(directory, "*.psd1").ToList();
@@ -137,7 +158,12 @@ namespace StaticAnalysis.BreakingChangeAnalyzer
                             {
                                 issueLogger.Decorator.AddDecorator(a => a.AssemblyFileName = assemblyFileName, "AssemblyFileName");
                                 processedHelpFiles.Add(assemblyFileName);
-                                var proxy = EnvironmentHelpers.CreateProxy<CmdletLoader>(directory, out _appDomain);
+                                var proxy =
+#if !NETSTANDARD
+                                    EnvironmentHelpers.CreateProxy<CmdletLoader>(directory, out _appDomain);
+#else
+                                    new CmdletLoader();
+#endif
                                 var newModuleMetadata = proxy.GetModuleMetadata(assemblyFile, requiredModules);
 
                                 string fileName = assemblyFileName + ".json";

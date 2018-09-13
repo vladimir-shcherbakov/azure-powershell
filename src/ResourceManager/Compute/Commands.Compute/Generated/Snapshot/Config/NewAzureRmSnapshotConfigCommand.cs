@@ -20,8 +20,6 @@
 // code is regenerated.
 
 using Microsoft.Azure.Commands.Compute.Automation.Models;
-using Microsoft.Azure.Commands.Compute.Common;
-using Microsoft.Azure.Commands.Compute.Models;
 using Microsoft.Azure.Commands.ResourceManager.Common.ArgumentCompleters;
 using Microsoft.Azure.Management.Compute.Models;
 using System;
@@ -32,7 +30,7 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute.Automation
 {
-    [Cmdlet("New", "AzureRmSnapshotConfig", SupportsShouldProcess = true)]
+    [Cmdlet(VerbsCommon.New, ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "SnapshotConfig", SupportsShouldProcess = true)]
     [OutputType(typeof(PSSnapshot))]
     public partial class NewAzureRmSnapshotConfigCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
     {
@@ -60,7 +58,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             Mandatory = false,
             Position = 3,
             ValueFromPipelineByPropertyName = true)]
-        [ResourceManager.Common.ArgumentCompleters.LocationCompleter("Microsoft.Compute/snapshots")]
+        [LocationCompleter("Microsoft.Compute/snapshots")]
         public string Location { get; set; }
 
         [Parameter(
@@ -118,9 +116,6 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
         private void Run()
         {
-            WriteWarning("New-AzureRmSnapshotConfig: A property of the output of this cmdlet will change in an upcoming breaking change release. " +
-                         "The Name property for a Sku will return Standard_LRS and Premium_LRS");
-
             // Sku
             Microsoft.Azure.Management.Compute.Models.SnapshotSku vSku = null;
 
@@ -132,8 +127,6 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
             if (this.MyInvocation.BoundParameters.ContainsKey("SkuName"))
             {
-                WriteWarning("New-AzureRmSnapshotConfig: The accepted values for parameter SkuName will change in an upcoming breaking change release " +
-                             "from StandardLRS and PremiumLRS to Standard_LRS and Premium_LRS, respectively.");
                 if (vSku == null)
                 {
                     vSku = new Microsoft.Azure.Management.Compute.Models.SnapshotSku();
@@ -228,4 +221,3 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         }
     }
 }
-

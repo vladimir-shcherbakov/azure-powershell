@@ -19,11 +19,7 @@ using Microsoft.Azure.Commands.KeyVault.Properties;
 
 namespace Microsoft.Azure.Commands.KeyVault
 {
-    [Cmdlet(VerbsCommon.Remove, "AzureKeyVaultKey",
-        SupportsShouldProcess = true,
-        DefaultParameterSetName = ByVaultNameParameterSet,
-         ConfirmImpact = ConfirmImpact.High,
-        HelpUri = Constants.KeyVaultHelpUri)]
+    [Cmdlet("Remove", ResourceManager.Common.AzureRMConstants.AzurePrefix + "KeyVaultKey",SupportsShouldProcess = true,DefaultParameterSetName = ByVaultNameParameterSet)]
     [OutputType(typeof(PSDeletedKeyVaultKey))]
     public class RemoveAzureKeyVaultKey : KeyVaultCmdletBase
     {
@@ -41,7 +37,6 @@ namespace Microsoft.Azure.Commands.KeyVault
         /// </summary>
         [Parameter(Mandatory = true,
             Position = 0,
-            ValueFromPipelineByPropertyName = true,
             ParameterSetName = ByVaultNameParameterSet,
             HelpMessage = "Vault name. Cmdlet constructs the FQDN of a vault based on the name and currently selected environment.")]
         [ValidateNotNullOrEmpty]
@@ -52,7 +47,6 @@ namespace Microsoft.Azure.Commands.KeyVault
         /// </summary>
         [Parameter(Mandatory = true,
             Position = 1,
-            ValueFromPipelineByPropertyName = true,
             ParameterSetName = ByVaultNameParameterSet,
             HelpMessage = "Key name. Cmdlet constructs the FQDN of a key from vault name, currently selected environment and key name.")]
         [ValidateNotNullOrEmpty]
@@ -66,7 +60,7 @@ namespace Microsoft.Azure.Commands.KeyVault
             Position = 0,
             ValueFromPipeline = true,
             ParameterSetName = ByInputObjectParameterSet,
-            HelpMessage = "KeyBundle Object")]
+            HelpMessage = "Key Object")]
         [ValidateNotNullOrEmpty]
         public PSKeyVaultKeyIdentityItem InputObject { get; set; }
 

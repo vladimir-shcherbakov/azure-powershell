@@ -25,7 +25,7 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute
 {
-    [Cmdlet(VerbsCommon.Get, ProfileNouns.VirtualMachine, DefaultParameterSetName = ListAllVirtualMachinesParamSet)]
+    [Cmdlet("Get", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "VM", DefaultParameterSetName = ListAllVirtualMachinesParamSet)]
     [OutputType(typeof(PSVirtualMachine), typeof(PSVirtualMachineInstanceView))]
     public class GetAzureVMCommand : VirtualMachineBaseCmdlet
     {
@@ -84,8 +84,6 @@ namespace Microsoft.Azure.Commands.Compute
 
             ExecuteClientAction(() =>
             {
-                WriteWarning("Get-AzureRmVM: A property of the output of this cmdlet will change in an upcoming breaking change release. " +
-                             "The StorageAccountType property for a DataDisk will return Standard_LRS and Premium_LRS");
                 if (string.IsNullOrEmpty(this.ResourceGroupName) && string.IsNullOrEmpty(this.Name))
                 {
                     AzureOperationResponse<IPage<VirtualMachine>> vmListResult = null;

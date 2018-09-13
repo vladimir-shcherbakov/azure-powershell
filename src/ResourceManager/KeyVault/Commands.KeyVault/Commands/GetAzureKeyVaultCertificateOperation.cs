@@ -20,9 +20,7 @@ namespace Microsoft.Azure.Commands.KeyVault
     /// <summary>
     /// Gets the status of the certificate operation
     /// </summary>
-    [Cmdlet(VerbsCommon.Get, CmdletNoun.AzureKeyVaultCertificateOperation,
-        DefaultParameterSetName = ByNameParameterSet,  
-        HelpUri = Constants.KeyVaultHelpUri)]
+    [Cmdlet("Get", ResourceManager.Common.AzureRMConstants.AzurePrefix + "KeyVaultCertificateOperation",DefaultParameterSetName = ByNameParameterSet)]
     [OutputType(typeof(PSKeyVaultCertificateOperation))]
     public class GetAzureKeyVaultCertificateOperation : KeyVaultCmdletBase
     {
@@ -41,7 +39,6 @@ namespace Microsoft.Azure.Commands.KeyVault
         [Parameter(Mandatory = true,
                    ParameterSetName = ByNameParameterSet,
                    Position = 0,
-                   ValueFromPipelineByPropertyName = true,
                    HelpMessage = "Vault name. Cmdlet constructs the FQDN of a vault based on the name and currently selected environment.")]
         [ValidateNotNullOrEmpty]
         public string VaultName { get; set; }
@@ -52,7 +49,6 @@ namespace Microsoft.Azure.Commands.KeyVault
         [Parameter(Mandatory = true,
                    ParameterSetName = ByNameParameterSet,
                    Position = 1,
-                   ValueFromPipelineByPropertyName = true,
                    HelpMessage = "Certificate name. Cmdlet constructs the FQDN of a certificate operation from vault name, currently selected environment and certificate name.")]
         [ValidateNotNullOrEmpty]
         [Alias(Constants.CertificateName)]
@@ -80,10 +76,12 @@ namespace Microsoft.Azure.Commands.KeyVault
             }
 
             var certificateOperation = this.DataServiceClient.GetCertificateOperation(VaultName, Name);
-            var kvCertificateOperation = PSKeyVaultCertificateOperation.FromCertificateOperation(certificateOperation);
-            kvCertificateOperation.VaultName = VaultName;
-            kvCertificateOperation.Name = Name;
-            this.WriteObject(kvCertificateOperation);
+            if (certificateOperation != null)
+            {
+                certificateOperation.VaultName = VaultName;
+                certificateOperation.Name = Name;
+            }
+            this.WriteObject(certificateOperation);
         }
     }
 }

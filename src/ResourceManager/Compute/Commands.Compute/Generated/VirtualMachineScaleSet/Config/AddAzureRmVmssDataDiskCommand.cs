@@ -20,8 +20,6 @@
 // code is regenerated.
 
 using Microsoft.Azure.Commands.Compute.Automation.Models;
-using Microsoft.Azure.Commands.Compute.Common;
-using Microsoft.Azure.Commands.Compute.Models;
 using Microsoft.Azure.Commands.ResourceManager.Common.ArgumentCompleters;
 using Microsoft.Azure.Management.Compute.Models;
 using System;
@@ -32,7 +30,7 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute.Automation
 {
-    [Cmdlet("Add", "AzureRmVmssDataDisk", SupportsShouldProcess = true)]
+    [Cmdlet(VerbsCommon.Add, ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "VmssDataDisk", SupportsShouldProcess = true)]
     [OutputType(typeof(PSVirtualMachineScaleSet))]
     public partial class AddAzureRmVmssDataDiskCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
     {
@@ -91,9 +89,6 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
         private void Run()
         {
-            WriteWarning("Add-AzureRmVmssDataDisk: A property of the output of this cmdlet will change in an upcoming breaking change release. " +
-                         "The StorageAccountType property for a DataDisk will return Standard_LRS and Premium_LRS");
-
             // VirtualMachineProfile
             if (this.VirtualMachineScaleSet.VirtualMachineProfile == null)
             {
@@ -119,11 +114,9 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             vDataDisks.Caching = this.MyInvocation.BoundParameters.ContainsKey("Caching") ? this.Caching : (CachingTypes?) null;
             vDataDisks.WriteAcceleratorEnabled = this.WriteAccelerator.IsPresent;
             vDataDisks.CreateOption = this.MyInvocation.BoundParameters.ContainsKey("CreateOption") ? this.CreateOption : null;
-            vDataDisks.DiskSizeGB = this.MyInvocation.BoundParameters.ContainsKey("DiskSizeGB") ? this.DiskSizeGB : (int?) null;
+            vDataDisks.DiskSizeGB = this.MyInvocation.BoundParameters.ContainsKey("DiskSizeGB") ? this.DiskSizeGB : (int?)null;
             if (this.MyInvocation.BoundParameters.ContainsKey("StorageAccountType"))
             {
-                WriteWarning("Add-AzureRmVmssDataDisk: The accepted values for parameter StorageAccountType will change in an upcoming breaking change release " +
-                             "from StandardLRS and PremiumLRS to Standard_LRS and Premium_LRS, respectively.");
                 // ManagedDisk
                 vDataDisks.ManagedDisk = new Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetManagedDiskParameters();
                 vDataDisks.ManagedDisk.StorageAccountType = this.StorageAccountType;
@@ -133,4 +126,3 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         }
     }
 }
-

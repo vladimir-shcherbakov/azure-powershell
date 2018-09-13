@@ -71,12 +71,18 @@ namespace StaticAnalysis.HelpAnalyzer
 
             return result;
         }
+
+        public void Analyze(IEnumerable<string> scopes)
+        {
+            Analyze(scopes, null);
+        }
+
         /// <summary>
         /// Given a set of directory paths containing PowerShell module folders, analyze the help
         /// in the module folders and report any issues
         /// </summary>
         /// <param name="scopes"></param>
-        public void Analyze(IEnumerable<string> scopes)
+        public void Analyze(IEnumerable<string> scopes, IEnumerable<string> modulesToAnalyze)
         {
             var savedDirectory = Directory.GetCurrentDirectory();
             var processedHelpFiles = new List<string>();
@@ -85,6 +91,13 @@ namespace StaticAnalysis.HelpAnalyzer
             {
                 foreach (var directory in Directory.EnumerateDirectories(Path.GetFullPath(baseDirectory)))
                 {
+                    if (modulesToAnalyze != null &&
+                        modulesToAnalyze.Any() &&
+                        !modulesToAnalyze.Where(m => directory.EndsWith(m)).Any())
+                    {
+                        continue;
+                    }
+
                     var dirs = Directory.EnumerateDirectories(directory);
                     if (dirs != null && dirs.Any((d) => string.Equals(Path.GetFileName(d), "help", StringComparison.OrdinalIgnoreCase)))
                     {
@@ -137,7 +150,12 @@ namespace StaticAnalysis.HelpAnalyzer
                             h.HelpFile = helpFileName;
                             h.Assembly = cmdletFileName;
                         }, "Cmdlet");
-                        var proxy = EnvironmentHelpers.CreateProxy<CmdletLoader>(directory, out _appDomain);
+                        var proxy =
+#if !NETSTANDARD
+                            EnvironmentHelpers.CreateProxy<CmdletLoader>(directory, out _appDomain);
+#else
+                            new CmdletLoader();
+#endif
                         var module = proxy.GetModuleMetadata(cmdletFile);
                         var cmdlets = module.Cmdlets;
                         var helpRecords = CmdletHelpParser.GetHelpTopics(helpFile, helpLogger);
@@ -229,7 +247,12 @@ namespace StaticAnalysis.HelpAnalyzer
                                 h.Assembly = assemblyFileName;
                             }, "Cmdlet");
                             processedHelpFiles.Add(assemblyFileName);
-                            var proxy = EnvironmentHelpers.CreateProxy<CmdletLoader>(directory, out _appDomain);
+                            var proxy =
+#if !NETSTANDARD
+                                EnvironmentHelpers.CreateProxy<CmdletLoader>(directory, out _appDomain);
+#else
+                                new CmdletLoader();
+#endif
                             var module = proxy.GetModuleMetadata(assemblyFile, requiredModules);
                             var cmdlets = module.Cmdlets;
                             allCmdlets.AddRange(cmdlets);
@@ -281,6 +304,11 @@ namespace StaticAnalysis.HelpAnalyzer
         /// </summary>
         /// <returns></returns>
         public AnalysisReport GetAnalysisReport()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Analyze(IEnumerable<string> cmdletProbingDirs, Func<IEnumerable<string>, IEnumerable<string>> directoryFilter, Func<string, bool> cmdletFilter, IEnumerable<string> modulesToAnalyze)
         {
             throw new NotImplementedException();
         }

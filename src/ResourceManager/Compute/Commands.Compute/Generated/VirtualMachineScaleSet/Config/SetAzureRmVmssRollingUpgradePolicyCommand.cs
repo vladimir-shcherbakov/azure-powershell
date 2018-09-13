@@ -29,7 +29,7 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute.Automation
 {
-    [Cmdlet("Set", "AzureRmVmssRollingUpgradePolicy", SupportsShouldProcess = true)]
+    [Cmdlet(VerbsCommon.Set, ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "VmssRollingUpgradePolicy", SupportsShouldProcess = true)]
     [OutputType(typeof(PSVirtualMachineScaleSet))]
     public partial class SetAzureRmVmssRollingUpgradePolicyCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
     {
@@ -73,9 +73,6 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
         private void Run()
         {
-            WriteWarning("Set-AzureRmVmssRollingUpgradePolicy: A property of the output of this cmdlet will change in an upcoming breaking change release. " +
-                         "The StorageAccountType property for a DataDisk will return Standard_LRS and Premium_LRS");
-
             if (this.MyInvocation.BoundParameters.ContainsKey("MaxBatchInstancePercent"))
             {
                 // UpgradePolicy
@@ -140,4 +137,3 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         }
     }
 }
-

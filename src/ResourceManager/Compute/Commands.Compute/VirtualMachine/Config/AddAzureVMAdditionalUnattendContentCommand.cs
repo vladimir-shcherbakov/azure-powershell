@@ -24,11 +24,7 @@ namespace Microsoft.Azure.Commands.Compute
     /// <summary>
     /// Add an Additional Unattend Content Object to VM
     /// </summary>
-    [Cmdlet(
-        VerbsCommon.Add,
-        ProfileNouns.AdditionalUnattendContent),
-    OutputType(
-        typeof(PSVirtualMachine))]
+    [Cmdlet("Add", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "VMAdditionalUnattendContent"),OutputType(typeof(PSVirtualMachine))]
     public class NewAzureAdditionalUnattendContentCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
     {
         private const ComponentNames defaultComponentName = ComponentNames.MicrosoftWindowsShellSetup;
@@ -59,9 +55,6 @@ namespace Microsoft.Azure.Commands.Compute
 
         public override void ExecuteCmdlet()
         {
-            WriteWarning("Add-AzureRmVMAdditionalUnattendContent: A property of the output of this cmdlet will change in an upcoming breaking change release. " +
-                         "The StorageAccountType property for a DataDisk will return Standard_LRS and Premium_LRS");
-
             if (this.VM.OSProfile == null)
             {
                 this.VM.OSProfile = new OSProfile();

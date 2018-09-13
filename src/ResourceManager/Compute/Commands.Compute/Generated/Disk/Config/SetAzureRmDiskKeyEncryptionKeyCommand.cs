@@ -29,7 +29,7 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute.Automation
 {
-    [Cmdlet("Set", "AzureRmDiskKeyEncryptionKey", SupportsShouldProcess = true)]
+    [Cmdlet(VerbsCommon.Set, ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "DiskKeyEncryptionKey", SupportsShouldProcess = true)]
     [OutputType(typeof(PSDisk))]
     public partial class SetAzureRmDiskKeyEncryptionKeyCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
     {
@@ -62,9 +62,6 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
         private void Run()
         {
-            WriteWarning("Set-AzureRmDiskKeyEncryptionKey: A property of the output of this cmdlet will change in an upcoming breaking change release. " +
-                         "The Name property for a Sku will return Standard_LRS and Premium_LRS");
-
             if (this.MyInvocation.BoundParameters.ContainsKey("KeyUrl"))
             {
                 // EncryptionSettings
@@ -104,4 +101,3 @@ namespace Microsoft.Azure.Commands.Compute.Automation
         }
     }
 }
-

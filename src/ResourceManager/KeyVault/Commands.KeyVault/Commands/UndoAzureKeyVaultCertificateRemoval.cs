@@ -18,11 +18,8 @@ using Microsoft.Azure.KeyVault.Models;
 
 namespace Microsoft.Azure.Commands.KeyVault
 {
-    [Cmdlet( VerbsCommon.Undo, "AzureKeyVaultCertificateRemoval",
-        SupportsShouldProcess = true,
-        DefaultParameterSetName = DefaultParameterSet,
-        HelpUri = Constants.KeyVaultHelpUri )]
-    [OutputType( typeof( CertificateBundle ) )]
+    [Cmdlet("Undo", ResourceManager.Common.AzureRMConstants.AzurePrefix + "KeyVaultCertificateRemoval",SupportsShouldProcess = true,DefaultParameterSetName = DefaultParameterSet)]
+    [OutputType(typeof(PSKeyVaultCertificate))]
     public class UndoAzureKeyVaultCertificateRemoval : KeyVaultCmdletBase
     {
         #region Parameter Set Names
@@ -40,7 +37,6 @@ namespace Microsoft.Azure.Commands.KeyVault
         [Parameter( Mandatory = true,
             Position = 0,
             ParameterSetName = DefaultParameterSet,
-            ValueFromPipelineByPropertyName = true,
             HelpMessage = "Vault name. Cmdlet constructs the FQDN of a vault based on the name and currently selected environment." )]
         [ValidateNotNullOrEmpty]
         public string VaultName { get; set; }
@@ -51,7 +47,6 @@ namespace Microsoft.Azure.Commands.KeyVault
         [Parameter( Mandatory = true,
             Position = 1,
             ParameterSetName = DefaultParameterSet,
-            ValueFromPipelineByPropertyName = true,
             HelpMessage = "Certificate name. Cmdlet constructs the FQDN of a certificate from vault name, currently selected environment and certificate name." )]
         [ValidateNotNullOrEmpty]
         [Alias( Constants.CertificateName )]
@@ -80,9 +75,7 @@ namespace Microsoft.Azure.Commands.KeyVault
 
             if ( ShouldProcess( Name, Properties.Resources.RecoverCertificate ) )
             {
-                WriteWarning("Undo-AzureKeyVaultCertificateRemoval: The output of the cmdlet will be changing from CertificateBundle to PSKeyVaultCertificate in May 2018");
-                CertificateBundle certificate = DataServiceClient.RecoverCertificate(VaultName, Name);
-
+                PSKeyVaultCertificate certificate = DataServiceClient.RecoverCertificate(VaultName, Name);
                 WriteObject( certificate );
             }
         }

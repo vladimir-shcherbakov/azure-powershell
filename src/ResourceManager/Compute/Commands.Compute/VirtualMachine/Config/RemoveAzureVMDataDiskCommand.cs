@@ -20,12 +20,7 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute
 {
-    [Cmdlet(
-        VerbsCommon.Remove,
-        ProfileNouns.DataDisk,
-        SupportsShouldProcess = true),
-    OutputType(
-        typeof(PSVirtualMachine))]
+    [Cmdlet("Remove", ResourceManager.Common.AzureRMConstants.AzureRMPrefix + "VMDataDisk",SupportsShouldProcess = true),OutputType(typeof(PSVirtualMachine))]
     public class RemoveAzureVMDataDiskCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
     {
         [Alias("VMProfile")]
@@ -49,9 +44,6 @@ namespace Microsoft.Azure.Commands.Compute
 
         public override void ExecuteCmdlet()
         {
-            WriteWarning("Remove-AzureRmVMDataDisk: A property of the output of this cmdlet will change in an upcoming breaking change release. " +
-                         "The StorageAccountType property for a DataDisk will return Standard_LRS and Premium_LRS");
-
             if (this.ShouldProcess("DataDisk", VerbsCommon.Remove))
             {
                 var storageProfile = this.VM.StorageProfile;
