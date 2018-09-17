@@ -65,7 +65,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Azure.PowerShell.TestFx, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>$(LibraryNugetPackageFolder)\Microsoft.Azure.Powershell.TestFx.1.0.0-preview\lib\net452\Microsoft.Azure.Powershell.TestFx.dll</HintPath>
+      <HintPath>$(LibraryNugetPackageFolder)\Microsoft.Azure.PowerShell.TestFx.1.0.137-preview\lib\net452\Microsoft.Azure.PowerShell.TestFx.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
