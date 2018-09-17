@@ -62,6 +62,7 @@
     <Compile Include="Providers\UnregisterResourceProviderCmdletTests.cs" />
     <Compile Include="ResourceGroupDeployments\RemoveAzureResourceGroupDeploymentCommandTests.cs" />
     <Compile Include="ResourceGroups\SetAzureResourceGroupCommandTests.cs" />
+    <Compile Include="ScenarioTests\ResourceTestRunner.cs" />
     <Compile Include="RoleAssignment\RoleAssignmentUnitTests.cs" />
     <Compile Include="ScenarioTests\ActiveDirectoryTests.cs" />
     <Compile Include="ScenarioTests\SubscriptionLevelDeploymentTests.cs" />
