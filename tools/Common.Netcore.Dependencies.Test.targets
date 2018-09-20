@@ -21,6 +21,9 @@
     <PackageReference Include="Microsoft.Azure.PowerShell.ScenarioTest.ResourceManager" Version="1.1.1-preview" >
       <PrivateAssets Condition="'$(HideReferenceDependencies)' == 'true'">All</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Azure.PowerShell.TestFx" Version="1.0.137-preview" >
+      <PrivateAssets Condition="'$(HideReferenceDependencies)' == 'true'">All</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">

@@ -33,7 +33,9 @@ namespace Microsoft.Azure.Commands.Management.Storage.Test
                 })
                 .WithExtraRmModules(helper => new[]
                 {
+#if !NETSTANDARD
                     helper.RMStorageDataPlaneModule,
+#endif
                     helper.RMStorageModule,
                 })
                 .Build();
