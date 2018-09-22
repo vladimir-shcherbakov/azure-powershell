@@ -5,7 +5,7 @@ dotnet: 2.1.400
 dist: trusty
 
 env:
-  - NAME="azure-powershell-core" CONFIG="Debug" AZURE_TEST_MODE=Playback
+  - NAME="azure-powershell-core" CONFIG="Debug"
 
 services:
  - docker
