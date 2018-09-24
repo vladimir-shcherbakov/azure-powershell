@@ -36,7 +36,7 @@ namespace Microsoft.Azure.Commands.Resources.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestPolicyDefinitionMode()
         {
-            TestRunner.RunTestScript("Test-PolicyDefinitionCRUDAtManagementGroup");
+            TestRunner.RunTestScript("Test-PolicyDefinitionMode");
         }
 
         [Fact]
