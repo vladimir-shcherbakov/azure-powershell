@@ -119,7 +119,7 @@ namespace Microsoft.Azure.Commands.Management.Storage.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestGetAzureStorageLocationUsage()
         {
-            TestController.NewInstance.RunPsTest(_logger, "Test-GetAzureStorageLocationUsage");
+            TestRunner.RunTestScript("Test-GetAzureStorageLocationUsage");
         }
     }
 }
