@@ -87,7 +87,6 @@ namespace Microsoft.Azure.Commands.Resources.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestGetADGroupWithBadSearchString()
         {
-            //ResourcesController.NewInstance.RunPsTest("Test-GetADGroupWithBadSearchString");
             TestRunner.RunTestScript("Test-GetADGroupWithBadSearchString");
         }
 
