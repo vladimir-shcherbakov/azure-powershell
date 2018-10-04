@@ -96,7 +96,9 @@ CmdletsToExport = 'Get-AzAppServicePlan', 'Set-AzAppServicePlan',
     'Reset-AzWebAppPublishingProfile', 'Restart-AzWebApp', 
     'Set-AzWebApp', 'Start-AzWebApp', 'Stop-AzWebApp', 
     'Get-AzWebAppSnapshot', 'Restore-AzWebAppSnapshot',
-    'Get-AzDeletedWebApp', 'Restore-AzDeletedWebApp'
+    'Get-AzDeletedWebApp', 'Restore-AzDeletedWebApp',
+    'Get-AzWebAppContainerContinuousDeploymentUrl',
+    'Enter-AzWebAppContainerPSSession', 'New-AzWebAppContainerPSSession'
 
 # Variables to export from this module
 # VariablesToExport = @()
