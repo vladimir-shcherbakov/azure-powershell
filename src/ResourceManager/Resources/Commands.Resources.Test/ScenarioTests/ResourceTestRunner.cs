@@ -46,7 +46,7 @@ namespace Microsoft.Azure.Commands.Resources.Test.ScenarioTests
                 {
                     helper.RMInsightsModule,
                 })
-                .WithBuildMatcher(
+                .WithRecordMatcher(
                     (ignoreResourcesClient, resourceProviders, userAgentsToIgnore) =>
                         new ResourcesRecordMatcher(ignoreResourcesClient, resourceProviders, userAgentsToIgnore))
                 .WithExtraUserAgentsToIgnore(new Dictionary<string, string>
