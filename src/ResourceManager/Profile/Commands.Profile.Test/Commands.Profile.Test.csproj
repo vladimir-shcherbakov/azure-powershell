@@ -71,7 +71,6 @@
     <Compile Include="MockServiceClient.cs" />
     <Compile Include="MockSubscriptionClientFactory.cs" />
     <Compile Include="NullClient.cs" />
-    <Compile Include="ProfileController.cs" />
     <Compile Include="ProtectedFileProviderTests.cs" />
     <Compile Include="PSSerializationTests.cs" />
     <Compile Include="ResourceGroupCompleterUnitTests.cs" />
