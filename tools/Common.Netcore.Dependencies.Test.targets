@@ -22,7 +22,7 @@
     <PackageReference Include="Microsoft.Azure.PowerShell.ScenarioTest.ResourceManager" Version="1.1.8-preview" >
       <PrivateAssets Condition="'$(HideReferenceDependencies)' == 'true'">All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Azure.PowerShell.TestFx" Version="1.1.6-preview" >
+    <PackageReference Include="Microsoft.Azure.PowerShell.TestFx" Version="1.0.228-preview" >
       <PrivateAssets Condition="'$(HideReferenceDependencies)' == 'true'">All</PrivateAssets>
     </PackageReference>
   </ItemGroup>

@@ -15,14 +15,16 @@
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public class AvailabilitySetTests
+    public class AvailabilitySetTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
-        public AvailabilitySetTests(Xunit.Abstractions.ITestOutputHelper output)
+        public AvailabilitySetTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -32,7 +34,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestAvailabilitySet()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AvailabilitySet");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AvailabilitySet");
+            TestRunner.RunTestScript("Test-AvailabilitySet");
         }
     }
 }

@@ -15,14 +15,16 @@
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public class VirtualMachineRunCommandTests
+    public class VirtualMachineRunCommandTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
-        public VirtualMachineRunCommandTests(Xunit.Abstractions.ITestOutputHelper output)
+        public VirtualMachineRunCommandTests(ITestOutputHelper output)
+         : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -37,7 +39,9 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineGetRunCommand()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineGetRunCommand");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineGetRunCommand");
+            TestRunner.RunTestScript("Test-VirtualMachineGetRunCommand");
+
         }
 
 #if NETSTANDARD
@@ -49,7 +53,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineSetRunCommand()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineSetRunCommand");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineSetRunCommand");
+            TestRunner.RunTestScript("Test-VirtualMachineSetRunCommand");
         }
 
 #if NETSTANDARD
@@ -61,7 +66,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetVMRunCommand()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetVMRunCommand");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetVMRunCommand");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetVMRunCommand");
         }
 
     }

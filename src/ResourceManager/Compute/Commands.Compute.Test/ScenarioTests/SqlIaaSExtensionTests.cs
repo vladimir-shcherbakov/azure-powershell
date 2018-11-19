@@ -1,14 +1,16 @@
 ﻿using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public class SqlIaaSExtensionTests
+    public class SqlIaaSExtensionTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
-        public SqlIaaSExtensionTests(Xunit.Abstractions.ITestOutputHelper output)
+        public SqlIaaSExtensionTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -23,7 +25,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSqlIaaSExtension()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SetAzureRmVMSqlServerExtension");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SetAzureRmVMSqlServerExtension");
+            TestRunner.RunTestScript("Test-SetAzureRmVMSqlServerExtension");
         }
 
 #if NETSTANDARD
@@ -35,7 +38,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSqlIaaSAKVExtension()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SetAzureRmVMSqlServerAKVExtension");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SetAzureRmVMSqlServerAKVExtension");
+            TestRunner.RunTestScript("Test-SetAzureRmVMSqlServerAKVExtension");
         }
 
 #if NETSTANDARD
@@ -47,7 +51,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSqlIaaSExtensionWith2016Image()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SetAzureRmVMSqlServerExtensionWith2016Image");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SetAzureRmVMSqlServerExtensionWith2016Image");
+            TestRunner.RunTestScript("Test-SetAzureRmVMSqlServerExtensionWith2016Image");
         }
     }
 }

@@ -15,14 +15,16 @@
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public partial class ContainerServiceTests
+    public partial class ContainerServiceTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
-        public ContainerServiceTests(Xunit.Abstractions.ITestOutputHelper output)
+        public ContainerServiceTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -32,14 +34,16 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestContainerService()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-ContainerService");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-ContainerService");
+            TestRunner.RunTestScript("Test-ContainerService");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestContainerServiceUpdate()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-ContainerServiceUpdate");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-ContainerServiceUpdate");
+            TestRunner.RunTestScript("Test-ContainerServiceUpdate");
         }
     }
 }

@@ -15,16 +15,16 @@
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public partial class VMDynamicTests
+    public partial class VMDynamicTests : ComputeTestRunner
     {
-        public VMDynamicTests() { }
-
         XunitTracingInterceptor _logger;
 
-        public VMDynamicTests(Xunit.Abstractions.ITestOutputHelper output)
+        public VMDynamicTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -34,7 +34,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void RunVMDynamicTests()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Run-VMDynamicTests -num_total_generated_tests 1");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Run-VMDynamicTests -num_total_generated_tests 1");
+            TestRunner.RunTestScript("Run-VMDynamicTests -num_total_generated_tests 1");
         }
     }
 }

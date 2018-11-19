@@ -20,14 +20,16 @@ using System.Diagnostics;
 using System.Reflection;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public class StrategiesVirtualMachineTests
+    public class StrategiesVirtualMachineTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
-        public StrategiesVirtualMachineTests(Xunit.Abstractions.ITestOutputHelper output)
+        public StrategiesVirtualMachineTests(ITestOutputHelper output)
+            :base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -37,28 +39,32 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSimpleNewVm()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVm");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVm");
+            TestRunner.RunTestScript("Test-SimpleNewVm");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSimpleNewVmWithAccelNet()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmWithAccelNet");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmWithAccelNet");
+            TestRunner.RunTestScript("Test-SimpleNewVmWithAccelNet");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestNewVmWin10()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-NewVmWin10");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-NewVmWin10");
+            TestRunner.RunTestScript("Test-NewVmWin10");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSimpleNewVmWithSystemAssignedIdentity()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmSystemAssignedIdentity");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmSystemAssignedIdentity");
+            TestRunner.RunTestScript("Test-SimpleNewVmSystemAssignedIdentity");
         }
 
 #if NETSTANDARD
@@ -80,21 +86,24 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
              * Get-AzureRmUserAssignedIdentity -ResourceGroupName UAITG123456 -Name UAITG123456Identity
              * Nore down the Id and use it in the PS code
              * */
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmUserAssignedIdentitySystemAssignedIdentity");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmUserAssignedIdentitySystemAssignedIdentity");
+            TestRunner.RunTestScript("Test-SimpleNewVmUserAssignedIdentitySystemAssignedIdentity");
         }
 
         [Fact] 
         [Trait(Category.AcceptanceType, Category.CheckIn)] 
         public void TestSimpleNewVmWithAvailabilitySet()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmWithAvailabilitySet");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmWithAvailabilitySet");
+            TestRunner.RunTestScript("Test-SimpleNewVmWithAvailabilitySet");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSimpleNewVmWithAvailabilitySet2()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmWithAvailabilitySet2");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmWithAvailabilitySet2");
+            TestRunner.RunTestScript("Test-SimpleNewVmWithAvailabilitySet2");
         }
 
         internal void TestDomainName(string psTest, Func<string> getUniqueId)
@@ -153,14 +162,16 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSimpleNewVmImageName()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmImageName");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmImageName");
+            TestRunner.RunTestScript("Test-SimpleNewVmImageName");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSimpleNewVmImageNameMicrosoftSqlUbuntu()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmImageNameMicrosoftSqlUbuntu");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SimpleNewVmImageNameMicrosoftSqlUbuntu");
+            TestRunner.RunTestScript("Test-SimpleNewVmImageNameMicrosoftSqlUbuntu");
         }
     }
 }

@@ -15,14 +15,16 @@
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public partial class VirtualMachineScaleSetTests
+    public partial class VirtualMachineScaleSetTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
-        public VirtualMachineScaleSetTests(Xunit.Abstractions.ITestOutputHelper output)
+        public VirtualMachineScaleSetTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -32,42 +34,48 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSet()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSet");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSet");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSet");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSet_ManagedDisks()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSet-ManagedDisks");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSet-ManagedDisks");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSet-ManagedDisks");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetUpdate()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetUpdate");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetUpdate");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetUpdate");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetReimageUpdate()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetReimageUpdate");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetReimageUpdate");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetReimageUpdate");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetLB()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetLB");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetLB");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetLB");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetNextLink()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetNextLink");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetNextLink");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetNextLink");
         }
 
 #if NETSTANDARD
@@ -79,7 +87,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetBootDiagnostics()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetBootDiagnostics");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetBootDiagnostics");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetBootDiagnostics");
         }
 
 #if NETSTANDARD
@@ -91,7 +100,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetIdentity()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetIdentity");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetIdentity");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetIdentity");
         }
 
 #if NETSTANDARD
@@ -103,7 +113,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetUserIdentity()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetUserIdentity");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetUserIdentity");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetUserIdentity");
         }
 
 #if NETSTANDARD
@@ -115,14 +126,16 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetNetworking()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetNetworking");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetNetworking");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetNetworking");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetRollingUpgrade()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetRollingUpgrade");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetRollingUpgrade");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetRollingUpgrade");
         }
 
 #if NETSTANDARD
@@ -134,21 +147,24 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetPriority()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetPriority");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetPriority");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetPriority");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetWriteAcceleratorUpdate()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetWriteAcceleratorUpdate");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetWriteAcceleratorUpdate");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetWriteAcceleratorUpdate");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetForceUDWalk()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetForceUDWalk");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetForceUDWalk");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetForceUDWalk");
         }
 
 #if NETSTANDARD
@@ -160,7 +176,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetRedeploy()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetRedeploy");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetRedeploy");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetRedeploy");
         }
 
 #if NETSTANDARD
@@ -172,7 +189,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetVMUpdate()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetVMUpdate");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetVMUpdate");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetVMUpdate");
         }
 
 #if NETSTANDARD
@@ -184,7 +202,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetAutoRollback()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetAutoRollback");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetAutoRollback");
+            TestRunner.RunTestScript("Test-VirtualMachineScaleSetAutoRollback");
         }
     }
 }

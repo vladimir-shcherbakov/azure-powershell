@@ -15,14 +15,16 @@
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public class ResourceSkuTests
+    public class ResourceSkuTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
-        public ResourceSkuTests(Xunit.Abstractions.ITestOutputHelper output)
+        public ResourceSkuTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -32,7 +34,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestGetResourceSku()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-GetResourceSku");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-GetResourceSku");
+            TestRunner.RunTestScript("Test-GetResourceSku");
         }
     }
 }

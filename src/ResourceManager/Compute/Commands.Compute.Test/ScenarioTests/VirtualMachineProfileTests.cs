@@ -15,14 +15,16 @@
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public class VirtualMachineProfileTests
+    public class VirtualMachineProfileTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
-        public VirtualMachineProfileTests(Xunit.Abstractions.ITestOutputHelper output)
+        public VirtualMachineProfileTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -32,14 +34,16 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineProfile()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineProfile");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineProfile");
+            TestRunner.RunTestScript("Test-VirtualMachineProfile");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineProfileWithoutAUC()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineProfileWithoutAUC");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineProfileWithoutAUC");
+            TestRunner.RunTestScript("Test-VirtualMachineProfileWithoutAUC");
         }
     }
 }

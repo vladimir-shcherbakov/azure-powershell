@@ -18,11 +18,12 @@ using Xunit;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public class DiskRPTests
+    public class DiskRPTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
         public DiskRPTests(Xunit.Abstractions.ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -37,7 +38,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestDisk()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-Disk");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-Disk");
+            TestRunner.RunTestScript("Test-Disk");
         }
 
 
@@ -50,7 +52,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSnapshot()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-Snapshot");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-Snapshot");
+            TestRunner.RunTestScript("Test-Snapshot");
         }
     }
 }

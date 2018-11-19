@@ -19,10 +19,11 @@ using System;
 using System.IO;
 using System.Reflection;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public class DiagnosticsExtensionTests
+    public class DiagnosticsExtensionTests : ComputeTestRunner
     {
         private static string configDirPath = Path.Combine(Path.GetDirectoryName(Uri.UnescapeDataString(new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath)), "ConfigFiles");
 
@@ -33,7 +34,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 
         XunitTracingInterceptor _logger;
 
-        public DiagnosticsExtensionTests(Xunit.Abstractions.ITestOutputHelper output)
+        public DiagnosticsExtensionTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -48,7 +50,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestDiagnosticsExtensionBasic()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-DiagnosticsExtensionBasic");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-DiagnosticsExtensionBasic");
+            TestRunner.RunTestScript("Test-DiagnosticsExtensionBasic");
         }
 
 #if NETSTANDARD
@@ -60,7 +63,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestDiagnosticsExtensionSepcifyStorageAccountName()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-DiagnosticsExtensionSepcifyStorageAccountName");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-DiagnosticsExtensionSepcifyStorageAccountName");
+            TestRunner.RunTestScript("Test-DiagnosticsExtensionSepcifyStorageAccountName");
         }
 
 #if NETSTANDARD
@@ -72,7 +76,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestDiagnosticsExtensionCantListSepcifyStorageAccountKey()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-DiagnosticsExtensionCantListSepcifyStorageAccountKey");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-DiagnosticsExtensionCantListSepcifyStorageAccountKey");
+            TestRunner.RunTestScript("Test-DiagnosticsExtensionCantListSepcifyStorageAccountKey");
         }
 
 #if NETSTANDARD
@@ -84,7 +89,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestDiagnosticsExtensionSupportJsonConfig()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-DiagnosticsExtensionSupportJsonConfig");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-DiagnosticsExtensionSupportJsonConfig");
+            TestRunner.RunTestScript("Test-DiagnosticsExtensionSupportJsonConfig");
         }
 
 #if NETSTANDARD
@@ -96,7 +102,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVmssDiagnosticsExtension()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VmssDiagnosticsExtension");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VmssDiagnosticsExtension");
+            TestRunner.RunTestScript("Test-VmssDiagnosticsExtension");
         }
 
         [Fact]

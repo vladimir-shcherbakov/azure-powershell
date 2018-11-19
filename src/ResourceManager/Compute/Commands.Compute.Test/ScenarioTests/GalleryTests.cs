@@ -15,14 +15,16 @@
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public class GalleryTests
+    public class GalleryTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
-        public GalleryTests(Xunit.Abstractions.ITestOutputHelper output)
+        public GalleryTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -37,7 +39,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestGallery()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-Gallery");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-Gallery");
+            TestRunner.RunTestScript("Test-Gallery");
         }
     }
 }

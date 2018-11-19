@@ -15,14 +15,16 @@
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public partial class VirtualMachineBootDiagnosticsTests
+    public partial class VirtualMachineBootDiagnosticsTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
-        public VirtualMachineBootDiagnosticsTests(Xunit.Abstractions.ITestOutputHelper output)
+        public VirtualMachineBootDiagnosticsTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -32,7 +34,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.RunType, Category.LiveOnly)]
         public void TestVirtualMachineBootDiagnostics()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineBootDiagnostics");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineBootDiagnostics");
+            TestRunner.RunTestScript("Test-VirtualMachineBootDiagnostics");
         }
 
 
@@ -45,7 +48,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineBootDiagnosticsPremium()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineBootDiagnosticsPremium");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineBootDiagnosticsPremium");
+            TestRunner.RunTestScript("Test-VirtualMachineBootDiagnosticsPremium");
         }
 
 #if NETSTANDARD
@@ -57,7 +61,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestLinuxVirtualMachineBootDiagnostics()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-LinuxVirtualMachineBootDiagnostics");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-LinuxVirtualMachineBootDiagnostics");
+            TestRunner.RunTestScript("Test-LinuxVirtualMachineBootDiagnostics");
         }
 
 #if NETSTANDARD
@@ -69,7 +74,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineBootDiagnosticsSet()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineBootDiagnosticsSet");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineBootDiagnosticsSet");
+            TestRunner.RunTestScript("Test-VirtualMachineBootDiagnosticsSet");
         }
     }
 }

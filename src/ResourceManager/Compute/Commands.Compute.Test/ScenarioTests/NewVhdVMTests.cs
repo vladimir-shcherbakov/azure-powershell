@@ -15,14 +15,16 @@
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public class NewVhdVMTests
+    public class NewVhdVMTests : ComputeTestRunner
     {
         public XunitTracingInterceptor _logger;
 
-        public NewVhdVMTests(Xunit.Abstractions.ITestOutputHelper output)
+        public NewVhdVMTests(ITestOutputHelper output) 
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -37,14 +39,16 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestWithValidVhdDiskFile()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-NewAzureRmVhdVMWithValidDiskFile");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-NewAzureRmVhdVMWithValidDiskFile");
+            TestRunner.RunTestScript("Test-NewAzureRmVhdVMWithValidDiskFile");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestWithInvalidVhdDiskFile()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-NewAzureRmVhdVMWithInvalidDiskFile");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-NewAzureRmVhdVMWithInvalidDiskFile");
+            TestRunner.RunTestScript("Test-NewAzureRmVhdVMWithInvalidDiskFile");
         }
     }
 }

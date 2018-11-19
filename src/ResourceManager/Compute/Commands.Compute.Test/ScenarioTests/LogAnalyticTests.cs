@@ -15,14 +15,16 @@
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public class LogAnalyticTests
+    public class LogAnalyticTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
-        public LogAnalyticTests(Xunit.Abstractions.ITestOutputHelper output)
+        public LogAnalyticTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -32,14 +34,16 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestExportLogAnalyticThrottledRequestsNegative()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-ExportLogAnalyticThrottledRequestsNegative");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-ExportLogAnalyticThrottledRequestsNegative");
+            TestRunner.RunTestScript("Test-ExportLogAnalyticThrottledRequestsNegative");
         }
 
 		[Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestExportLogAnalyticRequestRateByIntervalNegative()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-ExportLogAnalyticRequestRateByIntervalNegative");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-ExportLogAnalyticRequestRateByIntervalNegative");
+            TestRunner.RunTestScript("Test-ExportLogAnalyticRequestRateByIntervalNegative");
         }
 
         [Fact(Skip = "BUG: LogAnalytics does not work.")]
@@ -47,7 +51,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait("Re-record", "ClientRuntime changes")]
         public void TestExportLogAnalytics()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-ExportLogAnalytics");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-ExportLogAnalytics");
+            TestRunner.RunTestScript("Test-ExportLogAnalytics");
         }
     }
 }

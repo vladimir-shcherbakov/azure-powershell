@@ -15,14 +15,16 @@
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public class ChefExtensionTests
+    public class ChefExtensionTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
-        public ChefExtensionTests(Xunit.Abstractions.ITestOutputHelper output)
+        public ChefExtensionTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -37,7 +39,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSetChefExtensionBasic()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SetChefExtensionBasic");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SetChefExtensionBasic");
+            TestRunner.RunTestScript("Test-SetChefExtensionBasic");
         }
     }
 }

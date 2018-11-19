@@ -15,14 +15,16 @@
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
-    public class VirtualMachineNetworkInterfaceTests
+    public class VirtualMachineNetworkInterfaceTests : ComputeTestRunner
     {
         XunitTracingInterceptor _logger;
 
-        public VirtualMachineNetworkInterfaceTests(Xunit.Abstractions.ITestOutputHelper output)
+        public VirtualMachineNetworkInterfaceTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -37,7 +39,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineSingleNetworkInterface()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SingleNetworkInterface");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SingleNetworkInterface");
+            TestRunner.RunTestScript("Test-SingleNetworkInterface");
         }
 
 #if NETSTANDARD
@@ -49,7 +52,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineMultipleNetworkInterface()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-MultipleNetworkInterface");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-MultipleNetworkInterface");
+            TestRunner.RunTestScript("Test-MultipleNetworkInterface");
         }
 
 #if NETSTANDARD
@@ -61,7 +65,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSingleNetworkInterfaceDnsSettings()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SingleNetworkInterfaceDnsSettings");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SingleNetworkInterfaceDnsSettings");
+            TestRunner.RunTestScript("Test-SingleNetworkInterfaceDnsSettings");
         }
 
 #if NETSTANDARD
@@ -73,7 +78,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestAddNetworkInterface()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AddNetworkInterface");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AddNetworkInterface");
+            TestRunner.RunTestScript("Test-AddNetworkInterface");
         }
 
 
@@ -86,7 +92,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestEffectiveRoutesAndNsg()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-EffectiveRoutesAndNsg");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-EffectiveRoutesAndNsg");
+            TestRunner.RunTestScript("Test-EffectiveRoutesAndNsg");
         }
 
 #if NETSTANDARD
@@ -98,7 +105,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSingleNetworkInterfaceWithAcceleratedNetworking()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SingleNetworkInterfaceWithAcceleratedNetworking");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SingleNetworkInterfaceWithAcceleratedNetworking");
+            TestRunner.RunTestScript("Test-SingleNetworkInterfaceWithAcceleratedNetworking");
         }
 
 #if NETSTANDARD
@@ -110,7 +118,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVMNicWithAcceleratedNetworkingValidations()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VMNicWithAcceleratedNetworkingValidations");
+            //ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VMNicWithAcceleratedNetworkingValidations");
+            TestRunner.RunTestScript("Test-VMNicWithAcceleratedNetworkingValidations");
         }
     }
 }
