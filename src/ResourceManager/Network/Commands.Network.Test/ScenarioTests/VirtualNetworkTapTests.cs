@@ -25,6 +25,7 @@
 // </auto-generated>
 
 using System;
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Microsoft.WindowsAzure.Commands.Test.Utilities.Common;
@@ -33,11 +34,12 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class VirtualNetworkTapTests : RMTestBase
+    public class VirtualNetworkTapTests : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
 
-        public VirtualNetworkTapTests(Xunit.Abstractions.ITestOutputHelper output)
+        public VirtualNetworkTapTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -48,7 +50,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestVirtualNetworkTapCRUDUsingIpConfig()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-VirtualNetworkTapCRUDUsingIpConfig"));
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-VirtualNetworkTapCRUDUsingIpConfig"));
+            TestRunner.RunTestScript("Test-VirtualNetworkTapCRUDUsingIpConfig");
         }
     }
 }

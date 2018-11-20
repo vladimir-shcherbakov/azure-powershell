@@ -92,6 +92,7 @@
     <Compile Include="ScenarioTests\LoadBalancerTests.cs" />
     <Compile Include="ScenarioTests\ExpressRouteCircuitTests.cs" />
     <Compile Include="ScenarioTests\NetworkProfileTests.cs" />
+    <Compile Include="ScenarioTests\NetworkTestRunner.cs" />
     <Compile Include="ScenarioTests\PublicIpPrefixTests.cs" />
     <Compile Include="ScenarioTests\RouteTableTests.cs" />
     <Compile Include="ScenarioTests\NetworkSecurityGroupTests.cs" />

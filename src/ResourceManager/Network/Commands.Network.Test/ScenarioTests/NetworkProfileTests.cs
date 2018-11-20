@@ -25,6 +25,7 @@
 // </auto-generated>
 
 using System;
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Microsoft.WindowsAzure.Commands.Test.Utilities.Common;
@@ -33,11 +34,12 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class NetworkProfileTests : RMTestBase
+    public class NetworkProfileTests : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
 
-        public NetworkProfileTests(Xunit.Abstractions.ITestOutputHelper output)
+        public NetworkProfileTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -48,7 +50,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestNetworkProfileCRUDMinimalParameters()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-NetworkProfileCRUDMinimalParameters"));
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-NetworkProfileCRUDMinimalParameters"));
+            TestRunner.RunTestScript("Test-NetworkProfileCRUDMinimalParameters");
         }
 
         [Fact]
@@ -56,7 +59,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestNetworkProfileCRUDAllParameters()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-NetworkProfileCRUDAllParameters"));
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-NetworkProfileCRUDAllParameters"));
+            TestRunner.RunTestScript("Test-NetworkProfileCRUDAllParameters");
         }
 
         [Fact]
@@ -64,7 +68,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestContainerNetworkInterfaceConfigCRUDMinimalParameters()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-ContainerNetworkInterfaceConfigCRUDMinimalParameters"));
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-ContainerNetworkInterfaceConfigCRUDMinimalParameters"));
+            TestRunner.RunTestScript("Test-ContainerNetworkInterfaceConfigCRUDMinimalParameters");
         }
 
         [Fact]
@@ -72,7 +77,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestContainerNetworkInterfaceConfigCRUD()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-ContainerNetworkInterfaceConfigCRUD"));
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-ContainerNetworkInterfaceConfigCRUD"));
+            TestRunner.RunTestScript("Test-ContainerNetworkInterfaceConfigCRUD");
         }
     }
 }

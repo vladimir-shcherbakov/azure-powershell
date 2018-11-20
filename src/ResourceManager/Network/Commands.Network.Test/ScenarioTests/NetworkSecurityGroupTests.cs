@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
@@ -19,11 +20,12 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class NetworkSecurityGroupTests : Microsoft.WindowsAzure.Commands.Test.Utilities.Common.RMTestBase
+    public class NetworkSecurityGroupTests : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
 
-        public NetworkSecurityGroupTests(Xunit.Abstractions.ITestOutputHelper output)
+        public NetworkSecurityGroupTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -34,7 +36,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestNetworkSecurityGroupCRUD()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-NetworkSecurityGroupCRUD");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-NetworkSecurityGroupCRUD");
+            TestRunner.RunTestScript("Test-NetworkSecurityGroupCRUD");
         }
 
         [Fact]
@@ -42,7 +45,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestNetworkSecurityGroupSecurityRuleCRUD()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-NetworkSecurityGroup-SecurityRuleCRUD");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-NetworkSecurityGroup-SecurityRuleCRUD");
+            TestRunner.RunTestScript("Test-NetworkSecurityGroup-SecurityRuleCRUD");
         }
 
         [Fact]
@@ -50,7 +54,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestNetworkSecurityGroupMultiValuedRules()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-NetworkSecurityGroup-MultiValuedRules");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-NetworkSecurityGroup-MultiValuedRules");
+            TestRunner.RunTestScript("Test-NetworkSecurityGroup-MultiValuedRules");
         }
 
         [Fact]
@@ -58,7 +63,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestNetworkSecurityRuleArgumentValidation()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-NetworkSecurityRule-ArgumentValidation");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-NetworkSecurityRule-ArgumentValidation");
+            TestRunner.RunTestScript("Test-NetworkSecurityRule-ArgumentValidation");
         }
     }
 }

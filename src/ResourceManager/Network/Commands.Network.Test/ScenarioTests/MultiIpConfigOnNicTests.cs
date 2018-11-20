@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
@@ -19,11 +20,12 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class MultiIpConfigOnNicTests : Microsoft.WindowsAzure.Commands.Test.Utilities.Common.RMTestBase
+    public class MultiIpConfigOnNicTests : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
 
         public MultiIpConfigOnNicTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -34,7 +36,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestMultiIpConfigCRUD()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-MultiIpConfigCRUD");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-MultiIpConfigCRUD");
+            TestRunner.RunTestScript("Test-MultiIpConfigCRUD");
         }
 
         [Fact]
@@ -43,7 +46,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestLBWithMultiIpConfigNICCRUD()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LBWithMultiIpConfigNICCRUD");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LBWithMultiIpConfigNICCRUD");
+            TestRunner.RunTestScript("Test-LBWithMultiIpConfigNICCRUD");
         }
 
 
@@ -52,7 +56,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestAddNICToLBWithMultiIpConfig()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-AddNICToLBWithMultiIpConfig");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-AddNICToLBWithMultiIpConfig");
+            TestRunner.RunTestScript("Test-AddNICToLBWithMultiIpConfig");
         }
 
         [Fact]
@@ -62,7 +67,8 @@ namespace Commands.Network.Test.ScenarioTests
         public void TestLBWithMultiIpConfigMultiNIC()
         {
 
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LBWithMultiIpConfigMultiNIC");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LBWithMultiIpConfigMultiNIC");
+            TestRunner.RunTestScript("Test-LBWithMultiIpConfigMultiNIC");
         }
     }
 }

@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
@@ -19,11 +20,12 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class LoadBalancerTests : Microsoft.WindowsAzure.Commands.Test.Utilities.Common.RMTestBase
+    public class LoadBalancerTests : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
 
-        public LoadBalancerTests(Xunit.Abstractions.ITestOutputHelper output)
+        public LoadBalancerTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -34,7 +36,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerCRUDPublic()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-Public");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-Public");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-Public");
         }
 
         [Fact]
@@ -42,7 +45,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerCRUDPublicTcpReset()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-PublicTcpReset");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-PublicTcpReset");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-PublicTcpReset");
         }
 
         [Fact]
@@ -50,7 +54,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerCRUDInternalDynamic()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalDynamic");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalDynamic");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-InternalDynamic");
         }
 
         [Fact]
@@ -58,7 +63,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerCRUDInternalStatic()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalStatic");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalStatic");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-InternalStatic");
         }
 
         [Fact]
@@ -66,7 +72,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerCRUDPublicNoInboundNATRule()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-PublicNoInboundNATRule");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-PublicNoInboundNATRule");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-PublicNoInboundNATRule");
         }
 
         [Fact]
@@ -74,7 +81,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerCRUDPublicPublicNoLbRule()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-PublicNoLbRule");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-PublicNoLbRule");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-PublicNoLbRule");
         }
 
         [Fact]
@@ -82,7 +90,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerCRUDInternalUsingId()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalUsingId");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalUsingId");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-InternalUsingId");
         }
 
         [Fact]
@@ -90,7 +99,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerCRUDPublicUsingId()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-PublicUsingId");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-PublicUsingId");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-PublicUsingId");
         }
 
         [Fact]
@@ -98,7 +108,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerChildResource()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerChildResource");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerChildResource");
+            TestRunner.RunTestScript("Test-LoadBalancerChildResource");
         }
 
         [Fact]
@@ -106,7 +117,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerSet()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerSet");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerSet");
+            TestRunner.RunTestScript("Test-LoadBalancerSet");
         }
 
         [Fact]
@@ -114,7 +126,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestCreateEmptyLoadBalancer()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-CreateEmptyLoadBalancer");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-CreateEmptyLoadBalancer");
+            TestRunner.RunTestScript("Test-CreateEmptyLoadBalancer");
         }
 
         [Fact]
@@ -122,7 +135,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerNicAssociation()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancer-NicAssociation");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancer-NicAssociation");
+            TestRunner.RunTestScript("Test-LoadBalancer-NicAssociation");
         }
 
         [Fact]
@@ -130,7 +144,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerNicAssociationDuringCreate()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancer-NicAssociationDuringCreate");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancer-NicAssociationDuringCreate");
+            TestRunner.RunTestScript("Test-LoadBalancer-NicAssociationDuringCreate");
         }
 
         [Fact]
@@ -138,7 +153,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerInboundNatPoolConfigInternalLB()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerInboundNatPoolConfigCRUD-InternalLB");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerInboundNatPoolConfigCRUD-InternalLB");
+            TestRunner.RunTestScript("Test-LoadBalancerInboundNatPoolConfigCRUD-InternalLB");
         }
 
         [Fact]
@@ -146,7 +162,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerInboundNatPoolConfigCRUDPublicLB()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerInboundNatPoolConfigCRUD-PublicLB");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerInboundNatPoolConfigCRUD-PublicLB");
+            TestRunner.RunTestScript("Test-LoadBalancerInboundNatPoolConfigCRUD-PublicLB");
         }
 
         [Fact]
@@ -154,7 +171,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerMultiVipPublic()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerMultiVip-Public");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerMultiVip-Public");
+            TestRunner.RunTestScript("Test-LoadBalancerMultiVip-Public");
         }
 
         [Fact]
@@ -162,7 +180,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerMultiVipInternal()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerMultiVip-Internal");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerMultiVip-Internal");
+            TestRunner.RunTestScript("Test-LoadBalancerMultiVip-Internal");
         }
 
         [Fact]
@@ -170,7 +189,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestSetLoadBalancerObjectAssignment()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-SetLoadBalancerObjectAssignment");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-SetLoadBalancerObjectAssignment");
+            TestRunner.RunTestScript("Test-SetLoadBalancerObjectAssignment");
         }
 
         [Fact]
@@ -178,7 +198,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestSetLoadBalancerCRUDPublicBasicSku()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-PublicBasicSku");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-PublicBasicSku");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-PublicBasicSku");
         }
 
         [Fact]
@@ -186,7 +207,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestSetLoadBalancerCRUDInternalBasicSku()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalBasicSku");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalBasicSku");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-InternalBasicSku");
         }
 
         [Fact]
@@ -194,7 +216,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestSetLoadBalancerCRUDPublicStandardSku()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-PublicStandardSku");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-PublicStandardSku");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-PublicStandardSku");
         }
 
         [Fact]
@@ -202,7 +225,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestSetLoadBalancerCRUDInternalStandardSku()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalStandardSku");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalStandardSku");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-InternalStandardSku");
         }
 
         [Fact]
@@ -210,7 +234,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerCRUDInternalHighlyAvailableBasicSku()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalHighlyAvailableBasicSku");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalHighlyAvailableBasicSku");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-InternalHighlyAvailableBasicSku");
         }
 
         [Fact]
@@ -218,7 +243,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerCRUDInternalHighlyAvailableStandardSku()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalHighlyAvailableStandardSku");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerCRUD-InternalHighlyAvailableStandardSku");
+            TestRunner.RunTestScript("Test-LoadBalancerCRUD-InternalHighlyAvailableStandardSku");
         }
 
         [Fact]
@@ -226,7 +252,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestLoadBalancerZones()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerZones");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LoadBalancerZones");
+            TestRunner.RunTestScript("Test-LoadBalancerZones");
         }
 
         [Fact]
@@ -234,7 +261,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.slbdev)]
         public void TestCreateSubresourcesOnEmptyLoadBalancer()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-CreateSubresourcesOnEmptyLoadBalancer");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-CreateSubresourcesOnEmptyLoadBalancer");
+            TestRunner.RunTestScript("Test-CreateSubresourcesOnEmptyLoadBalancer");
         }
     }
 }

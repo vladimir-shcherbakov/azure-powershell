@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
@@ -19,11 +20,12 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class AzureFirewallTests : Microsoft.WindowsAzure.Commands.Test.Utilities.Common.RMTestBase
+    public class AzureFirewallTests : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
 
         public AzureFirewallTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(new XunitTracingInterceptor(output));
@@ -34,7 +36,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.azurefirewall)]
         public void TestAzureFirewallCRUD()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-AzureFirewallCRUD");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-AzureFirewallCRUD");
+            TestRunner.RunTestScript("Test-AzureFirewallCRUD");
         }
 
         [Fact]
@@ -42,7 +45,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.azurefirewall)]
         public void TestAzureFirewallAllocateAndDeallocate()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-AzureFirewallAllocateAndDeallocate");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-AzureFirewallAllocateAndDeallocate");
+            TestRunner.RunTestScript("Test-AzureFirewallAllocateAndDeallocate");
         }
     }
 }

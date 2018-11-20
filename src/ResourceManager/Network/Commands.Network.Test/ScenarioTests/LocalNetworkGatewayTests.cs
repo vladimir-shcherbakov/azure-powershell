@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
@@ -19,11 +20,12 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class LocalNetworkGatewayTests : Microsoft.WindowsAzure.Commands.Test.Utilities.Common.RMTestBase
+    public class LocalNetworkGatewayTests : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
 
         public LocalNetworkGatewayTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -34,7 +36,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.brooklynft)]
         public void TestLocalNetworkGatewayCRUD()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LocalNetworkGatewayCRUD");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-LocalNetworkGatewayCRUD");
+            TestRunner.RunTestScript("Test-LocalNetworkGatewayCRUD");
         }
     }
 }

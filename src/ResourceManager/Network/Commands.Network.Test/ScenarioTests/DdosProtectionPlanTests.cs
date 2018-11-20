@@ -13,6 +13,7 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Microsoft.WindowsAzure.Commands.Test.Utilities.Common;
@@ -21,11 +22,12 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class DdosProtectionPlanTests : RMTestBase
+    public class DdosProtectionPlanTests : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
 
-        public DdosProtectionPlanTests(Xunit.Abstractions.ITestOutputHelper output)
+        public DdosProtectionPlanTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -36,7 +38,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestDdosProtectionPlanCrud()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-DdosProtectionPlanCRUD"));
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-DdosProtectionPlanCRUD"));
+            TestRunner.RunTestScript("Test-DdosProtectionPlanCRUD");
         }
 
         [Fact]
@@ -44,7 +47,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestDdosProtectionPlanCrudWithVirtualNetwork()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-DdosProtectionPlanCRUDWithVirtualNetwork"));
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-DdosProtectionPlanCRUDWithVirtualNetwork"));
+            TestRunner.RunTestScript("Test-DdosProtectionPlanCRUDWithVirtualNetwork");
         }
 
         [Fact]
@@ -52,7 +56,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestDdosProtectionPlanCollections()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-DdosProtectionPlanCollections"));
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-DdosProtectionPlanCollections"));
+            TestRunner.RunTestScript("Test-DdosProtectionPlanCollections");
         }
     }
 }

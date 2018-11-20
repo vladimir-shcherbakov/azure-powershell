@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
@@ -19,11 +20,12 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class AvailableDelegationsTests : Microsoft.WindowsAzure.Commands.Test.Utilities.Common.RMTestBase
+    public class AvailableDelegationsTests : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
 
-        public AvailableDelegationsTests(Xunit.Abstractions.ITestOutputHelper output)
+        public AvailableDelegationsTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -34,7 +36,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestAvailableDelegationsList()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-GetAvailableDelegationsList");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-GetAvailableDelegationsList");
+            TestRunner.RunTestScript("Test-GetAvailableDelegationsList");
         }
     }
 }

@@ -13,6 +13,7 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Microsoft.WindowsAzure.Commands.Test.Utilities.Common;
@@ -21,10 +22,11 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class ExpressRoutePortTests : RMTestBase
+    public class ExpressRoutePortTests : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
-        public ExpressRoutePortTests(Xunit.Abstractions.ITestOutputHelper output)
+        public ExpressRoutePortTests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -35,7 +37,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, Category.pgtm)]
         public void TestExpressRoutePortCRUDMinimalParameters()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-ExpressRoutePortCRUD"));
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, string.Format("Test-ExpressRoutePortCRUD"));
+            TestRunner.RunTestScript("Test-ExpressRoutePortCRUD");
         }
     }
 }

@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
@@ -19,11 +20,12 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class NetworkWatcherAPITests : Microsoft.WindowsAzure.Commands.Test.Utilities.Common.RMTestBase
+    public class NetworkWatcherAPITests : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
 
-        public NetworkWatcherAPITests(Xunit.Abstractions.ITestOutputHelper output)
+        public NetworkWatcherAPITests(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -34,7 +36,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.netanalyticsdev)]
         public void TestGetTopology()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-GetTopology");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-GetTopology");
+            TestRunner.RunTestScript("Test-GetTopology");
         }
 
         [Fact]
@@ -42,7 +45,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.netanalyticsdev)]
         public void TestGetSecurityGroupView()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-GetSecurityGroupView");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-GetSecurityGroupView");
+            TestRunner.RunTestScript("Test-GetSecurityGroupView");
         }
 
         [Fact]
@@ -50,7 +54,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.netanalyticsdev)]
         public void TestGetNextHop()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-GetNextHop");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-GetNextHop");
+            TestRunner.RunTestScript("Test-GetNextHop");
         }
 
         [Fact]
@@ -58,7 +63,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.netanalyticsdev)]
         public void TestVerifyIPFlow()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-VerifyIPFlow");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-VerifyIPFlow");
+            TestRunner.RunTestScript("Test-VerifyIPFlow");
         }
 
         [Fact]
@@ -66,7 +72,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.netanalyticsdev)]
         public void TestPacketCapture()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-PacketCapture");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-PacketCapture");
+            TestRunner.RunTestScript("Test-PacketCapture");
         }
 
         [Fact]
@@ -74,7 +81,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.netanalyticsdev)]
         public void TestTroubleshoot()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-Troubleshoot");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-Troubleshoot");
+            TestRunner.RunTestScript("Test-Troubleshoot");
         }
 
         [Fact]
@@ -82,7 +90,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, Category.netanalyticsdev)]
         public void TestFlowLog()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-FlowLog");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-FlowLog");
+            TestRunner.RunTestScript("Test-FlowLog");
         }
 
 #if NETSTANDARD
@@ -95,7 +104,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.netanalyticsdev)]
         public void TestConnectivityCheck()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-ConnectivityCheck");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-ConnectivityCheck");
+            TestRunner.RunTestScript("Test-ConnectivityCheck");
         }
 
         [Fact]
@@ -103,7 +113,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.netanalyticsdev)]
         public void TestReachabilityReport()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-ReachabilityReport");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-ReachabilityReport");
+            TestRunner.RunTestScript("Test-ReachabilityReport");
         }
 
         [Fact]
@@ -111,7 +122,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.netanalyticsdev)]
         public void TestProvidersList()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-ProvidersList");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-ProvidersList");
+            TestRunner.RunTestScript("Test-ProvidersList");
         }
 
         [Fact]
@@ -119,7 +131,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.netanalyticsdev)]
         public void TestConnectionMonitor()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-ConnectionMonitor");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-ConnectionMonitor");
+            TestRunner.RunTestScript("Test-ConnectionMonitor");
         }
     }
 }
