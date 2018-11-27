@@ -141,4 +141,39 @@
   <data name="RemovingWebAppSSLBinding" xml:space="preserve">
     <value>Are you sure you want to remove the web app ssl binding for hostname '{0}'</value>
   </data>
+  <data name="SimpleWebAppCreateAction" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="SimpleWebAppCreateTarget" xml:space="preserve">
+    <value>WebApp '{0}'</value>
+    <comment>{0} = WebAppName</comment>
+  </data>
+  <data name="GitDirectoryDoesNotExist" xml:space="preserve">
+    <value>Directory '{0}' does not exist, please check the directory path and try again.</value>
+    <comment>{0} = path</comment>
+  </data>
+  <data name="GitInstallMessage" xml:space="preserve">
+    <value>To connect your website with a git repository, you must have the git executable installed. Please download and install git from https://git-scm.com/</value>
+  </data>
+  <data name="GitRemoteMessage" xml:space="preserve">
+    <value>Use 'git push azure master' to push local changes to this website.</value>
+  </data>
+  <data name="GitRemoteAddFailure" xml:space="preserve">
+    <value>Failed to add git remote to directory '{0}' with error '{1}'</value>
+    <comment>{0} = directory, {1} = error message</comment>
+  </data>
+  <data name="EnterContainerPSSessionFormatForTrustedHostsSuggestion" xml:space="preserve">
+    <value>Add your Container Web App to the trusted hosts. For example: "Set-Item WSMAN:\\LocalHost\\Client\\TrustedHosts -Value '{0}{1}.azurewebsites.net'"</value>
+    <comment>{0} = current trusted hosts if present, {1} = website or slot name</comment>
+  </data>
+  <data name="EnterContainerPSSessionFormatForTrustedHostsWarning" xml:space="preserve">
+    <value>Your current WSMAN Trusted Hosts settings will prevent you from connecting to your Container Web App. Current settings: {0}</value>
+    <comment>{0} = Current trusted hosts if present, "&lt;empty" otherwise</comment>
+  </data>
+  <data name="EnterCotnainerPSSessionBasicAuthWarning" xml:space="preserve">
+    <value>WSMAN Basic authentication is not enabled. Run the following command and try again: "Set-Item WSMAN:\LocalHost\Client\Auth\Basic -Value $true"</value>
+  </data>
+  <data name="EnterContainerPSSessionConfirmation" xml:space="preserve">
+    <value>Creating a new remote PowerShell session. Confirm?</value>
+  </data>
 </root>
