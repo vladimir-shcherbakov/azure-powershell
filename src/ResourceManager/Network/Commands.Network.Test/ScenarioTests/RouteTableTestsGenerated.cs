@@ -25,6 +25,7 @@
 // </auto-generated>
 
 using System;
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Microsoft.WindowsAzure.Commands.Test.Utilities.Common;
@@ -33,11 +34,12 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class RouteTableTestsGenerated : RMTestBase
+    public class RouteTableTestsGenerated : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
 
-        public RouteTableTestsGenerated(Xunit.Abstractions.ITestOutputHelper output)
+        public RouteTableTestsGenerated(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -48,7 +50,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestRouteTableCRUDMinimalParameters()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-RouteTableCRUDMinimalParameters");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-RouteTableCRUDMinimalParameters");
+            TestRunner.RunTestScript("Test-RouteTableCRUDMinimalParameters");
         }
 
         [Fact]
@@ -56,7 +59,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestRouteTableCRUDAllParameters()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-RouteTableCRUDAllParameters");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-RouteTableCRUDAllParameters");
+            TestRunner.RunTestScript("Test-RouteTableCRUDAllParameters");
         }
 
         [Fact]
@@ -64,7 +68,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestRouteCRUDMinimalParameters()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-RouteCRUDMinimalParameters");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-RouteCRUDMinimalParameters");
+            TestRunner.RunTestScript("Test-RouteCRUDMinimalParameters");
         }
 
         [Fact]
@@ -72,7 +77,8 @@ namespace Commands.Network.Test.ScenarioTests
         [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
         public void TestRouteCRUDAllParameters()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-RouteCRUDAllParameters");
+//            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-RouteCRUDAllParameters");
+            TestRunner.RunTestScript("Test-RouteCRUDAllParameters");
         }
     }
 }

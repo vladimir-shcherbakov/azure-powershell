@@ -25,6 +25,7 @@
 // </auto-generated>
 
 using System;
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Microsoft.WindowsAzure.Commands.Test.Utilities.Common;
@@ -33,11 +34,12 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class ApplicationSecurityGroupTestsGenerated : RMTestBase
+    public class UsageTestsGenerated : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
 
-        public ApplicationSecurityGroupTestsGenerated(Xunit.Abstractions.ITestOutputHelper output)
+        public UsageTestsGenerated(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -45,18 +47,11 @@ namespace Commands.Network.Test.ScenarioTests
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
-        [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
-        public void TestApplicationSecurityGroupCRUDMinimalParameters()
+        [Trait(Category.Owner, NrpTeamAlias.wanrpdev)]
+        public void TestUsageCRUDMinimalParameters()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-ApplicationSecurityGroupCRUDMinimalParameters");
-        }
-
-        [Fact]
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
-        [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
-        public void TestApplicationSecurityGroupCRUDAllParameters()
-        {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-ApplicationSecurityGroupCRUDAllParameters");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-UsageCRUDMinimalParameters");
+            TestRunner.RunTestScript("Test-UsageCRUDMinimalParameters");
         }
     }
 }

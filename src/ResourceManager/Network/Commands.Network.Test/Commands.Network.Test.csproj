@@ -82,9 +82,9 @@
     <Compile Include="ScenarioTests\ExpressRouteCrossConnectionTests.cs" />
     <Compile Include="ScenarioTests\ExpressRoutePortsLocationTests.cs" />
     <Compile Include="ScenarioTests\ExpressRoutePortTests.cs" />
-    <Compile Include="ScenarioTests\Generated\ApplicationSecurityGroupTestsGenerated.cs" />
-    <Compile Include="ScenarioTests\Generated\LoadBalancerTestsGenerated.cs" />
-    <Compile Include="ScenarioTests\Generated\UsageTestsGenerated.cs" />
+    <Compile Include="ScenarioTests\ApplicationSecurityGroupTestsGenerated.cs" />
+    <Compile Include="ScenarioTests\LoadBalancerTestsGenerated.cs" />
+    <Compile Include="ScenarioTests\UsageTestsGenerated.cs" />
     <Compile Include="ScenarioTests\MultiIpConfigOnNicTests.cs" />
     <Compile Include="ScenarioTests\ExpressRouteServiceProviderTests.cs" />
     <Compile Include="ScenarioTests\NetworkCloudExceptionTests.cs" />
@@ -96,7 +96,7 @@
     <Compile Include="ScenarioTests\PublicIpPrefixTests.cs" />
     <Compile Include="ScenarioTests\RouteTableTests.cs" />
     <Compile Include="ScenarioTests\NetworkSecurityGroupTests.cs" />
-    <Compile Include="ScenarioTests\Generated\RouteTableTestsGenerated.cs" />
+    <Compile Include="ScenarioTests\RouteTableTestsGenerated.cs" />
     <Compile Include="ScenarioTests\TestDnsAvailabilityTest.cs" />
     <Compile Include="ScenarioTests\UsageTests.cs" />
     <Compile Include="ScenarioTests\VirtualNetworkTapTests.cs" />
@@ -170,13 +170,13 @@
     <None Include="ScenarioTests\ExpressRouteServiceProviderTests.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ScenarioTests\Generated\ApplicationSecurityGroupTestsGenerated.ps1">
+    <None Include="ScenarioTests\ApplicationSecurityGroupTestsGenerated.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ScenarioTests\Generated\LoadBalancerTestsGenerated.ps1">
+    <None Include="ScenarioTests\LoadBalancerTestsGenerated.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ScenarioTests\Generated\UsageTestsGenerated.ps1">
+    <None Include="ScenarioTests\UsageTestsGenerated.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ScenarioTests\MultiIpConfigOnNicTests.ps1">
@@ -206,7 +206,7 @@
     <None Include="ScenarioTests\NetworkSecurityGroupTests.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ScenarioTests\Generated\RouteTableTestsGenerated.ps1">
+    <None Include="ScenarioTests\RouteTableTestsGenerated.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ScenarioTests\TestDnsAvailabilityTest.ps1">
@@ -810,5 +810,6 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

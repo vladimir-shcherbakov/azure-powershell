@@ -25,6 +25,7 @@
 // </auto-generated>
 
 using System;
+using Microsoft.Azure.Commands.Network.Test.ScenarioTests;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Microsoft.WindowsAzure.Commands.Test.Utilities.Common;
@@ -33,11 +34,12 @@ using Xunit.Abstractions;
 
 namespace Commands.Network.Test.ScenarioTests
 {
-    public class UsageTestsGenerated : RMTestBase
+    public class ApplicationSecurityGroupTestsGenerated : NetworkTestRunner
     {
         public XunitTracingInterceptor _logger;
 
-        public UsageTestsGenerated(Xunit.Abstractions.ITestOutputHelper output)
+        public ApplicationSecurityGroupTestsGenerated(ITestOutputHelper output)
+            : base(output)
         {
             _logger = new XunitTracingInterceptor(output);
             XunitTracingInterceptor.AddToContext(_logger);
@@ -45,10 +47,20 @@ namespace Commands.Network.Test.ScenarioTests
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
-        [Trait(Category.Owner, NrpTeamAlias.wanrpdev)]
-        public void TestUsageCRUDMinimalParameters()
+        [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
+        public void TestApplicationSecurityGroupCRUDMinimalParameters()
         {
-            NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-UsageCRUDMinimalParameters");
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-ApplicationSecurityGroupCRUDMinimalParameters");
+            TestRunner.RunTestScript("Test-ApplicationSecurityGroupCRUDMinimalParameters");
+        }
+
+        [Fact]
+        [Trait(Category.AcceptanceType, Category.CheckIn)]
+        [Trait(Category.Owner, NrpTeamAlias.sdnnrp)]
+        public void TestApplicationSecurityGroupCRUDAllParameters()
+        {
+            //NetworkResourcesController.NewInstance.RunPsTest(_logger, "Test-ApplicationSecurityGroupCRUDAllParameters");
+            TestRunner.RunTestScript("Test-ApplicationSecurityGroupCRUDAllParameters");
         }
     }
 }
