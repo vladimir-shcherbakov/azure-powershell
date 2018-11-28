@@ -26,8 +26,6 @@ namespace Microsoft.Azure.Commands.RecoveryServices.Backup.Cmdlets.ServiceClient
     /// </summary>
     public partial class ServiceClientAdapter
     {
-        const string AppSettingsSectionName = "appSettings";
-        const string ProviderNamespaceKey = "ProviderNamespace";
         const string AzureFabricName = "Azure";
         public const string ResourceProviderProductionNamespace = "Microsoft.RecoveryServices";
 
@@ -45,23 +43,7 @@ namespace Microsoft.Azure.Commands.RecoveryServices.Backup.Cmdlets.ServiceClient
         /// This value depends on the value given in the 
         /// exe config file of the service client DLL.
         /// </summary>
-        public static string ResourceProviderNamespace
-        {
-            get
-            {
-                Configuration exeConfiguration = ConfigurationManager.OpenExeConfiguration(
-                    Assembly.GetExecutingAssembly().Location);
-                AppSettingsSection appSettings = (AppSettingsSection)exeConfiguration.GetSection(
-                    AppSettingsSectionName);
-                string resourceProviderNamespace = ResourceProviderProductionNamespace;
-                if (appSettings.Settings[ProviderNamespaceKey] != null)
-                {
-                    resourceProviderNamespace = appSettings.Settings[ProviderNamespaceKey].Value;
-                }
-
-                return resourceProviderNamespace;
-            }
-        }
+        public static string ResourceProviderNamespace => ResourceProviderProductionNamespace;
 
         /// <summary>
         /// AzureContext based ctor
